@@ -1,5 +1,7 @@
 # Prime Number Studies
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21638888.svg)](https://doi.org/10.5281/zenodo.21638888)
+
 Notes, measurements and verified code from an independent, self-directed study of the
 multiplicative structure of the integers — starting from an elementary object, the
 **division table**, and following it as far as it goes.
@@ -133,7 +135,10 @@ Being told that something here is already known is a useful outcome, not an unwe
 ## Citation
 
 ```
-Osman (2026). Prime Number Studies: independent re-derivations, measurements and
-negative results around the division table. GitHub repository.
-https://github.com/Osman209/prime-number-studies
+Osman, M. (2026). Prime Number Studies: independent re-derivations, measurements
+and negative results around the division table. Zenodo.
+https://doi.org/10.5281/zenodo.21638888
 ```
+
+Repository: https://github.com/Osman209/prime-number-studies
+ORCID: https://orcid.org/0009-0004-5912-999X
