@@ -133,8 +133,17 @@ for t in [math.log(3), math.log(7), math.log(13), math.log(29), math.log(60),
         continue
     s1, r2, eff = rank_report(overlap(t, L, m))
     print(f"   {t:>10.5f} {t/L:>7.3f} | {s1:>10.5f} {r2:>14.6f} {eff:>9d}")
-print("\n   -> if sigma2/sigma1 -> 0 as t -> L, the overlap degenerates to rank one at the")
-print("      support edge, which is exactly where an entering prime sits when L = log c.")
+print("\n   -> the combined ratio does NOT go to zero: it plateaus, and the plateau is")
+print(f"      exactly (m-1)/(m+2) = {(m-1)}/{(m+2)} = {(m-1)/(m+2):.6f} for this basis size.")
+print("      That is the law of A. Groskin (see papers/prime_edge_two_paths.md).  What")
+print("      DOES go to rank one is each PARITY BLOCK separately: splitting odd from")
+print("      even sine modes gives sigma2/sigma1 -> 0 on each, with the dominant")
+print("      eigenvalue positive on the odd block and negative on the even one, so the")
+print("      full matrix is their difference and its ratio sits just below 1.  The")
+print("      split is measured in check_reply.py and, in extended precision where the")
+print("      limit is actually resolvable, in harness/edge_precision.py.")
+print("      Effective rank does collapse toward the edge, which is the real content")
+print("      of the column above.")
 
 # ================================================================= TEST C
 print()
