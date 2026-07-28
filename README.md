@@ -20,6 +20,10 @@ and names the source. Specifically:
 | the wheel pair-count `W(H)` and its normalization | the **Hardy–Littlewood** singular series (1923), truncated |
 | peaks of a smoothed prime signal landing on the zeta ordinates | the **explicit formula** — the object is a truncated `ξ'/ξ` |
 | reconstruction of `τ, φ, μ, Λ` from valuation vectors | the fundamental theorem of arithmetic |
+| lag functions of `gcd(n,h)` and their transforms | **Ramanujan–Fourier** analysis of `r`-even functions |
+| the positive `log gcd` Gram kernel | the classical **gcd-matrix** literature |
+| `λ_min → 0` for a purely atomic spectral measure | the **Szegő limit theorem** (Grenander–Szegő, 1958) |
+| the critical balance of the Weil form at `β* = 1` | **Bombieri**, Rend. Lincei 11 (2000) |
 
 **There is no claim here about the Riemann Hypothesis.** Where a construction touches it,
 the paper states precisely why the numerics certify nothing about the critical line.
@@ -39,9 +43,9 @@ What the repository *does* offer:
 ## Contents
 
 ```
-papers/     three self-contained papers, plus one short structural note (Markdown)
+papers/     four self-contained papers, plus one short structural note (Markdown)
 figures/    the figures they reference
-code/       verification scripts — one per paper, plus the figure generators
+code/       verification scripts for every table and number, plus the figure generators
 ```
 
 ### `papers/division_table_prime_towers.md`
@@ -70,6 +74,32 @@ protocol). The paper then shows why that match is structurally forced — `D_X` 
 truncated `ξ'/ξ`, so its peaks are its poles — and that two features which looked like
 independent structure resolve into truncation error and the Rayleigh resolution criterion.
 
+### `papers/division_table_single_column.md`
+The odd division table rewritten as **one time-ordered series**, with nothing lost. Each
+odd prime is a clock starting at `p²` and stepping by `2p`, so a prime is the *absence* of
+a strike; each integer becomes a vector of its prime-power layers whose inner product is
+exactly `log gcd`; and the table's columns reappear as lag diagonals of the single column.
+Time averages give a Dirichlet convolution of the von Mangoldt function, Möbius inversion
+isolates `Λ`, and the Dirichlet transform gives the prime side of `−ζ'/ζ`. The chain is
+exact at every step — and stops, provably, at its half-plane of convergence, which is where
+the construction stops being a re-derivation and starts being a citation of `ζ`.
+
+Three spectral objects built from it are then tested, and all three are closed for
+**structural** reasons rather than numerical ones. The covariance kernel is positive
+because it is a stationary autocovariance (*not* because it is a Gram matrix — the
+pointwise Gram matrix is not even Toeplitz), and its decay to zero is forced by a purely
+atomic spectral measure. Isolating `Λ` gives a Toeplitz family whose positivity is a
+**convention artifact**: over odd prime powers the symbol satisfies `f(π) = −c < 0` for
+*any* nonnegative weights, while admitting the prime 2 restores positivity but only inside
+a bounded window of the parameter. And the hybrid prime-power operator is bipartite, so its
+spectrum is exactly symmetric about zero and its top does not move when primes are added,
+while the zeta ordinates are positive and unbounded.
+
+*One open item is flagged as possibly having content beyond bookkeeping: the minimising
+angle of the symbol locks onto rational points — exactly `π`, then exactly `2π/5` to eight
+decimals — held there by a downward cusp whose exponent tracks the parameter, and comes
+loose only when that cusp becomes Lipschitz.*
+
 ### `papers/prime_edge_two_paths.md`
 A short note, not a paper of its own. It measures the prime-edge derivative jump of the
 truncated Weil form in a Dirichlet sine construction and compares it with the matrix-valued
@@ -96,9 +126,12 @@ python code/w_fast2.py                # D_X vs ξ'/ξ, peak shape
 python code/w_stab2.py                # peak extraction, prominence and tolerance sweeps
 python code/w_fast3.py                # angular criterion and the resolution law
 python code/w_alg.py                  # divisibility matrix and operator algebra
+python code/verify_core.py            # single column: Propositions 1–7, the operator tables, controls
+python code/verify_covariance.py      # single column: the spectral measure, decay, and rank saturation
+python code/verify_positivity.py      # single column: both conventions, the α-window, N versus P
 python code/prime_edge_jump.py        # prime-edge jump; section C retained with its artifact annotated
 python code/prime_edge_rank.py        # rank, edge analysis, and factor universality
-python code/check_reply.py             # closed form for the plateau, and the split blocks
+python code/check_reply.py            # closed form for the plateau, and the split blocks
 
 cd code
 python fig.py       # figure for the division-table paper
@@ -109,13 +142,15 @@ cd ..
 
 Tested with Python 3.12, NumPy 2.4, SymPy 1.14, mpmath 1.3.
 The gap-frequency scripts segment-sieve windows of width `4×10⁷` up to `10¹³` and take a
-few minutes; everything else runs in seconds.
+few minutes. `verify_covariance.py` and `verify_positivity.py` also take a few minutes —
+each has a long-average or large-matrix step, and `verify_covariance.py` has a `FAST` flag
+that shortens the slowest one. Everything else runs in seconds.
 
 ---
 
-## Two method rules these papers exist to illustrate
+## Three method rules these papers exist to illustrate
 
-Both were learned by getting them wrong first.
+All three were learned by getting them wrong first.
 
 **Test any threshold law on the bare kernel before calling it arithmetic.** A resolution
 law `log X_crit ≍ C/g` looked like a property of the zeta zeros. Two bare Fejér bumps at
@@ -127,13 +162,23 @@ two-parameter model beating a zero-parameter model across a six-decade extrapola
 almost nothing until the zero-parameter model is given one calibrated constant too. Doing
 that closed most of the gap.
 
+**Print the truncation next to every number that depends on it.** The same covariance
+kernel, at the same parameter, has an apparent decay exponent of `−4.8`, `−2.2`, `−1.2` or
+`−0.74` depending only on where the layers are cut off. Two exponents in this literature
+that look like different phenomena are the same object at two truncations — and at any
+*fixed* cutoff there is no exponent at all, because the spectral measure has finitely many
+atoms and the rank simply saturates.
+
 ---
 
 ## Status
 
-Three papers are here. A fourth — on compressing the division table into a single
-time-ordered column, with a gcd Gram kernel and a hybrid prime-power operator — is being
-prepared and will be added.
+Four papers and one note are here.
+
+The fourth paper closes the division-table route as a direct approach to RH, and says so in
+its own conclusion. What it leaves genuinely open is listed in its Appendix A — most
+interestingly the rational-angle locking of the symbol's minimum, which is the one measured
+structure in it that does not obviously reduce to bookkeeping.
 
 Corrections, counterexamples and pointers to prior art are all welcome; open an issue.
 Being told that something here is already known is a useful outcome, not an unwelcome one.
