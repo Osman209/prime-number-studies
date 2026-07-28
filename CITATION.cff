@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+title: >-
+  Prime Number Studies: independent re-derivations, measurements
+  and negative results around the division table
+message: >-
+  If you use this material, please cite it using the metadata
+  from this file.
+type: software
+authors:
+  - given-names: Mohamed
+    family-names: Osman
+    orcid: 'https://orcid.org/0009-0004-5912-999X'
+repository-code: 'https://github.com/Osman209/prime-number-studies'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21638888
+    description: Concept DOI (always resolves to the latest version)
+abstract: >-
+  Notes, measurements and verified code from a self-directed study
+  of the multiplicative structure of the integers, starting from the
+  division table. Contains independent re-derivations of known
+  results (the sieve of Sundaram; the Hardy-Littlewood singular
+  series; the explicit formula), documented negative results and
+  controls, and runnable verification scripts for every table and
+  figure. No claim is made about the Riemann Hypothesis.
+keywords:
+  - number theory
+  - prime numbers
+  - sieve of Sundaram
+  - divisor function
+  - Hardy-Littlewood singular series
+  - Riemann zeta function
+  - prime gaps
+  - reproducible research
+license: CC-BY-4.0
+version: 1.2.0
+date-released: '2026-07-28'
