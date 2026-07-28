@@ -45,7 +45,7 @@ import math
 import mpmath as mp
 import numpy as np
 
-L_DEFAULT = 4.5
+from conventions import L_DEFAULT
 
 
 # ----------------------------------------------------------------- the overlap

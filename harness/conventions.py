@@ -8,7 +8,8 @@ regression tests must be re-baselined deliberately.
 --------------------------------------------------------------------------------
 1. PARAMETERS
 
-    L      support length. The test-function support is the symmetric interval
+    L      support length, default L_DEFAULT below. The test-function support is
+           the symmetric interval
            [-L/2, +L/2]. The autocorrelation g = f * f~ then has support [-L, L],
            so a prime power q contributes iff log q < L.
 
@@ -113,10 +114,11 @@ regression tests must be re-baselined deliberately.
 """
 
 # ---- fixed conventions -------------------------------------------------------
+L_DEFAULT = 4.5        # support length used by every entry point unless overridden
 R_MAX = 900.0          # archimedean integral truncation, |r| <= R_MAX
 NR = 30001             # quadrature nodes on [-R_MAX, R_MAX]
 TAU_DEFAULT = 1e-6     # absolute near-null tolerance; always reported
 GAMMA_MAX_DEFAULT = 1062.9   # highest zeta ordinate used by the validator
 M_LADDER = (100, 200, 300, 400, 500)
 
-__all__ = ["R_MAX", "NR", "TAU_DEFAULT", "GAMMA_MAX_DEFAULT", "M_LADDER"]
+__all__ = ["L_DEFAULT", "R_MAX", "NR", "TAU_DEFAULT", "GAMMA_MAX_DEFAULT", "M_LADDER"]

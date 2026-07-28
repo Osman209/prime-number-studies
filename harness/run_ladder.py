@@ -10,7 +10,8 @@ fails.
     python run_ladder.py --L 4.5 --tau 1e-6
 
 Checks that must pass, or the run fails:
-    V1  validator residual within its tail bound on the saturated diagonal
+    V1  validator residual within its tail bound on the saturated diagonal,
+        evaluated at EVERY rung of the m-ladder, not only at one basis size
     V2  lambda_min >= -tau on the saturated diagonal  (the form is PSD there)
     V3  lambda_min stable to STAB_TOL relative across the top two ladder rungs
 Counts are REPORTED, never checked -- they are not converged and the harness
@@ -20,7 +21,7 @@ from __future__ import annotations
 import argparse, json, math, os, platform, sys, time
 import numpy as np
 
-from conventions import M_LADDER, TAU_DEFAULT, R_MAX, NR
+from conventions import L_DEFAULT, M_LADDER, TAU_DEFAULT, R_MAX, NR
 from builder_sine import build, inertia
 from validator import validate
 
@@ -48,7 +49,7 @@ def sweep(L: float, pcs, ladder, tau: float):
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--L", type=float, default=4.5)
+    ap.add_argument("--L", type=float, default=L_DEFAULT)
     ap.add_argument("--tau", type=float, default=TAU_DEFAULT)
     ap.add_argument("--ladder", type=int, nargs="*", default=list(M_LADDER))
     ap.add_argument("--pcs", type=float, nargs="*", default=None)
@@ -72,16 +73,31 @@ def main() -> int:
 
     failures = []
 
-    # V1 -- non-circular validation on the diagonal
-    m_top = max(args.ladder)
-    val = validate(L, min(m_top, 200))
-    print(f"V1 validator  (L={L}, saturated, m={min(m_top,200)}, gamma_max={val['gamma_max']:.0f})")
+    # V1 -- non-circular validation on the diagonal, AT EVERY RUNG OF THE LADDER
+    vals = {}
+    print(f"V1 validator on the saturated diagonal, across the ladder (L={L})")
+    print(f"   {'m':>5} {'gamma_max':>10} {'worst |rel resid|':>18} {'worst tail bound':>17} "
+          f"{'ranks ok':>9}")
+    for m in sorted(args.ladder):
+        v = validate(L, m)
+        vals[m] = v
+        worst_rel = max(abs(r["rel_residual"]) for r in v["rows"])
+        worst_tb = max(r["tail_bound"] for r in v["rows"])
+        nok = 0
+        for r in v["rows"]:
+            ok = r["within_tail"] or abs(r["rel_residual"]) < 1e-5
+            if ok:
+                nok += 1
+            elif r["lambda"] > 1e-4:
+                failures.append(f"V1 m={m} rank {r['rank']} rel residual {r['rel_residual']:.2e}")
+        print(f"   {m:>5} {v['gamma_max']:>10.1f} {worst_rel:>18.2e} {worst_tb:>17.2e} "
+              f"{nok:>4}/{len(v['rows']):<4}")
+    val = vals[max(args.ladder)]
+    print("   per-eigenvector detail at the top rung:")
     for r in val["rows"]:
         ok = r["within_tail"] or abs(r["rel_residual"]) < 1e-5
-        print(f"   rank {r['rank']:>4}  lambda {r['lambda']:>14.9f}  zero side {r['zero_side']:>14.9f}"
+        print(f"     rank {r['rank']:>4}  lambda {r['lambda']:>14.9f}  zero side {r['zero_side']:>14.9f}"
               f"  rel {r['rel_residual']:>10.2e}  {'ok' if ok else 'FAIL'}")
-        if not ok and r["lambda"] > 1e-4:
-            failures.append(f"V1 rank {r['rank']} rel residual {r['rel_residual']:.2e}")
 
     # V2 -- PSD on the diagonal
     diag = [r for r in rows if r["saturated"]]
@@ -110,7 +126,8 @@ def main() -> int:
         "L": L, "tau": tau, "ladder": args.ladder, "p_c_values": pcs,
         "saturated_p_c": sat, "r_max": R_MAX, "nr": NR,
         "stability_tol": STAB_TOL,
-        "rows": rows, "validator": val, "failures": failures,
+        "rows": rows, "validator": val,
+        "validator_ladder": {str(k): v for k, v in vals.items()}, "failures": failures,
         "env": {"python": platform.python_version(), "numpy": np.__version__,
                 "platform": platform.platform()},
         "utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
