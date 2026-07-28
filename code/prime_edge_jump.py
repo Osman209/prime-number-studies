@@ -137,8 +137,15 @@ print("      support edge, which is exactly where an entering prime sits when L 
 # ================================================================= TEST C
 print()
 print("=" * 78)
-print("C  COUPLED SETTING  (L = u, the reference parametrisation)")
+print("C  COUPLED SETTING  (L = u)  --  ARTIFACT, RETAINED AS A RECORD")
 print("=" * 78)
+print("""   WARNING.  On this path the entering term is (1 - t/u) R(t;u) = O((u-t)^4),
+   so the TRUE first-derivative jump is ZERO.  The nonzero numbers printed below
+   are a finite-gap difference of the smooth background and scale linearly with
+   `gap`, vanishing in the limit.  Diagnosis due to A. Groskin (correspondence,
+   July 2026); the linear-in-gap decay is verified in check_reply.py section 6.
+   This block is kept, annotated, rather than deleted.
+""")
 m2 = 40
 print(f"   basis size m = {m2}")
 print(f"   {'q':>6} {'u0 = log q':>11} | {'||jump||':>12} {'sigma2/sigma1':>14} {'eff.rank':>9} {'scalar ratio':>14}")
