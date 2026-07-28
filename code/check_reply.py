@@ -18,7 +18,9 @@ L = 4.5
 print("=" * 78)
 print("1  THE LAW  sigma2/sigma1 -> (m-1)/(m+2)")
 print("=" * 78)
-print(f"   {'m':>5} {'predicted':>12} " + " ".join(f"d=1e-{k}" for k in [3, 4, 5, 6]))
+print("   columns are eps = 1 - t/L.  The shift itself is delta = L - t = L*eps,")
+print(f"   so eps = 1e-4 here means delta = {L:.1f}e-4.")
+print(f"   {'m':>5} {'predicted':>12} " + " ".join(f"eps=1e-{k}" for k in [3, 4, 5, 6]))
 for m in [20, 40, 80, 160, 200]:
     pred = (m - 1) / (m + 2)
     vals = []
@@ -26,11 +28,17 @@ for m in [20, 40, 80, 160, 200]:
         R = overlap(L * (1 - 10.0 ** (-k)), L, m)
         s = np.linalg.svd(R, compute_uv=False)
         vals.append(f"{s[1]/s[0]:.7f}")
-    print(f"   {m:>5} {pred:>12.7f} " + " ".join(f"{v:>9}" for v in vals))
+    print(f"   {m:>5} {pred:>12.7f} " + " ".join(f"{v:>11}" for v in vals))
+print()
+print("   NOTE.  The eps = 1e-6 column is float64 noise, not a worse approximation:")
+print("   R is O(delta^3) formed from O(delta) pieces, so the cancellation has eaten")
+print("   the answer by then.  Taken in extended precision the discrepancy keeps")
+print("   falling like delta^2 -- see harness/edge_precision.py, check 2.")
 
 print()
 print("=" * 78)
-print("2  DO OPPOSITE PARITIES DECOUPLE?")
+print("2  DO OPPOSITE PARITIES DECOUPLE?   (the ratio at eps=1e-6 is a noise floor,")
+print("   not a failure: same-parity has itself collapsed to ~1e-14 by then)")
 print("=" * 78)
 m = 80
 idx = np.arange(1, m + 1)
@@ -45,6 +53,8 @@ for eps in [1e-2, 1e-4, 1e-6]:
 print()
 print("=" * 78)
 print("3  THE EXPANSION  R_jk(L-d) = (pi^2 d^3 / 6 L^3) j k ((-1)^(j+1)+(-1)^(k+1)) + O(d^5)")
+print("   (here d IS delta = L - t.  The rise at d = 1e-5 is cancellation, not the")
+print("   remainder: in extended precision the ratio stays at 100 -- edge_precision.py)")
 print("=" * 78)
 m = 40
 j = np.arange(1, m + 1)
@@ -75,6 +85,7 @@ for m in [40, 80, 160]:
 print()
 print("=" * 78)
 print("5  SPLIT ODD AND EVEN MODES: IS EACH BLOCK RANK ONE, WITH OPPOSITE SIGN?")
+print("   measured at eps = 1e-5, i.e. delta = L*1e-5")
 print("=" * 78)
 for m in [40, 80, 160]:
     idx = np.arange(1, m + 1)

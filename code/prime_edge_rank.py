@@ -104,8 +104,13 @@ print()
 print("=" * 80)
 print("F  SUMMARY OF WHAT IS AND IS NOT REPRODUCED")
 print("=" * 80)
-print("""   scalar  -2 Lambda(q) / (sqrt q log q) : reproduced exactly, independent basis,
-       including prime POWERS (q = 9, 25, 27, 49 carry Lambda = log p, not log q).
+print("""   scalar  -2 Lambda(q) / (sqrt q log q) : reproduced, but this is NOT evidence.
+       With the triangular window w(q,u) = 1 - log q / u, differentiating gives
+       -2 Lambda(q) q^{-1/2} (log q / u^2) R, and at u = log q that IS the scalar
+       in one line.  Lambda(q) appears in the output because it was placed in the
+       sum as input, prime powers included.  Reproducing it verifies this file's
+       own arithmetic, not the cited theorem, whose content is the UNIVERSALITY
+       of the matrix factor -- which section G measures, and which fails here.
    rank-one structure : appears only as the shift approaches the support edge,
        which is precisely the configuration L = log c.  Away from the edge the
        jump is full rank in this basis.""")

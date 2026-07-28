@@ -118,6 +118,12 @@ for q, Lam in [(3, math.log(3)), (5, math.log(5)), (7, math.log(7)),
 print("\n   -> the ratio and cosine are FINITE-DIFFERENCE estimates: agreement to the")
 print("      printed digits, not an exact identity.  The residual departure from 1 is")
 print("      truncation error in the difference quotient and shrinks with h.")
+print("      AND THE AGREEMENT ITSELF PROVES NOTHING.  Differentiating the window")
+print("      w(q,u) = 1 - log q/u gives -2 Lambda(q) q^-1/2 (log q/u^2) R, which at")
+print("      u = log q IS the predicted scalar; Lambda(q) is in the output because it")
+print("      was put into the sum as input.  What the cited theorem actually asserts")
+print("      is that the MATRIX factor is the same for every q -- tested in")
+print("      prime_edge_rank.py section G, where it is not.")
 print("      sigma2/sigma1 says whether that matrix is close to rank one.")
 
 # ================================================================= TEST B
