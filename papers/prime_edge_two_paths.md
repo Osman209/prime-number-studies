@@ -79,9 +79,27 @@ Checked at `ε = 10⁻⁴`, i.e. `δ = 4.5×10⁻⁴`:
 | measured | 0.8636366 | 0.9285719 | 0.9634156 | 0.9814833 | 0.9851509 |
 | \|difference\| | 2.3×10⁻⁷ | 4.5×10⁻⁷ | 9.2×10⁻⁷ | 1.9×10⁻⁶ | 2.3×10⁻⁶ |
 
-**Agreement to within `2.4×10⁻⁶`.** That is a statement about the absolute discrepancy at one value of `ε`; it is not a digit count, and it is not converged in `ε`.
+**Agreement to within `2.4×10⁻⁶`.** That is a statement about the absolute discrepancy at one value of `ε`; it is not a digit count.
 
-The expansion checks out over the range where it can be checked. Residuals `‖R − leading‖/‖R‖` at `δ = 10⁻², 10⁻³, 10⁻⁴` are `5.0×10⁻³, 5.0×10⁻⁵, 7.8×10⁻⁶`, with successive ratios `100.3` and `6.4`. **Only the first step exhibits the `δ²` scaling** an `O(δ⁵)` remainder predicts; by `δ = 10⁻⁴` the residual is already cancellation-limited, and at `δ = 10⁻⁵` it rises again to `6.5×10⁻³`. Parity decoupling is exact to machine precision: `max|cross-parity| = 4×10⁻¹⁶` against `max|same-parity| = 1×10⁻²`.
+**In extended precision the law converges, and it converges like `δ²`.** The discrepancy from `(m−1)/(m+2)`:
+
+| `ε` | 10⁻³ | 10⁻⁴ | 10⁻⁵ | 10⁻⁶ |
+|---|---|---|---|---|
+| `m = 20` | 2.1×10⁻⁵ | 2.1×10⁻⁷ | 2.1×10⁻⁹ | 2.1×10⁻¹¹ |
+| `m = 40` | 4.45×10⁻⁵ | 4.45×10⁻⁷ | 4.45×10⁻⁹ | 4.45×10⁻¹¹ |
+
+Two decades of `ε` per two decades of discrepancy, monotone throughout — which is what a `δ → 0` limit is supposed to do, and what float64 could not show.
+
+In float64 the expansion checks out only over the range where float64 survives. Residuals `‖R − leading‖/‖R‖` at `δ = 10⁻², 10⁻³, 10⁻⁴` are `5.0×10⁻³, 5.0×10⁻⁵, 7.8×10⁻⁶`, with successive ratios `100.3` and `6.4`; only the first step shows the `δ²` scaling an `O(δ⁵)` remainder predicts, and at `δ = 10⁻⁵` the residual rises again to `6.5×10⁻³`.
+
+**In extended precision the remainder is confirmed to be `O(δ⁵)` throughout** (`harness/edge_precision.py`, `m = 20`, precision set per `δ`):
+
+| `δ` | 10⁻² | 10⁻³ | 10⁻⁴ | 10⁻⁵ | 10⁻⁶ |
+|---|---|---|---|---|---|
+| `‖R − leading‖/‖R‖` | 1.290×10⁻³ | 1.289×10⁻⁵ | 1.289×10⁻⁷ | 1.289×10⁻⁹ | 1.289×10⁻¹¹ |
+| ratio | — | 100.07 | 100.001 | 100.0 | 100.0 |
+
+The turnaround was the arithmetic, not the mathematics. Parity decoupling is exact to machine precision in either regime: `max|cross-parity| = 4×10⁻¹⁶` against `max|same-parity| = 1×10⁻²`.
 
 ## Measurement 3 — the split blocks approach rank one
 
@@ -93,7 +111,16 @@ Separating odd from even sine modes, the odd-block ratio `σ₂/σ₁` falls as 
 |---|---|---|---|---|
 | odd block `σ₂/σ₁` (m = 80) | 3.6×10⁻⁷ | 9.8×10⁻⁹ | 2.6×10⁻⁵ | 1.4×10⁻² |
 
-Each block therefore **approaches** rank one. A finite ratio at finite `ε` does not establish exact rank one, and the non-monotone tail is the float64 limit rather than the mathematics; effective ranks near the edge also fall well below `m`. The dominant eigenvalue is positive on the odd block and negative on the even block, so the full matrix is their difference — which is why the combined ratio sits just below `1` rather than near `0`. Taking this limit properly requires extended precision.
+Each block therefore **approaches** rank one, and the non-monotone tail is the float64 limit rather than the mathematics.
+
+**Taken in extended precision the ratio falls monotonically, and its rate is `ε⁴`** (`m = 20`):
+
+| `ε` | 10⁻³ | 10⁻⁴ | 10⁻⁵ | 10⁻⁶ | 10⁻⁸ |
+|---|---|---|---|---|---|
+| odd block | 1.3546×10⁻⁹ | 1.35434×10⁻¹³ | 1.354341×10⁻¹⁷ | 1.354341×10⁻²¹ | 1.354341×10⁻²⁹ |
+| even block | 1.6516×10⁻⁹ | 1.65129×10⁻¹³ | 1.651282×10⁻¹⁷ | 1.651282×10⁻²¹ | 1.651282×10⁻²⁹ |
+
+so `σ₂/σ₁ = C(m) ε⁴ + O(ε⁶)` with `C` converged to ten figures — `1.354341014` on the odd block and `1.651282092` on the even. A finite ratio at finite `ε` still does not *prove* exact rank one, but the limit is now exhibited rather than asserted. The dominant eigenvalue is positive on the odd block and negative on the even block, so the full matrix is their difference — which is why the combined ratio sits just below `1` rather than near `0`.
 
 **The second endpoint vector is `(−1)^{j+1} j`,** not `j`. Testing the leading singular vector against `j` alone gives `0.720083, 0.713664, 0.710403` at `m = 40, 80, 160` — converging to `1/√2 = 0.70711`, because `j` is a 45° mix of the odd-only and even-only vectors. That plateau was a mixing angle, not a failed match.
 
@@ -144,8 +171,8 @@ Recorded rather than silently edited. Items 5–10 are due to A. Groskin.
 4. **A stability argument was stated as invariance of orthogonality under congruence.** The Frobenius inner product is not congruence-invariant; the correct invariant is proportionality to a common matrix, which the argument now uses.
 5. **`ε` was labelled `δ`.** The law table is taken at `ε = 1 − t/L = 10⁻⁴`, hence `δ = L − t = 4.5×10⁻⁴`.
 6. **"Seven digits" was wrong.** The correct statement is agreement within `2.4×10⁻⁶` at that `ε`.
-7. **The `δ²` claim was over-extended.** Only the first two residuals scale that way; the third is cancellation-limited.
-8. **"Is rank one" and "full rank = `m`" were both overstated.** The parity blocks *approach* rank one; effective ranks near the edge fall well below `m`.
+7. **The `δ²` claim was over-extended *as float64 evidence*.** In double precision only the first two residuals scale that way and the third is cancellation-limited, so the original claim was not supported by the computation behind it. Extended precision (§ Measurement 2) since confirms the scaling itself, out to `δ = 10⁻⁶` — the correction was to the evidence, not to the mathematics.
+8. **"Is rank one" and "full rank = `m`" were both overstated.** The parity blocks *approach* rank one; effective ranks near the edge fall well below `m`. Extended precision now exhibits that approach with a rate, `σ₂/σ₁ = C(m) ε⁴`, but a limit at finite `ε` still does not prove exact rank one.
 9. **Bombieri's count theorem was invoked where it does not apply** — it is stated for `H(Γ; t)`, not this family.
 10. **`d = 2c − 6` was asserted as an equality** despite an offset that is `6` or `7` depending on `L`; withdrawn above.
 
@@ -163,11 +190,12 @@ python code/check_reply.py           # the closed form and the split blocks
 cd harness
 python validator.py 4.5 100          # non-circular check against the zeta zeros
 python run_ladder.py --L 4.5         # inertia ladder, JSON metadata, nonzero exit on failure
+python edge_precision.py --m 20 40   # the edge limit in extended precision
 ```
 
 `harness/conventions.py` is the single source of truth for the support, basis, block definitions, tolerance and reporting requirements. Python 3.12, NumPy 2.4, SymPy 1.14, mpmath 1.3.
 
-Edge-limit quantities are cancellation-limited in float64 and should be recomputed in extended precision; that is not yet done, and the affected tables say so.
+Edge-limit quantities are cancellation-limited in float64. They are recomputed in extended precision by `harness/edge_precision.py`, which sets the working precision from the target `δ` and evaluates the overlap through a reduction with no trigonometric cancellation left in its structure; the float64 figures are retained above for contrast, with the extended-precision result beside each.
 
 ## References
 
