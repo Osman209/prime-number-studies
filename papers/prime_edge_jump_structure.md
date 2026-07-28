@@ -82,7 +82,9 @@ A candidate mechanism was tested and fails. As `t → L` the overlap region `[0,
 
 ## What this does and does not establish
 
-Rank is invariant under change of basis, and so is the mutual orthogonality of a family of matrices under a fixed congruence. So the two constructions cannot be describing the same operator family in different coordinates; something in the setup differs.
+The relevant invariance is proportionality, not orthogonality. If in some basis every jump factor equalled one and the same matrix `J` up to a scalar, `A_q = λ_q J`, then under any change of basis `S` one would have `Sᵀ A_q S = λ_q (Sᵀ J S)` — still all proportional to a single matrix. **Proportionality to a common factor is therefore basis-independent**, and proportional matrices have pairwise `|cos| = 1`.
+
+The factors measured here have pairwise `|cos| ≤ 0.10`. So the two constructions are not the same operator family written in different coordinates; something in the setup differs. (Note that mutual *orthogonality* would not by itself be a basis-independent statement — the Frobenius inner product is not preserved under a general congruence — which is why the argument is run through proportionality.)
 
 The likely candidates, none of which this note can adjudicate:
 
