@@ -1,0 +1,25 @@
+{
+  "title": "Prime Number Studies: independent re-derivations, measurements and negative results around the division table",
+  "description": "<p>Notes, measurements and verified code from a self-directed study of the multiplicative structure of the integers, starting from an elementary object: the division table.</p><p>Contains three papers with figures and runnable verification scripts for every table and number printed. The results are <strong>independent re-derivations of known mathematics</strong>, and each paper names its prior art explicitly: the map characterising odd composites is the sieve of Sundaram (1934); the wheel pair-count is the truncated Hardy-Littlewood singular series (1923); the peak-matching construction is a truncated logarithmic derivative of the completed zeta function, so its numerics certify nothing about the critical line.</p><p><strong>No claim is made about the Riemann Hypothesis.</strong> The material is offered as an educational route from an elementary object to the explicit formula, together with documented negative results, controls, and two methodological rules the work exists to illustrate.</p>",
+  "upload_type": "publication",
+  "publication_type": "workingpaper",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "creators": [
+    {
+      "name": "Osman, Mohamed",
+      "orcid": "0009-0004-5912-999X"
+    }
+  ],
+  "keywords": [
+    "number theory",
+    "prime numbers",
+    "sieve of Sundaram",
+    "divisor function",
+    "Hardy-Littlewood singular series",
+    "Riemann zeta function",
+    "prime gaps",
+    "reproducible research",
+    "negative results"
+  ]
+}
