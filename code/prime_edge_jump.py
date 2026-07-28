@@ -139,8 +139,11 @@ for t in [math.log(3), math.log(7), math.log(13), math.log(29), math.log(60),
         continue
     s1, r2, eff = rank_report(overlap(t, L, m))
     print(f"   {t:>10.5f} {t/L:>7.3f} | {s1:>10.5f} {r2:>14.6f} {eff:>9d}")
-print("\n   -> the combined ratio does NOT go to zero: it plateaus, and the plateau is")
-print(f"      exactly (m-1)/(m+2) = {(m-1)}/{(m+2)} = {(m-1)/(m+2):.6f} for this basis size.")
+print("\n   -> the combined ratio does NOT go to zero.  It converges, and the limit is")
+print(f"      (m-1)/(m+2) = {(m-1)}/{(m+2)} = {(m-1)/(m+2):.6f} for this basis size --")
+print("      the last two rows, 0.958593 and 0.951681, approach it from above.")
+print("      (float64 gives out below this; the limit is resolved properly in")
+print("      harness/edge_precision.py, where the parity ratio is measured as eps^4.)")
 print("      That is the law of A. Groskin (see papers/prime_edge_two_paths.md).  What")
 print("      DOES go to rank one is each PARITY BLOCK separately: splitting odd from")
 print("      even sine modes gives sigma2/sigma1 -> 0 on each, with the dominant")
