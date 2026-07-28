@@ -46,6 +46,8 @@ What the repository *does* offer:
 papers/     four self-contained papers, plus one short structural note (Markdown)
 figures/    the figures they reference
 code/       verification scripts for every table and number, plus the figure generators
+harness/    the fixed-support builder, the zero-side validator, and a regression
+            harness reporting inertia across an m-ladder with JSON metadata
 ```
 
 ### `papers/division_table_prime_towers.md`
@@ -110,6 +112,19 @@ coordinates. The note carries a closed form for the measured plateau, `(m-1)/(m+
 A. Groskin in correspondence and verified here to seven digits, and a corrections section
 recording what earlier versions of the note got wrong.
 
+### `harness/`
+`conventions.py` is the single source of truth for the support, basis, block definitions,
+tolerance and reporting requirements. `builder_sine.py` assembles the truncated Weil form
+with archimedean, pole and prime blocks exposed separately. `validator.py` checks that
+assembly non-circularly against ordinates from `mpmath.zetazero` — the zeros enter no part
+of the construction — reporting residuals against explicit tail bounds rather than
+asserting agreement. `run_ladder.py` sweeps the `m`-ladder, prints the full inertia triple
+with its stated tolerance, writes raw arrays and JSON metadata, and exits nonzero on
+regression failure.
+
+Built to a specification supplied by A. Groskin so that a second constructor can be run
+against the same harness.
+
 ---
 
 ## Reproducibility
@@ -137,6 +152,11 @@ cd code
 python fig.py       # figure for the division-table paper
 python robust_paper3.py && python fig3.py   # fig3 needs the gap data robust_paper3 caches
 python fig4.py      # figure for the dynamical-model paper
+cd ..
+
+cd harness
+python validator.py 4.5 100            # non-circular check against the zeta zeros
+python run_ladder.py --L 4.5           # inertia ladder + JSON; nonzero exit on failure
 cd ..
 ```
 
