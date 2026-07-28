@@ -1,19 +1,26 @@
 """
-Follow-up.  Test A confirmed the SCALAR  -2 Lambda(q)/(sqrt q log q)  exactly, but
-the jump matrix was full rank at interior shifts.  Rank is invariant under change
-of basis, so if the reference claim is basis-independent the rank-one structure
-must appear somewhere specific: at the support EDGE, which is where an entering
-prime sits when L = log c.
+Follow-up to prime_edge_jump.py.
 
-MECHANISM TO TEST.  As the shift t -> L the overlap region [0, L-t] shrinks to the
-single point x = 0, so
+SUPERSEDED MECHANISM, KEPT AS A RECORD.  An earlier version of this file guessed
+that as the shift t -> L the overlap region [0, L-t] shrinks to the point x = 0,
+giving a rank-one limit with the single vector v_j ~ phi_j'(0) ~ j.  That guess is
+WRONG and the numerics below show why: the measured alignment against j plateaus
+at 1/sqrt(2) = 0.7071, not 1.
 
-    R_jk(t) = int_0^{L-t} phi_j(x) phi_k(x+t) dx  ~  (L-t) * phi_j(0^+) phi_k(0^+)
+THE CORRECT ACCOUNT (A. Groskin, correspondence; see the public derivation linked
+in papers/).  With delta = L - t,
 
-which is rank one with vector v_j = phi_j'(0) ~ a_j = j pi / L for a SINE basis
-(the sine basis vanishes at the endpoint, so the leading behaviour is the derivative).
-A basis whose functions are all equal at the endpoint would instead give the
-all-ones matrix.  Same theorem, basis-appropriate vector.
+    R_jk(L - delta) = (pi^2 delta^3 / 6 L^3) j k ((-1)^(j+1) + (-1)^(k+1)) + O(delta^5)
+
+opposite parities decouple exactly, and the leading matrix is one rank-one ODD
+block minus one rank-one EVEN block.  For even m the combined ratio tends to
+(m-1)/(m+2).  The second endpoint vector is (-1)^(j+1) j, and j itself is a
+45-degree mix of the odd-only and even-only vectors -- which is exactly why the
+alignment against j saturates at 1/sqrt(2).
+
+NUMERICAL REGIME.  All quantities here are cancellation-limited in float64 once
+delta falls below about 1e-3; ratios printed below that are not reliable and the
+edge limit should be taken in extended precision instead.
 """
 import numpy as np, math
 from sympy import primerange

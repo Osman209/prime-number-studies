@@ -115,8 +115,10 @@ for q, Lam in [(3, math.log(3)), (5, math.log(5)), (7, math.log(7)),
     align = float(np.sum(J * pred) / (np.linalg.norm(J) * np.linalg.norm(pred)))
     s1, r2, eff = rank_report(J)
     print(f"   {q:>6} {Lam:>10.5f} {u0:>8.4f} | {ratio:>19.9f} {r2:>14.4f} {eff:>9d}   cos={align:+.6f}")
-print("\n   -> ratio 1.000000000 and cos = +1 mean the jump equals the predicted matrix EXACTLY.")
-print("      sigma2/sigma1 says whether that matrix is rank one.")
+print("\n   -> the ratio and cosine are FINITE-DIFFERENCE estimates: agreement to the")
+print("      printed digits, not an exact identity.  The residual departure from 1 is")
+print("      truncation error in the difference quotient and shrinks with h.")
+print("      sigma2/sigma1 says whether that matrix is close to rank one.")
 
 # ================================================================= TEST B
 print()
@@ -157,5 +159,7 @@ for q, Lam in [(7, math.log(7)), (11, math.log(11)), (13, math.log(13)),
     pred_scalar = -2.0 * Lam / (math.sqrt(q) * math.log(q))
     print(f"   {q:>6} {u0:>11.5f} | {np.linalg.norm(J):>12.3e} {r2:>14.6f} {eff:>9d} "
           f"{np.linalg.norm(J)/abs(pred_scalar):>14.4e}")
-print("\n   -> here the entering prime always sits AT the support edge (log q = u = L),")
-print("      so this row is the reference paper's own configuration.")
+print("\n   -> here the entering prime sits at the support edge (log q = u = L).")
+print("      This is the COUPLED SINE-WINDOW path, NOT the reference construction:")
+print("      the reference carries the edge vanishing inside its matrix, whereas this")
+print("      path multiplies a Dirichlet sine overlap by an external window.")
