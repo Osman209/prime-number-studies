@@ -39,7 +39,7 @@ What the repository *does* offer:
 ## Contents
 
 ```
-papers/     three self-contained papers (Markdown)
+papers/     three self-contained papers, plus one short verification note (Markdown)
 figures/    the figures they reference
 code/       verification scripts — one per paper, plus the figure generators
 ```
@@ -70,6 +70,15 @@ protocol). The paper then shows why that match is structurally forced — `D_X` 
 truncated `ξ'/ξ`, so its peaks are its poles — and that two features which looked like
 independent structure resolve into truncation error and the Rayleigh resolution criterion.
 
+### `papers/prime_edge_jump_verification.md`
+A short verification note, not a paper of its own. It tests the prime-edge derivative-jump
+identity of Groskin (2026) in an independent construction (sine basis rather than the
+divided-difference form on squared-integer nodes). The scalar
+`-2*Lambda(q)/(sqrt(q)*log(q))` is reproduced exactly, including at prime powers where the
+weight is `log p` rather than `log q`; the rank-one structure of the jump matrix is not
+reproduced in this basis, which is recorded as an open question about differing conventions
+rather than as a disagreement.
+
 ---
 
 ## Reproducibility
@@ -86,6 +95,8 @@ python code/w_fast2.py                # D_X vs ξ'/ξ, peak shape
 python code/w_stab2.py                # peak extraction, prominence and tolerance sweeps
 python code/w_fast3.py                # angular criterion and the resolution law
 python code/w_alg.py                  # divisibility matrix and operator algebra
+python code/prime_edge_jump.py        # prime-edge derivative jump, scalar check
+python code/prime_edge_rank.py        # prime-edge jump, rank and edge analysis
 
 cd code
 python fig.py       # figure for the division-table paper
