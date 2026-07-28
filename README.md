@@ -156,7 +156,8 @@ cd ..
 
 cd harness
 python validator.py 4.5 100            # non-circular check against the zeta zeros
-python run_ladder.py --L 4.5           # inertia ladder + JSON; nonzero exit on failure
+python run_ladder.py                   # inertia ladder + JSON; nonzero exit on failure
+python edge_precision.py --m 20 40     # the edge limit in extended precision
 cd ..
 ```
 
@@ -164,7 +165,10 @@ Tested with Python 3.12, NumPy 2.4, SymPy 1.14, mpmath 1.3.
 The gap-frequency scripts segment-sieve windows of width `4×10⁷` up to `10¹³` and take a
 few minutes. `verify_covariance.py` and `verify_positivity.py` also take a few minutes —
 each has a long-average or large-matrix step, and `verify_covariance.py` has a `FAST` flag
-that shortens the slowest one. Everything else runs in seconds.
+that shortens the slowest one. `harness/run_ladder.py` sweeps five prime cutoffs
+across the full `m`-ladder and validates at every rung, so the default run takes
+about ten minutes; pass `--pcs 90 --ladder 100 200` for a quick check. Everything
+else runs in seconds.
 
 ---
 
