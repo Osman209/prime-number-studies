@@ -1,6 +1,6 @@
 # Prime Number Studies
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21638888.svg)](https://doi.org/10.5281/zenodo.21638888)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21638887.svg)](https://doi.org/10.5281/zenodo.21638887)
 
 Notes, measurements and verified code from an independent, self-directed study of the
 multiplicative structure of the integers — starting from an elementary object, the
@@ -70,14 +70,15 @@ protocol). The paper then shows why that match is structurally forced — `D_X` 
 truncated `ξ'/ξ`, so its peaks are its poles — and that two features which looked like
 independent structure resolve into truncation error and the Rayleigh resolution criterion.
 
-### `papers/prime_edge_jump_structure.md`
+### `papers/prime_edge_two_paths.md`
 A short note, not a paper of its own. It measures the prime-edge derivative jump of the
-truncated Weil form in this construction and compares it with the matrix-valued von Mangoldt
-measure of Groskin (2026). The content of that result is the *universality* of the matrix
-factor accompanying the von Mangoldt weight; here the factor is instead `q`-dependent, with
-pairwise cosines across nine prime powers in `[-0.083, +0.100]`. The note is explicit that
-the scalar coefficient, which does agree, follows from the window in one line and is not
-evidence of anything. Recorded as an open question about differing conventions.
+truncated Weil form in a Dirichlet sine construction and compares it with the matrix-valued
+von Mangoldt measure of Groskin (2026), where the jump is rank one. The two differ in where
+the edge vanishing lives: inside the matrix in the reference path, outside it as a scalar
+window here — so they are distinct families rather than the same object in different
+coordinates. The note carries a closed form for the measured plateau, `(m-1)/(m+2)`, due to
+A. Groskin in correspondence and verified here to seven digits, and a corrections section
+recording what earlier versions of the note got wrong.
 
 ---
 
@@ -95,8 +96,9 @@ python code/w_fast2.py                # D_X vs ξ'/ξ, peak shape
 python code/w_stab2.py                # peak extraction, prominence and tolerance sweeps
 python code/w_fast3.py                # angular criterion and the resolution law
 python code/w_alg.py                  # divisibility matrix and operator algebra
-python code/prime_edge_jump.py        # prime-edge derivative jump
+python code/prime_edge_jump.py        # prime-edge jump; section C retained with its artifact annotated
 python code/prime_edge_rank.py        # rank, edge analysis, and factor universality
+python code/check_reply.py             # closed form for the plateau, and the split blocks
 
 cd code
 python fig.py       # figure for the division-table paper
@@ -148,7 +150,7 @@ Being told that something here is already known is a useful outcome, not an unwe
 ```
 Osman, M. (2026). Prime Number Studies: independent re-derivations, measurements
 and negative results around the division table. Zenodo.
-https://doi.org/10.5281/zenodo.21638888
+https://doi.org/10.5281/zenodo.21638887
 ```
 
 Repository: https://github.com/Osman209/prime-number-studies
