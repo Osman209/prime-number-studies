@@ -639,6 +639,13 @@ Three scripts accompany this document; each prints the tables above.
 
 Environment: Python 3, NumPy 2.4, SciPy, mpmath 1.3. Zeta ordinates from `mpmath.zetazero` at 20 digits.
 
+## AI assistance
+
+The verification script accompanying this paper, and much of its prose, were
+written with the assistance of Claude (Anthropic). The research direction, the
+decisions, and the responsibility for every claim are the author's. See the
+repository README for a fuller statement.
+
 ---
 
 ## References
