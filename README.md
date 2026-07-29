@@ -20,6 +20,8 @@ and names the source. Specifically:
 | the wheel pair-count `W(H)` and its normalization | the **Hardy–Littlewood** singular series (1923), truncated |
 | peaks of a smoothed prime signal landing on the zeta ordinates | the **explicit formula** — the object is a truncated `ξ'/ξ` |
 | reconstruction of `τ, φ, μ, Λ` from valuation vectors | the fundamental theorem of arithmetic |
+| the shifted Möbius map, its derivative object, and the equality between them | the **Li–Sekatskii coefficients** — Sekatskii (2013, 2014), on **Bombieri–Lagarias** (1999) and **Li** (1997) |
+| explicit indices at which a Li-type coefficient certifies an off-line zero | **Brown** (2005), **Bucur–Ernvall-Hytönen–Odžak–Smajlović** (2016), **Palojärvi** (2019) |
 | lag functions of `gcd(n,h)` and their transforms | **Ramanujan–Fourier** analysis of `r`-even functions |
 | the positive `log gcd` Gram kernel | the classical **gcd-matrix** literature |
 | `λ_min → 0` for a purely atomic spectral measure | the **Szegő limit theorem** (Grenander–Szegő, 1958) |
@@ -43,7 +45,7 @@ What the repository *does* offer:
 ## Contents
 
 ```
-papers/     four self-contained papers, plus one short structural note (Markdown)
+papers/     four self-contained papers, plus two short structural notes (Markdown)
 figures/    the figures they reference
 code/       verification scripts for every table and number, plus the figure generators
 harness/    the fixed-support builder, the zero-side validator, and a regression
@@ -112,6 +114,26 @@ coordinates. The note carries a closed form for the measured plateau, `(m-1)/(m+
 A. Groskin in correspondence and verified here to seven digits, and a corrections section
 recording what earlier versions of the note got wrong.
 
+### `papers/li_lens_law.md`
+A short note on the **Li–Sekatskii coefficients** — the one-parameter family of Li
+coefficients obtained by shifting the Möbius map, whose unit circle is the critical line
+for every admissible shift. The whole construction is Sekatskii's and the note says so in
+a prior-art table; what it adds is that the shift behaves as a lens with an **exact optimal
+width**: for a hypothetical zero at `ρ = 1/2 + β + iT` the detection rate is maximal at
+`d = |ρ − 1/2|`, where it equals `artanh(β/|ρ − 1/2|)`, so matching the lens to the zero
+improves the detection index by a factor `T`. A previously measured empirical `30.9×`
+improvement for a planted zero at height `30` turns out to be that `T`.
+
+The note also records a truncation artifact that manufactures a false detection — its rate
+is `(1 + 1/|a|)`, which is Sekatskii's own exponential term — and asks the same optimisation
+question of the truncated Weil form, where the answer is the opposite: the support length
+has no interior optimum, being bounded by a Paley–Wiener price rather than a matching
+condition. It also states how far its own prior-art search went, and which sources it did
+not consult.
+
+*Its own conclusion, and the reason it is a note rather than a paper: a more sensitive
+detector is not a shorter proof.*
+
 ### `harness/`
 `conventions.py` is the single source of truth for the support, basis, block definitions,
 tolerance and reporting requirements. `builder_sine.py` assembles the truncated Weil form
@@ -147,6 +169,7 @@ python code/verify_positivity.py      # single column: both conventions, the α-
 python code/prime_edge_jump.py        # prime-edge jump; section C retained with its artifact annotated
 python code/prime_edge_rank.py        # rank, edge analysis, and factor universality
 python code/check_reply.py            # closed form for the plateau, and the split blocks
+python code/verify_li_lens.py         # the lens law; eleven checks, the proof verified line by line
 
 cd code
 python fig.py       # figure for the division-table paper
@@ -195,14 +218,39 @@ atoms and the rank simply saturates.
 
 ---
 
+## On the use of AI assistance
+
+The verification scripts in `code/` and `harness/`, and much of the prose in `papers/`,
+were written with the assistance of **Claude (Anthropic)**, used as a working collaborator
+throughout: drafting and rewriting code, running the computations, drafting and editing
+text, searching the literature, and — most usefully — auditing the papers against their own
+scripts.
+
+The research direction, the questions asked, the decisions about what to publish and what
+to withdraw, and the final responsibility for every claim are the author's.
+
+A great many of the corrections recorded in these papers were found by that auditing: a
+claim stated more precisely than the computation supported, a script that had not caught up
+with a correction to the text, a formula quoted but never tested. Several were errors the
+assistant had itself introduced and then found on a later pass. Where a result is reported
+here, it is because a script regenerates it and the script has been read; that discipline,
+rather than any assurance about the tool, is what the reader is asked to rely on.
+
+---
+
 ## Status
 
-Four papers and one note are here.
+Four papers and two notes are here.
 
 The fourth paper closes the division-table route as a direct approach to RH, and says so in
 its own conclusion. What it leaves genuinely open is listed in its Appendix A — most
 interestingly the rational-angle locking of the symbol's minimum, which is the one measured
 structure in it that does not obviously reduce to bookkeeping.
+
+The two notes are smaller and were written the same way: an elementary route is followed
+until it lands on something already published, the prior art is named, and what survives is
+a measurement or two. Both end on the same finding — a sharper instrument is not a shorter
+proof — which by now is the pattern the repository is really a record of.
 
 Corrections, counterexamples and pointers to prior art are all welcome; open an issue.
 Being told that something here is already known is a useful outcome, not an unwelcome one.
