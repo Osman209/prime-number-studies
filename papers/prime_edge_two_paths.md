@@ -197,6 +197,14 @@ python edge_precision.py --m 20 40   # the edge limit in extended precision
 
 Edge-limit quantities are cancellation-limited in float64. They are recomputed in extended precision by `harness/edge_precision.py`, which sets the working precision from the target `δ` and evaluates the overlap through a reduction with no trigonometric cancellation left in its structure; the float64 figures are retained above for contrast, with the extended-precision result beside each.
 
+## AI assistance
+
+The verification script accompanying this paper, and much of its prose, were
+written with the assistance of Claude (Anthropic). The research direction, the
+decisions, and the responsibility for every claim are the author's. See the
+repository README for a fuller statement.
+
+---
 ## References
 
 1. A. Groskin (2026). *A matrix-valued von Mangoldt measure in the finite Connes–van Suijlekom path.* Zenodo, [10.5281/zenodo.21242028](https://doi.org/10.5281/zenodo.21242028).
