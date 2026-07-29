@@ -433,6 +433,14 @@ The chain is exact and complete for multiplicative structure and elementary thro
 
 `verify_paper2.py` prints every table and count in this document; `fig.py` produces Figure 1. Environment: Python 3, NumPy 2.4, SymPy 1.14.
 
+## AI assistance
+
+The verification script accompanying this paper, and much of its prose, were
+written with the assistance of Claude (Anthropic). The research direction, the
+decisions, and the responsibility for every claim are the author's. See the
+repository README for a fuller statement.
+
+---
 ## References
 
 1. V. Ramaswami Aiyar, *Sundaram's Sieve for Prime Numbers*, The Mathematics Student **2** (1934), 73. *(The map `Φ` of §5.)*
