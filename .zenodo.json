@@ -1,7 +1,7 @@
 {
   "title": "Prime Number Studies: independent re-derivations, measurements and negative results around the division table",
   "description": "<p>Notes, measurements and verified code from a self-directed study of the multiplicative structure of the integers, starting from an elementary object: the division table.</p><p>Contains four papers and one structural note, with figures and runnable verification scripts for every table and number printed. The results are <strong>independent re-derivations of known mathematics</strong>, and each paper names its prior art explicitly: the map characterising odd composites is the sieve of Sundaram (1934); the wheel pair-count is the truncated Hardy-Littlewood singular series (1923); the peak-matching construction is a truncated logarithmic derivative of the completed zeta function, so its numerics certify nothing about the critical line; and the single-column paper reaches the prime side of the logarithmic derivative of zeta through Ramanujan-Fourier lag analysis, gcd Gram kernels and Moebius inversion, closing three spectral routes for structural reasons via the Szego limit theorem and the bipartite symmetry of the operator it builds.</p><p><strong>No claim is made about the Riemann Hypothesis.</strong> The material is offered as an educational route from an elementary object to the explicit formula, together with documented negative results, controls, and three methodological rules the work exists to illustrate.</p>",
-"version": "1.8.2",
+"version": "1.9.0",
   "upload_type": "publication",
   "publication_type": "workingpaper",
   "access_right": "open",
