@@ -329,6 +329,14 @@ Steps 5 and 7 are the ones that change conclusions.
 
 `w_fast2.py` (Prop. 3.1, the functional-equation check, the peak-shape table), `w_stab2.py` (§4.1 prominence and tolerance sweeps), `w_fast3.py` (§6 and §9), `w_alg.py` (§§7–8), `fig4.py` (Figure 1). Environment: Python 3, NumPy 2.4, SymPy 1.14, mpmath 1.3, SciPy. Zero ordinates from `mpmath.zetazero`.
 
+## AI assistance
+
+The verification script accompanying this paper, and much of its prose, were
+written with the assistance of Claude (Anthropic). The research direction, the
+decisions, and the responsibility for every claim are the author's. See the
+repository README for a fuller statement.
+
+---
 ## References
 
 1. B. Riemann, *Ueber die Anzahl der Primzahlen unter einer gegebenen Grösse*, 1859.
