@@ -267,6 +267,14 @@ Step 6 is the one that changes conclusions, and step 7 without the matching in �
 
 `verify_paper3.py` produces §§4–8; `robust_paper3.py` produces the window sweeps of §7.2 and §8; `fig3.py` produces Figure 1. Environment: Python 3, NumPy 2.4, SymPy 1.14. Gap data: segmented sieve, `ΔX = 4×10⁷` per height.
 
+## AI assistance
+
+The verification script accompanying this paper, and much of its prose, were
+written with the assistance of Claude (Anthropic). The research direction, the
+decisions, and the responsibility for every claim are the author's. See the
+repository README for a fuller statement.
+
+---
 ## References
 
 1. G. H. Hardy and J. E. Littlewood, *Some problems of "Partitio Numerorum" III: On the expression of a number as a sum of primes*, Acta Mathematica **44** (1923), 1–70.
