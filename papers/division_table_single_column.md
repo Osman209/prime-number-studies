@@ -620,13 +620,27 @@ The negative results are the useful part, because each one is a general lesson a
 These are the questions this document did **not** settle, stated so that a later reader does not mistake them for closed.
 
 1. **The joint limit in §8.** At a fixed layer cutoff the Toeplitz rank saturates and no decay exponent exists; as the cutoff grows the measured slope drifts (`−4.78` at cutoff 100 to `−0.736` at 10⁵) and has not stabilised. What the correct law is in a joint limit `cutoff, N → ∞` — and at what relative rate the two must be taken — is unmeasured. Szegő already forces the limit to be `0`, so this is a rate question, not an existence question.
-2. **The upper edge of the `α`-window in §9, and the cusp that pins the minimum.** The lower edge is exact (the root of `4 log 2/(2^{α+1} − 1) + ζ'/ζ(α+1) = 0`, at `α = 0.495075…`), because the symbol's minimum sits at `θ = π` throughout that region. The upper edge, `α = 1.6096`, is only numerical, and the reason is a structure this document measures but does not explain. The minimising angle **locks onto rational points**: it is exactly `π` up to about `α = 0.71`, then exactly `2π/5` — to 8 decimals at `α = 0.75` and 7 at `α = 1.00` — and only then does it come loose, drifting to `0.39950π` at `α = 1.40` and `0.39892π` at `α = 1.60`. The locking is caused by a downward cusp: measuring `f(2π/5 + ε) − f(2π/5) ~ ε^β` gives
+2. **The upper edge of the `α`-window in §9, and the cusp that pins the minimum. — ANSWERED after publication; see `papers/rational_angle_lock.md`.** The lower edge is exact (the root of `4 log 2/(2^{α+1} − 1) + ζ'/ζ(α+1) = 0`, at `α = 0.495075…`), because the symbol's minimum sits at `θ = π` throughout that region. The upper edge, `α = 1.6096`, is only numerical. The minimising angle **locks onto rational points**: it is exactly `π` up to `α* = 0.74005` — **corrected**; this document originally read "about `α = 0.71`", where the gap `f(π) − f(2π/5)` is in fact still `−4.6×10⁻²` — then exactly `2π/5`, to 8 decimals at `α = 0.75` and 7 at `α = 1.00`, and only then does it come loose, drifting to `0.39950π` at `α = 1.40` and `0.39892π` at `α = 1.60`. The locking is caused by a downward cusp: measuring `f(2π/5 + ε) − f(2π/5) ~ ε^β` gives
 
    | `α` | 0.60 | 0.75 | 1.00 | 1.40 |
    |---|---|---|---|---|
    | `β` | 0.624 | 0.769 | 1.004 | 1.063 |
 
-   (summation cutoff `1.6×10⁷`; the exponents move *towards* `α` as the cutoff grows — at `4×10⁶` the same measurement reads `0.654, 0.793, 1.016, 1.063`) — so `β ≈ α` while the minimum is pinned, and the pinning fails exactly when the cusp becomes Lipschitz (`β = 1`, at `α ≈ 1`) and can no longer hold a minimum against the surrounding slope. Why the exponent should equal `α`, why the transition is at `α = 1`, and which rational angle takes over and when, are all open. This is the one place in the document where a measured structure looks like it might have content beyond bookkeeping.
+   (summation cutoff `1.6×10⁷`; the exponents move *towards* `α` as the cutoff grows — at `4×10⁶` the same measurement reads `0.654, 0.793, 1.016, 1.063`) — so `β ≈ α` while the minimum is pinned, and the pinning fails exactly when the cusp becomes Lipschitz (`β = 1`, at `α ≈ 1`).
+
+   **The resolution, and it is a dissolution.** The edge law is
+   `f(2πa/q + ε) − f(2πa/q) ~ 2 (μ(q)/φ(q)) Γ(−α) cos(πα/2) |ε|^α`, the product of the
+   Hardy–Littlewood singular series `μ(q)/φ(q)` — the residue at `s = 1` of
+   `Σ Λ(n)e(an/q)n^{−s}` — with the Lerch–Wood expansion of the polylogarithm at `z = 1`.
+   So `β = α` exactly, with no arithmetic in it; the cusp points down precisely where
+   `μ(q) = −1`; the strength is `1/φ(q)`; and the transition at `α = 1` is where the cusp
+   becomes Lipschitz. Rescaling every measured edge by `φ(q)/μ(q)` collapses all of them
+   onto one prime-free universal cusp (mean `0.9944`, sd `0.0096`). What looked like it
+   might carry content beyond bookkeeping is the **major-arc approximation of the circle
+   method, drawn as a graph**. The upper edge stays numerical, but now for a stated
+   reason: above `α = 1` the minimiser leaves every rational angle, so there is no closed
+   form of the kind that made the lower edge exact. Details, tables and the correction to
+   `α*` are in `papers/rational_angle_lock.md`, with `code/verify_angle_lock.py`.
 3. **The growth law of `λ_max(H)` in `N`.** Measured `2.57867 → 2.69060` over `N = 5120 … 81920` at fixed `P = 4489`, with the increment per decade *increasing*, so it is super-logarithmic; no fitted law is stable over this range. Since §10's argument rests on the insensitivity to `P` and on Lemma 2, this does not affect any conclusion — but the law is not identified.
 
 ## Appendix B. Reproducibility
@@ -641,7 +655,11 @@ Environment: Python 3, NumPy 2.4, SciPy, mpmath 1.3. Zeta ordinates from `mpmath
 
 ## AI assistance
 
-The verification script and much of the prose in this note were written with the assistance of Claude (Anthropic); the research direction, the decisions about what to publish, and responsibility for every claim are the author's.
+The verification script accompanying this paper, and much of its prose, were
+written with the assistance of Claude (Anthropic). The research direction, the
+decisions, and the responsibility for every claim are the author's. See the
+repository README for a fuller statement.
+
 ---
 
 ## References
