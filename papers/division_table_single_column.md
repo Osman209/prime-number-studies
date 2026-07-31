@@ -655,10 +655,7 @@ Environment: Python 3, NumPy 2.4, SciPy, mpmath 1.3. Zeta ordinates from `mpmath
 
 ## AI assistance
 
-The verification script accompanying this paper, and much of its prose, were
-written with the assistance of Claude (Anthropic). The research direction, the
-decisions, and the responsibility for every claim are the author's. See the
-repository README for a fuller statement.
+The verification scripts and much of the prose in this paper were written with the assistance of Claude (Anthropic); the research direction, the decisions about what to publish, and responsibility for every claim are the author's. See the repository README for a fuller statement.
 
 ---
 

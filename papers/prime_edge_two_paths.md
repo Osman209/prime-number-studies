@@ -199,7 +199,7 @@ Edge-limit quantities are cancellation-limited in float64. They are recomputed i
 
 ## AI assistance
 
-The verification script and much of the prose in this note were written with the assistance of Claude (Anthropic); the research direction, the decisions about what to publish, and responsibility for every claim are the author's.
+The verification script and much of the prose in this note were written with the assistance of Claude (Anthropic); the research direction, the decisions about what to publish, and responsibility for every claim are the author's. See the repository README for a fuller statement.
 
 ---
 ## References
