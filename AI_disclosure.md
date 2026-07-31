@@ -20,6 +20,6 @@ that had not caught up with a correction to the text, a formula quoted but never
 tested. Several were errors the assistant had itself introduced and then found on
 a later pass. Where a result is reported here, it is because a script regenerates
 it and the script has been read; that discipline, rather than any assurance about
-the tool, is what the reader is asked to rely on.
+the tool.
 
 ---
