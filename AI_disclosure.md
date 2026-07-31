@@ -31,24 +31,3 @@ it and the script has been read; that discipline, rather than any assurance abou
 the tool, is what the reader is asked to rely on.
 
 ---
-
-## For each paper
-
-One line, placed immediately before the references.
-
-**AI assistance.** The verification script accompanying this paper, and much of
-its prose, were written with the assistance of Claude (Anthropic). The research
-direction, the decisions, and the responsibility for every claim are the author's.
-See the repository README for a fuller statement.
-
----
-
-## Notes on placement
-
-- Put the paper line **before** the references, not in a footnote — the point is
-  that a reader sees it while deciding how much to trust the tables.
-- The four existing papers and the two notes should all carry it, not just the new
-  ones. Retrofitting it is a correction like any other and belongs in the same
-  release.
-- If a journal or preprint server asks for a disclosure in a particular form, use
-  theirs; this is written for the repository.
