@@ -26,6 +26,7 @@ and names the source. Specifically:
 | the positive `log gcd` Gram kernel | the classical **gcd-matrix** literature |
 | `λ_min → 0` for a purely atomic spectral measure | the **Szegő limit theorem** (Grenander–Szegő, 1958) |
 | the critical balance of the Weil form at `β* = 1` | **Bombieri**, Rend. Lincei 11 (2000) |
+| the arithmetic weight `μ(q)/φ(q)` on a major arc, and the cusp at rational angles | **Hardy–Littlewood** (1923) major arcs; **Ramanujan** sums (1918); the **Lerch–Wood** polylogarithm expansion at `z = 1` |
 
 **There is no claim here about the Riemann Hypothesis.** Where a construction touches it,
 the paper states precisely why the numerics certify nothing about the critical line.
@@ -45,7 +46,7 @@ What the repository *does* offer:
 ## Contents
 
 ```
-papers/     four self-contained papers, plus two short structural notes (Markdown)
+papers/     four self-contained papers, plus three short structural notes (Markdown)
 figures/    the figures they reference
 code/       verification scripts for every table and number, plus the figure generators
 harness/    the fixed-support builder, the zero-side validator, and a regression
@@ -99,10 +100,11 @@ a bounded window of the parameter. And the hybrid prime-power operator is bipart
 spectrum is exactly symmetric about zero and its top does not move when primes are added,
 while the zeta ordinates are positive and unbounded.
 
-*One open item is flagged as possibly having content beyond bookkeeping: the minimising
+*One open item was flagged as possibly having content beyond bookkeeping: the minimising
 angle of the symbol locks onto rational points — exactly `π`, then exactly `2π/5` to eight
 decimals — held there by a downward cusp whose exponent tracks the parameter, and comes
-loose only when that cusp becomes Lipschitz.*
+loose only when that cusp becomes Lipschitz. It has since been closed, and dissolved, in
+`papers/rational_angle_lock.md`; the crossing point stated in this paper is corrected there.*
 
 ### `papers/prime_edge_two_paths.md`
 A short note, not a paper of its own. It measures the prime-edge derivative jump of the
@@ -133,6 +135,25 @@ not consult.
 
 *Its own conclusion, and the reason it is a note rather than a paper: a more sensitive
 detector is not a shorter proof.*
+
+### `papers/rational_angle_lock.md`
+A short note that closes the open item flagged in the fourth paper above, by dissolving it. The cusp law is
+`f(2πa/q + ε) − f(2πa/q) ~ 2 (μ(q)/φ(q)) Γ(−α) cos(πα/2) |ε|^α`: the **Hardy–Littlewood
+singular series** multiplying the **Lerch–Wood expansion of the polylogarithm** at `z = 1`.
+That gives the exponent (`β = α`, no arithmetic in it), the sign (down exactly where
+`μ(q) = −1`), the strength (`1/φ(q)`) and the transition at `α = 1` (the cusp becomes
+Lipschitz). Rescaling every measured edge by `φ(q)/μ(q)` collapses them onto one prime-free
+universal cusp — mean `0.9944`, sd `0.0096`. The phenomenon is the major-arc approximation
+of the circle method drawn as a graph.
+
+It also **corrects a number in the fourth paper**: the handover from `π` to `2π/5` is at
+`α* = 0.74005083`, not "about `α = 0.71`", and which rational wins is decided by the value
+at the angle, not by the cusp strength — which is why `q = 3`, twice as strong as `q = 5`,
+never wins.
+
+*What survives as its own is small and labelled as such: for `0 < α < 1` a sub-Lipschitz
+cusp cannot be dislodged by a smooth background, so the minimiser is confined to rational
+angles with `μ(q) = −1` and can only ever jump.*
 
 ### `harness/`
 `conventions.py` is the single source of truth for the support, basis, block definitions,
@@ -170,6 +191,7 @@ python code/prime_edge_jump.py        # prime-edge jump; section C retained with
 python code/prime_edge_rank.py        # rank, edge analysis, and factor universality
 python code/check_reply.py            # closed form for the plateau, and the split blocks
 python code/verify_li_lens.py         # the lens law; eleven checks, the proof verified line by line
+python code/verify_angle_lock.py      # the rational-angle cusp law; --fast for a 5 s run
 
 cd code
 python fig.py       # figure for the division-table paper
@@ -240,17 +262,22 @@ rather than any assurance about the tool, is what the reader is asked to rely on
 
 ## Status
 
-Four papers and two notes are here.
+Four papers and three notes are here.
 
 The fourth paper closes the division-table route as a direct approach to RH, and says so in
-its own conclusion. What it leaves genuinely open is listed in its Appendix A — most
-interestingly the rational-angle locking of the symbol's minimum, which is the one measured
-structure in it that does not obviously reduce to bookkeeping.
+its own conclusion. What it leaves genuinely open is listed in its Appendix A. The most
+interesting of those items — the rational-angle locking of the symbol's minimum, the one
+measured structure that did not obviously reduce to bookkeeping — has since been closed in
+`papers/rational_angle_lock.md`, and it did reduce to bookkeeping: the singular series
+times a polylogarithm cusp, which is the circle method's major arcs seen as a graph. That
+note also corrects the crossing point the fourth paper reported.
 
-The two notes are smaller and were written the same way: an elementary route is followed
+The three notes are smaller and were written the same way: an elementary route is followed
 until it lands on something already published, the prior art is named, and what survives is
-a measurement or two. Both end on the same finding — a sharper instrument is not a shorter
-proof — which by now is the pattern the repository is really a record of.
+a measurement or two. The first two end on the same finding — a sharper instrument is not a
+shorter proof — and the third ends one step further along, on a structure that looked like
+it might be an exception and was not. That is by now the pattern the repository is really a
+record of.
 
 Corrections, counterexamples and pointers to prior art are all welcome; open an issue.
 Being told that something here is already known is a useful outcome, not an unwelcome one.
