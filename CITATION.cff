@@ -21,7 +21,9 @@ abstract: >-
   division table. Contains independent re-derivations of known
   results (the sieve of Sundaram; the Hardy-Littlewood singular
   series; the explicit formula; Ramanujan-Fourier analysis of
-  r-even functions; the Szego limit theorem), documented negative
+  r-even functions; the Szego limit theorem; the Li-Sekatskii
+  shifted Li coefficients; the major-arc expansion of the circle
+  method), documented negative
   results and controls, and runnable verification scripts for every
   table and figure. No claim is made about the Riemann Hypothesis.
 keywords:
@@ -38,5 +40,5 @@ keywords:
   - von Mangoldt function
   - reproducible research
 license: CC-BY-4.0
-version: 1.9.0
+version: 1.10.0
 date-released: '2026-07-28'
