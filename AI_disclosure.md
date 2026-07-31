@@ -1,4 +1,4 @@
-# AI assistance disclosure — text to add to every paper and to the README
+# AI assistance disclosure 
 
 The wording below is deliberately specific about the division of labour, because a
 vague acknowledgement is worse than none: a reader needs to know which parts to
