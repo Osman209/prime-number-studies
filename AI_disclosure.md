@@ -1,14 +1,6 @@
 # AI assistance disclosure 
 
-The wording below is deliberately specific about the division of labour, because a
-vague acknowledgement is worse than none: a reader needs to know which parts to
-check harder, not merely that a tool was involved.
-
 ---
-
-## For the README
-
-Put it under its own heading, near the reproducibility section.
 
 ### On the use of AI assistance
 
