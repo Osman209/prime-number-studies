@@ -176,7 +176,6 @@ Recorded rather than silently edited. Items 5–10 are due to A. Groskin.
 9. **Bombieri's count theorem was invoked where it does not apply** — it is stated for `H(Γ; t)`, not this family.
 10. **`d = 2c − 6` was asserted as an equality** despite an offset that is `6` or `7` depending on `L`; withdrawn above.
 
-Two further items were flagged and are now addressed by committing code rather than by editing prose: the full-form assembly and the zero-side validator were previously **reported rather than verified**, since neither was in the repository. Both are now in `harness/`, and the validator reports residuals against explicit tail bounds rather than asserting agreement.
 
 ---
 
