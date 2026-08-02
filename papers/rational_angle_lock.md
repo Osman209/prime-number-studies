@@ -6,7 +6,7 @@
 
 ## Summary
 
-The fourth paper in this repository, *The Odd Division Table as a Single Column*,
+A companion paper in this repository, *Compressing the Division Table into a Single Dynamical Column*,
 ends with three open items. The second of them is the only place in that document
 where a measured structure looked as though it might carry content beyond
 bookkeeping: the minimising angle of the Toeplitz symbol
@@ -49,7 +49,7 @@ wins although it is twice as strong as `q = 5`. Enumerating all `97` candidates 
 `μ(q) = −1, q ≤ 40`: `π` wins below the crossing, `2π/5` above it, and nothing else
 ever comes within `3%`.
 
-**This corrects a number in the fourth paper.** That paper puts the handover at
+**This corrects a number in *Compressing the Division Table into a Single Dynamical Column*.** That paper puts the handover at
 "about `α = 0.71`". Bisecting `f_α(π) − f_α(2π/5)` gives
 
 ```
@@ -104,7 +104,7 @@ and tell us where.
 
 ## 2. The object, and where the question comes from
 
-`f_α` is the Toeplitz symbol of §9 of the fourth paper: `f_α(θ) = c + 2 Σ_{h≥1} b(h) cos(hθ)`
+`f_α` is the Toeplitz symbol of §9 of *Compressing the Division Table into a Single Dynamical Column*: `f_α(θ) = c + 2 Σ_{h≥1} b(h) cos(hθ)`
 with `b(h) = Λ(h) h^{−(α+1)}`, `c = Σ_q Λ(q) q^{−(α+1)}`. Its positivity for all `N`
 is equivalent to `f_α ≥ 0`, so the location and value of `min_θ f_α` is what decides
 the `α`-window in that paper. Two conventions occur there: all prime powers, and odd
@@ -239,7 +239,7 @@ it the minimum detaches, at distance
 |ε*| ~ (|b₁| / (Cα))^{1/(α−1)},
 ```
 
-which is the slow drift the fourth paper measured (`0.39950π` at `α = 1.40`,
+which is the slow drift the companion paper measured (`0.39950π` at `α = 1.40`,
 `0.39892π` at `α = 1.60`) and could not account for.
 
 ---
@@ -271,9 +271,9 @@ handover is a competition of values, not of strengths.
 α* = 0.740038     at cutoff 4×10⁶      (shift 1.3×10⁻⁵)
 ```
 
-### 5.1 Correction to the fourth paper [C]
+### 5.1 Correction to the companion paper [C]
 
-Appendix A item 2 of *The Odd Division Table as a Single Column* states that the
+Appendix A item 2 of *Compressing the Division Table into a Single Dynamical Column* states that the
 minimum is at `π` "up to about `α = 0.71`". **That is wrong**, and the correct value
 is `α* = 0.74005`. At `α = 0.71` the gap `f(π) − f(2π/5)` is still `−4.56×10⁻²`.
 The two conventions of that paper are not the cause: the `0.71` does not correspond
@@ -323,7 +323,7 @@ python code/verify_angle_lock.py --fast   # cutoff 4×10⁶, about 5 s
 Eleven checks, in the order in which the sections above use them: the Ramanujan sum,
 the residue `Ψ_{a,q}(x)/x → μ(q)/φ(q)`, the prime-free transfer lemma, the edge law's
 exponent and amplitude in both conventions, the universal cusp, the angle
-enumeration, the crossing, the fourth paper's two numbers, and the cutoff stability
+enumeration, the crossing, the companion paper's two numbers, and the cutoff stability
 of `α*` and of a fitted exponent. The script regenerates every table and number
 above, exits nonzero on failure, and prints its summation cutoff next to each result
 — none of these numbers is cutoff-free, and the third of the repository's method
@@ -348,7 +348,7 @@ for a fuller statement.*
 6. D. C. Wood, *The computation of polylogarithms*, Technical Report 15-92, University of Kent, 1992.
 7. A. Erdélyi et al., *Higher Transcendental Functions*, vol. I, McGraw–Hill 1953, §1.11.
 8. H. Iwaniec and E. Kowalski, *Analytic Number Theory*, AMS Colloquium Publications 53, §§4, 5.
-9. M. Osman, *The Odd Division Table as a Single Column*, in this repository — Appendix A, item 2, which this note answers.
+9. M. Osman, *Compressing the Division Table into a Single Dynamical Column*, in this repository — Appendix A, item 2, which this note answers.
 
 **No claim is made about the Riemann Hypothesis.** The object studied here is a
 Toeplitz symbol whose positivity was already shown, in the paper this note serves, to

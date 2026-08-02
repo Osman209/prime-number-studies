@@ -424,7 +424,7 @@ The chain is exact and complete for multiplicative structure and elementary thro
 | `R(H,j)` | remainder field, `= 2k mod d` |
 | `q = 2t + 1` | the odd quotient in a non-trivial exact division |
 | `Φ(j,t)` | factor map `2jt + j + t − 1` |
-| `Z_d` | layer `{ H : d | 2H + 3 }` |
+| `Z_d` | layer `{ H : d \| 2H + 3 }` |
 | `v_p(n)` | exponent of `p` in `n` (depth in the tower) |
 | `V(n)` | prime-depth vector |
 | `τ, φ, μ, Λ, ω, Ω` | divisor count, totient, Möbius, von Mangoldt, distinct and total prime counts |

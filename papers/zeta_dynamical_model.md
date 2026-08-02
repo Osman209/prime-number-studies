@@ -153,7 +153,7 @@ F_L(0) = L/2 ,      F'_L(0) = 0 ,      F''_L(0) = −L³/12 .
 
 It is tempting to write `Q_{n,X}(δ) = |D_X(γ_n + δ)|² = F_L(δ) + B_{n,X}(δ)` and treat `F_L` as the isolated-zero signal and `B` as background. **The leading term is not `F_L`.** Measured at `γ₁`:
 
-| X | `L` | `|D_X(γ₁)|²` | `F_L(0) = L/2` | `F_L(0)² = (L/2)²` | measured curvature | `−L³/12` | `−L⁴/12` |
+| X | `L` | `\|D_X(γ₁)\|²` | `F_L(0) = L/2` | `F_L(0)² = (L/2)²` | measured curvature | `−L³/12` | `−L⁴/12` |
 |---|---|---|---|---|---|---|---|
 | 10³ | 6.91 | 12.200 | 3.454 | 11.929 | −63.0 | −27.5 | −189.7 |
 | 10⁴ | 9.21 | 21.590 | 4.605 | 21.208 | −207.2 | −65.1 | −599.7 |
@@ -210,7 +210,7 @@ which tends to `0` as `ε → 0`, whereas an on-line zero always gives `π`. *Ve
 
 **(b) Its cost makes it impractical as a test.** The model resolves `t`-scales of order `1/L = 1/log X`, so detecting a displacement `a` requires `ε ≲ a`, hence `log X ≳ 1/a`:
 
-| `a = |β − 1/2|` | 0.1 | 0.01 | 0.001 |
+| `a = \|β − 1/2\|` | 0.1 | 0.01 | 0.001 |
 |---|---|---|---|
 | required `log X` | 10 | 100 | 1000 |
 | required `X` | `10⁴` | `10⁴³` | `10⁴³⁴` |
