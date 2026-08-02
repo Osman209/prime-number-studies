@@ -160,7 +160,8 @@ not consult.
 detector is not a shorter proof.*
 
 ### `papers/rational_angle_lock.md`
-A short note that closes the open item flagged in `papers/division_table_single_column.md` above, by dissolving it. The cusp law is
+A short note that closes the open item flagged in `papers/division_table_single_column.md`
+above, by dissolving it. The cusp law is
 `f(2πa/q + ε) − f(2πa/q) ~ 2 (μ(q)/φ(q)) Γ(−α) cos(πα/2) |ε|^α`: the **Hardy–Littlewood
 singular series** multiplying the **Lerch–Wood expansion of the polylogarithm** at `z = 1`.
 That gives the exponent (`β = α`, no arithmetic in it), the sign (down exactly where
@@ -169,7 +170,8 @@ Lipschitz). Rescaling every measured edge by `φ(q)/μ(q)` collapses them onto o
 universal cusp — mean `0.9944`, sd `0.0096`. The phenomenon is the major-arc approximation
 of the circle method drawn as a graph.
 
-It also **corrects a number in `papers/division_table_single_column.md`**: the handover from `π` to `2π/5` is at
+It also **corrects a number in `papers/division_table_single_column.md`**: the handover
+from `π` to `2π/5` is at
 `α* = 0.74005083`, not "about `α = 0.71`", and which rational wins is decided by the value
 at the angle, not by the cusp strength — which is why `q = 3`, twice as strong as `q = 5`,
 never wins.
@@ -300,8 +302,9 @@ decomposes all twenty-one of its items into named classical results. It is also 
 paper here that could reasonably be submitted to a journal, because an expository paper is
 accepted for its route rather than for a result.
 
-`papers/division_table_single_column.md` closes the division-table route as a direct approach to
-RH, and says so in its own conclusion. What it leaves genuinely open is listed in its Appendix A. The most
+`papers/division_table_single_column.md` closes the division-table route as a direct
+approach to RH, and says so in its own conclusion. What it leaves genuinely open is
+listed in its Appendix A. The most
 interesting of those items — the rational-angle locking of the symbol's minimum, the one
 measured structure that did not obviously reduce to bookkeeping — has since been closed in
 `papers/rational_angle_lock.md`, and it did reduce to bookkeeping: the singular series
