@@ -23,7 +23,7 @@ abstract: >-
   series; the explicit formula; Ramanujan-Fourier analysis of
   r-even functions; the Szego limit theorem; the Li-Sekatskii
   shifted Li coefficients; the major-arc expansion of the circle
-  method), documented negative
+  method; Buchstab's function and the wheel sieve), documented negative
   results and controls, and runnable verification scripts for every
   table and figure. No claim is made about the Riemann Hypothesis.
 keywords:
@@ -39,6 +39,28 @@ keywords:
   - Szego limit theorem
   - von Mangoldt function
   - reproducible research
+  - Buchstab function
+  - Dickman function
+  - wheel sieve
+  - Redheffer matrix
+  - Dirichlet divisor problem
 license: CC-BY-4.0
-version: 1.10.0
-date-released: '2026-07-28'
+version: 1.11.0
+date-released: '2026-08-02'
+
+preferred-citation:
+  type: report
+  title: >-
+    Prime Number Studies: independent re-derivations, measurements
+    and negative results around the division table
+  authors:
+    - given-names: Mohamed
+      family-names: Osman
+      orcid: 'https://orcid.org/0009-0004-5912-999X'
+  year: 2026
+  doi: 10.5281/zenodo.21638887
+  url: 'https://doi.org/10.5281/zenodo.21638887'
+  notes: >-
+    Deposited on Zenodo as a working paper. The repository itself is
+    the software and data that accompany it; cite this entry for the
+    written work, and the repository entry above for the code.

@@ -27,6 +27,9 @@ and names the source. Specifically:
 | `λ_min → 0` for a purely atomic spectral measure | the **Szegő limit theorem** (Grenander–Szegő, 1958) |
 | the critical balance of the Weil form at `β* = 1` | **Bombieri**, Rend. Lincei 11 (2000) |
 | the arithmetic weight `μ(q)/φ(q)` on a major arc, and the cusp at rational angles | **Hardy–Littlewood** (1923) major arcs; **Ramanujan** sums (1918); the **Lerch–Wood** polylogarithm expansion at `z = 1` |
+| the determinant of the division table after one column is falsified | **Redheffer** (1977); Barrett–Forcade–Pollington (1988); Vaughan (1993, 1996) |
+| the density of the numbers a truncated sieve has not yet struck, as a function of `log x / log z` | **Buchstab's** function `ω` (1937), the dual of **Dickman's** `ρ` |
+| repeat the cycle, delete one member of each family, merge the two neighbouring gaps | the **wheel sieve** — Pritchard (1982) — and cycles of gaps in Eratosthenes' sieve |
 
 **There is no claim here about the Riemann Hypothesis.** Where a construction touches it,
 the paper states precisely why the numerics certify nothing about the critical line.
@@ -46,12 +49,32 @@ What the repository *does* offer:
 ## Contents
 
 ```
-papers/     four self-contained papers, plus three short structural notes (Markdown)
+papers/     five self-contained papers, plus three short structural notes (Markdown)
 figures/    the figures they reference
 code/       verification scripts for every table and number, plus the figure generators
 harness/    the fixed-support builder, the zero-side validator, and a regression
             harness reporting inertia across an m-ladder with JSON metadata
 ```
+
+### `papers/a_numerical_study_of_the_division_table.md`
+**Start here if you are new to the repository.** The most elementary paper of the set, and
+deliberately expository: it starts from the quotients `n/d` for `n ≤ 100`, written as mixed
+numbers, and reports at every step which classical object the sheet has become. Three
+features before any theory — the whole cells are `D(x)`, the column sums are the harmonic
+numbers, and the determinant of the `0–1` shadow, after one column is falsified, is the
+**Mertens function**, so `det Rₙ = O(n^{1/2+ε})` is the Riemann hypothesis wearing a matrix.
+Then a walk across the table traces an **arch**, the arch is **Fermat's method** (1643), its
+failure is repaired by **Kraitchik** and the **quadratic sieve**, and rotating the picture
+forty-five degrees lands on the **Dirichlet divisor** and **Gauss circle** problems,
+Voronoï's series, and the `x^{1/4}` that both share. Two closing sections truncate the sheet
+instead of walking it, which turns it into the sieve of Eratosthenes and reaches **Buchstab's
+function** and the **wheel sieve**; the second of them measures that which row owns a struck
+point is independent of the additive geometry around it — the additive/multiplicative divide
+seen from the sieve side rather than argued.
+
+Its ledger section lists twenty-one items and decomposes all twenty-one. **No result in it
+is new**, and it says so in the abstract; what it offers is the route and an honest map of
+where each step already lives.
 
 ### `papers/division_table_prime_towers.md`
 From the odd division table to prime-power towers. Builds the remainder field
@@ -192,6 +215,10 @@ python code/prime_edge_rank.py        # rank, edge analysis, and factor universa
 python code/check_reply.py            # closed form for the plateau, and the split blocks
 python code/verify_li_lens.py         # the lens law; eleven checks, the proof verified line by line
 python code/verify_angle_lock.py      # the rational-angle cusp law; --fast for a 5 s run
+python code/verify_division_table.py  # the division-table paper, sections 1-9; 105 checks
+python code/verify_redheffer.py       # its section 1 again, in exact rational arithmetic
+python code/verify_knowledge_clock.py # its section 10, Buchstab's omega and the clock u
+python code/verify_row_inheritance.py # its section 11, A_p = p S_p^- and the window limit
 
 cd code
 python fig.py       # figure for the division-table paper
@@ -207,6 +234,9 @@ cd ..
 ```
 
 Tested with Python 3.12, NumPy 2.4, SymPy 1.14, mpmath 1.3.
+The four division-table scripts take about ten, one, four and five minutes respectively on a
+full run; every one of them accepts `--fast`, and `verify_row_inheritance.py` also accepts
+`--deep` for the `10⁹` window row of section 11.6.
 The gap-frequency scripts segment-sieve windows of width `4×10⁷` up to `10¹³` and take a
 few minutes. `verify_covariance.py` and `verify_positivity.py` also take a few minutes —
 each has a long-average or large-matrix step, and `verify_covariance.py` has a `FAST` flag
@@ -262,7 +292,13 @@ rather than any assurance about the tool, is what the reader is asked to rely on
 
 ## Status
 
-Four papers and three notes are here.
+Five papers and three notes are here.
+
+The newest paper, `a_numerical_study_of_the_division_table.md`, is the odd one out and the
+natural entry point: it is expository, it claims nothing new anywhere, and its ledger
+decomposes all twenty-one of its items into named classical results. It is also the only
+paper here that could reasonably be submitted to a journal, because an expository paper is
+accepted for its route rather than for a result.
 
 The fourth paper closes the division-table route as a direct approach to RH, and says so in
 its own conclusion. What it leaves genuinely open is listed in its Appendix A. The most
