@@ -49,7 +49,7 @@ wins although it is twice as strong as `q = 5`. Enumerating all `97` candidates 
 `μ(q) = −1, q ≤ 40`: `π` wins below the crossing, `2π/5` above it, and nothing else
 ever comes within `3%`.
 
-**This corrects a number in *Compressing the Division Table into a Single Dynamical Column*.** That paper puts the handover at
+**This corrects a number in the companion paper.** That paper puts the handover at
 "about `α = 0.71`". Bisecting `f_α(π) − f_α(2π/5)` gives
 
 ```
@@ -104,7 +104,7 @@ and tell us where.
 
 ## 2. The object, and where the question comes from
 
-`f_α` is the Toeplitz symbol of §9 of *Compressing the Division Table into a Single Dynamical Column*: `f_α(θ) = c + 2 Σ_{h≥1} b(h) cos(hθ)`
+`f_α` is the Toeplitz symbol of §9 of the companion paper: `f_α(θ) = c + 2 Σ_{h≥1} b(h) cos(hθ)`
 with `b(h) = Λ(h) h^{−(α+1)}`, `c = Σ_q Λ(q) q^{−(α+1)}`. Its positivity for all `N`
 is equivalent to `f_α ≥ 0`, so the location and value of `min_θ f_α` is what decides
 the `α`-window in that paper. Two conventions occur there: all prime powers, and odd
