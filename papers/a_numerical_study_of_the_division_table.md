@@ -32,7 +32,7 @@ Everything below comes out of one sheet. Its rows are the divisors $d$, its colu
 Three features are worth noticing before anything else, because all three are classical objects wearing a disguise.
 
 **The whole entries are the divisor function.** An entry is a whole number exactly when $d \mid n$. Counting the whole entries with $2 \le d \le n$ gives $\tau(n)-1$ for each column, and over the whole sheet
-$$\#\{\text{whole entries}\} \;=\; \sum_{n\le 100}\bigl(\tau(n)-1\bigr) \;=\; D(100) - 100 \;=\; 482 - 100 \;=\; 382,$$
+$$\mathrm{card}\lbrace\text{whole entries}\rbrace  \;=\; \sum_{n\le 100}\bigl(\tau(n)-1\bigr) \;=\; D(100) - 100 \;=\; 482 - 100 \;=\; 382,$$
 where $D(x)=\sum_{n\le x}\tau(n)$. Highlighting the whole entries in the sheet is therefore not decoration: it draws the summatory divisor function directly.
 
 **The column sums are the harmonic numbers.** Adding a column, from $d=2$ up to $d=n$,
@@ -40,7 +40,7 @@ $$R(n) \;=\; \sum_{d=2}^{n}\frac nd \;=\; n\bigl(H_n-1\bigr),$$
 so column $5$ gives $1+1\tfrac14+1\tfrac23+2\tfrac12 = 6\tfrac{5}{12}$, and column $100$ gives $418.7378\ldots$ Asymptotically $R(n)= n\log n + (\gamma-1)n+O(\log n)$ — the same leading term as $D(n)=n\log n+(2\gamma-1)n+\Delta(n)$, with a different second constant. The two differ by exactly the sum of the discarded fractional parts, which is the subject of §7.
 
 **The determinant is the Mertens function.** Replace every whole entry by $1$ and every fractional entry by $0$, and keep the full square array with rows and columns $1,\dots,n$. The result is the divisibility matrix
-$$K_n(d,m) \;=\; \begin{cases}1 & d\mid m,\\ 0 & \text{otherwise.}\end{cases}$$
+$$K_n(d,m) \;=\; \begin{cases}1 & d\mid m,\cr  0 & \text{otherwise.}\end{cases}$$
 
 As it stands this matrix says nothing. Since $d\mid m$ forces $d\le m$, $K_n$ is upper triangular with $1$s on the diagonal: every eigenvalue is $1$ and $\det K_n = 1$, for every $n$. (It is not the identity in disguise — $\dim\ker(K_n-I)$ is the number of odd integers up to $n$, measured $10$, $30$, $61$ at $n = 20, 60, 121$ — but the spectrum is empty of arithmetic.)
 
@@ -51,7 +51,7 @@ $$1,\;0,\;-1,\;-1,\;-2,\;-1,\;-2,\;-2,\;-2,\;-1,\;-2,\;-2,$$
 which is Mertens' sequence exactly (OEIS A002321). The proof is two lines. Because $\det K_n = 1$ we may write $\det R_n = \det\bigl(K_n^{-1}R_n\bigr)$, and $K_n^{-1}R_n$ differs from the identity only in its first column; its $(1,1)$ entry is $1+\sum_{2\le k\le n}\mu(k)$, since the Dirichlet coefficients of $\zeta(s)^{-1}$ are $\mu(k)$. Hence the determinant is $M(n)$. This is Redheffer's matrix and Redheffer's theorem (1977).
 
 The consequence is that the sheet carries the Riemann hypothesis, which is equivalent to
-$$\det R_n \;=\; O\!\left(n^{1/2+\varepsilon}\right)\qquad\text{for every }\varepsilon>0 .$$
+$$\det R_n \;=\; O\left(n^{1/2+\varepsilon}\right)\qquad\text{for every }\varepsilon>0 .$$
 
 The same modification, weighted, produces values of Dirichlet series. Put $w_k = k^{-s}$ in the first column instead of $1$; then $\det = \sum_{k\le n}\mu(k)k^{-s}$, the truncated series for $\zeta(s)^{-1}$. Since a determinant is the product of the eigenvalues, a Dirichlet-series value is literally a product of eigenvalues of a finite division table. Almost all of them are $1$: only $\lfloor\log_2 n\rfloor + 1$ eigenvalues differ from $1$, and two of those are large, of size $\pm\sqrt n + \log\sqrt n + \gamma - \tfrac12 + O(\log^2 n/\sqrt n)$.
 
@@ -117,7 +117,7 @@ For $S=20$: entries $100, 99, 96, 91, 84, 75, 64, 51, 36$ at depths $0,1,4,9,16,
 **(e) Rows are straight lines.** With $a$ fixed, $N = aS - a^2$ — a line of slope $a$. And this line is precisely the **tangent** to the parabola $N = S^2/4$ at $S = 2a$. So the table is exactly the lattice points on the tangent lines drawn at integer parameters $a\ge1$, taken on the side $S \ge 2a$; the tangency points are the squares $a^2$.
 
 Now the collapse. Write $z = S + iH$. Then
-$$N = \mathrm{Re}\!\left(\frac{z^2}{4}\right).$$
+$$N = \mathrm{Re}\left(\frac{z^2}{4}\right).$$
 
 Everything above is a property of that single function:
 
@@ -128,7 +128,7 @@ Everything above is a property of that single function:
 | (a), (d), (e) | derivatives of a quadratic |
 | $\partial_a \partial_b (ab) = 1$ | the same two second derivatives with the other sign: $\partial_S^2 - \partial_H^2 = 1$ |
 
-> **A precision that is easy to miss.** $S$ and $H$ always have the same parity, since $S + H = 2b$. The $(S,H)$ points are therefore not all of $\mathbb{Z}^2$ but the index-2 sublattice $\{S \equiv H \bmod 2\}$ — a checkerboard. Any count performed in $(S,H)$ must be halved relative to the naive box.
+> **A precision that is easy to miss.** $S$ and $H$ always have the same parity, since $S + H = 2b$. The $(S,H)$ points are therefore not all of $\mathbb{Z}^2$ but the index-2 sublattice $\lbrace S \equiv H \bmod 2\rbrace$ — a checkerboard. Any count performed in $(S,H)$ must be halved relative to the naive box.
 
 > **What is classical here.** All of it, and in one line: $(S,H)$ are the principal axes of the quadratic form $ab$, and $\mathrm{Re}(z^2)$ is the standard harmonic function whose level curves are the rectangular hyperbolas. Laws (a)–(e) are exercises about it. The value of the section is negative and useful: a list of "discoveries" is one fact, and noticing that saves the reader from thinking the list is long.
 
@@ -160,7 +160,7 @@ With explicit primes, so that the reader can check every row:
 Instant when the factors are balanced; hopeless otherwise. Trial division has exactly the opposite profile, and Lehman (1974) combines them for $O(N^{1/3})$.
 
 There is a companion statement worth recording because it makes primality a measurement rather than a negation. Column $n$ lies on arch $S$ iff $a \mid n$ and $S = a + n/a$, so the arches through $n$ are exactly
-$$\{\,d + n/d \;:\; d \mid n \,\},$$
+$$\lbrace \,d + n/d \;:\; d \mid n \,\rbrace ,$$
 the **arch spectrum** of $n$. Its top is always $n+1$ (from $d=1$); its bottom is $\min_d (d + n/d) \ge 2\sqrt{n}$, with equality only for perfect squares; and $n$ is prime precisely when the spectrum is the single value $n+1$. The bottom of the spectrum is Fermat's target, so
 $$\text{Fermat steps} = \frac{S_{\min} - 2\lceil\sqrt n\rceil}{2}.$$
 The average spectrum size over $n \in [10^{k-1}, 10^k]$ measures $3.67, 4.81, 5.96, 7.11$ for $k = 3,4,5,6$, tracking $\tfrac12 \log n$.
@@ -171,7 +171,7 @@ The average spectrum size over $n \in [10^{k-1}, 10^k]$ measures $3.67, 4.81, 5.
 
 ## 5. Why it fails, and the repair — worked by hand
 
-Take $N = 2041$. Since $\lceil\sqrt{2041}\rceil = 46$, list the arches from there with their apex gaps, factored over $\{2,3,5,7\}$:
+Take $N = 2041$. Since $\lceil\sqrt{2041}\rceil = 46$, list the arches from there with their apex gaps, factored over $\lbrace 2,3,5,7\rbrace$:
 
 | index $x=S/2$ | apex $x^2$ | gap $x^2 - N$ | factorisation | parity of exponents |
 |---|---|---|---|---|
@@ -220,7 +220,7 @@ The predicted column is $\rho$ at the $u$ of the *geometric mean*, which is a on
 CFRAC keeps $\lvert \mathrm{gap}\rvert < 2\sqrt N$ always — nearly fourteen times the smooth rate of the single long interval — but its residues are *not* polynomial in the index, so it cannot be sieved: every candidate must be trial-divided. That single trade-off, **residue size against sievability**, separates every algorithm in the family.
 
 Balancing the two costs — about $\pi(B)$ relations needed, $\pi(B)/\rho(u)$ candidates to find them, and $\pi(B)^2$ for the linear algebra — has a minimum, and optimising it in general gives
-$$B \sim \exp\!\left(\tfrac12\sqrt{\log N \log\log N}\right), \qquad \text{cost } \exp\!\left((1+o(1))\sqrt{\log N \log\log N}\right).$$
+$$B \sim \exp\left(\tfrac12\sqrt{\log N \log\log N}\right), \qquad \text{cost } \exp\left((1+o(1))\sqrt{\log N \log\log N}\right).$$
 
 > **What is classical here.** Everything. The relaxation is Kraitchik's (1920s); the continued-fraction version is Morrison–Brillhart (1975); the sieve is Pomerance's quadratic sieve (announced 1981, published 1982--84); the multiple-polynomial variant is Montgomery (1985); the two-dimensional successor is the number field sieve. The complexity is standard. The only contribution here is the $2041$ table, which is small enough to check with a pencil.
 
@@ -231,7 +231,7 @@ $$B \sim \exp\!\left(\tfrac12\sqrt{\log N \log\log N}\right), \qquad \text{cost 
 Set $a = x-y$, $b = x+y$. Then $x^2 - y^2 = ab$: **the arch family and the division table are the same lattice-point problem, rotated.** The arch fixes the sum and traces the product; its conjugate fixes the product $n=ab$ and traces the sum, $S(d) = d + n/d$, a curve with a *valley* at $d = \sqrt n$ where the arch had a *peak*. With $S = d+n/d$ and $H = n/d - d$ one has $S^2 - H^2 = 4n$ identically, so both families live on the single saddle $S^2 - H^2 = 4N$, curving down in one principal direction and up in the other. (They are *not* the two orthogonal families of $z\mapsto z^2$: those are $\mathrm{Re}(z^2)$ and $\mathrm{Im}(z^2)$ constant, i.e. $N$ constant and $SH/2$ constant. The arch, $S$ constant, is a vertical line in the $z$-plane and meets the level curves of $N$ at no fixed angle.)
 
 So the arch inherits a counting problem. Counting ordered pairs $(d,e)$ with $de=n$ and $d\equiv e \bmod 2$ — equivalently, signed representations $n = x^2-y^2$ — gives
-$$\rho^{\mathrm{ord}}(n) = \begin{cases} \tau(n) & n \text{ odd}\\ 0 & n \equiv 2 \ (4)\\ \tau(n/4) & 4 \mid n\end{cases}$$
+$$\rho^{\mathrm{ord}}(n) = \begin{cases} \tau(n) & n \text{ odd}\cr  0 & n \equiv 2 \ (4)\cr  \tau(n/4) & 4 \mid n\end{cases}$$
 (verified against direct search for $n < 3000$; the unordered count, which is what the literature usually calls $\rho(n)$, is $\lceil \rho^{\mathrm{ord}}/2\rceil$). Its summatory function has main term
 $$\sum_{n \le X}\rho^{\mathrm{ord}}(n) = \tfrac12 X\log X + \left(\gamma - \tfrac12\right)X + \text{error},$$
 derived by splitting into the odd-divisor sum, whose Dirichlet series is $\big((1-2^{-s})\zeta(s)\big)^2$, plus $D(X/4)$. Computed exactly to $X = 10^{12}$ by the hyperbola method, the error at $X = 10^6, 10^9, 10^{12}$ is $+81$, $+285$, $+1504$ against main terms of order $10^7, 10^{10}, 10^{13}$.
@@ -258,7 +258,7 @@ Two different measurements, and they must not be conflated. The **typical** size
 
 Count the cells under $ab \le x$ for $x = 100$: the exact count is $482$, the area is $476.0$, the error is $+6.0$. The hyperbola crosses one cell per column, but the symmetry $a\leftrightarrow b$ reduces the independent boundary terms to about $2\sqrt{100}=20$; naively each could contribute $\pm1$, so the error might have been $20$.
 
-Where does it actually live? Since $\lfloor x/a\rfloor = x/a - \{x/a\}$, the error is a sum of *wobbles* $\{x/a\} - \tfrac12$. If every leftover were exactly one half, there would be no error at all.
+Where does it actually live? Since $\lfloor x/a\rfloor = x/a - \lbrace x/a\rbrace$, the error is a sum of *wobbles* $\lbrace x/a\rbrace - \tfrac12$. If every leftover were exactly one half, there would be no error at all.
 
 | $a$ (selected rows) | $100/a$ | $\lfloor\cdot\rfloor$ | leftover | wobble | running sum over all $a$ |
 |---|---|---|---|---|---|
@@ -273,21 +273,21 @@ They come in both signs and they cancel. At $x = 10^4$ there are $100$ wobbles o
 **And that is where the exponent comes from.** About $\sqrt x$ wobbles behaving like independent coin flips of size $\tfrac12$ sum to about $\sqrt{\sqrt x} = x^{1/4}$: square-root cancellation, nothing more. The measurement confirms it for the *typical* size — the standard deviation of $E(x)/x^{1/4}$ locks at $1.59$ for the circle, $0.98$ for the divisor problem, $0.79$ for the arch, none of them drifting. This is a theorem, not a coincidence: the mean square of the error is $\asymp x^{1/2}$ (Cramér, Preissmann). Coins can nevertheless run hot, and the maximum genuinely exceeds $x^{1/4}$; see §6 and §13.
 
 
-**And the wobbles have a mean.** Summing them rather than watching them cancel gives a second, cleaner handle on the same object. Write $W(n)=\sum_{d\le n}\{n/d\}$. Since $\sum_{d\le n} n/d = nH_n$ and $\sum_{d\le n}\lfloor n/d\rfloor = D(n)$,
+**And the wobbles have a mean.** Summing them rather than watching them cancel gives a second, cleaner handle on the same object. Write $W(n)=\sum_{d\le n}\lbrace n/d\rbrace$. Since $\sum_{d\le n} n/d = nH_n$ and $\sum_{d\le n}\lfloor n/d\rfloor = D(n)$,
 $$W(n) \;=\; nH_n - D(n) \;=\; (1-\gamma)\,n + \tfrac12 - \Delta(n) - \frac{1}{12n} + O(n^{-3}),$$
 using $H_n=\log n+\gamma+\frac1{2n}-\frac1{12n^2}+\cdots$ and $D(n)=n\log n+(2\gamma-1)n+\Delta(n)$. Verified numerically at $n=10^3,\dots,10^7$: the two sides agree to $8\times10^{-5}, 8\times10^{-6}, 8\times10^{-7}, 8\times10^{-8}$, which is $1/(12n)$ to three figures at each step, so nothing in the measurement is left over.
 
 Two consequences. First, the average wobble is not $\tfrac12$, as an equidistribution guess would give, but
-$$\frac{W(n)}{n}\;\longrightarrow\;\int_0^1\Bigl\{\frac1t\Bigr\}dt=\int_1^\infty\frac{\{u\}}{u^2}\,du=1-\gamma=0.42278\ldots$$
-the last equality in two lines: $\int_1^N\{u\}u^{-2}du=\log N-\sum_{k<N}k\bigl(\tfrac1k-\tfrac1{k+1}\bigr)=\log N-(H_N-1)$. The shortfall from $\tfrac12$ is $\gamma-\tfrac12=0.0772\ldots$ — the same constant that appeared in the main term of §6, and for the same reason.
+$$\frac{W(n)}{n}\;\longrightarrow\;\int_0^1\Bigl\lbrace \frac1t\Bigr\rbrace dt=\int_1^\infty\frac{\lbrace u\rbrace }{u^2}\,du=1-\gamma=0.42278\ldots$$
+the last equality in two lines: $\int_1^N\lbrace u\rbrace u^{-2}du=\log N-\sum_{k<N}k\bigl(\tfrac1k-\tfrac1{k+1}\bigr)=\log N-(H_N-1)$. The shortfall from $\tfrac12$ is $\gamma-\tfrac12=0.0772\ldots$ — the same constant that appeared in the main term of §6, and for the same reason.
 
 Second, rearranged as $\gamma = 1 - W(n)/n + \bigl(\tfrac12-\Delta(n)\bigr)/n$, this *computes* $\gamma$ from the fractional parts alone, with an accuracy governed exactly by $\Delta(n)$. Summing only the discarded fractions of the division table and subtracting from $1$ gives $0.583529$, $0.577354$, $0.577225$ at $n=10^3,10^5,10^7$ against $\gamma=0.5772157$. The deviations are $+6.31\times10^{-3}$, $+1.38\times10^{-4}$, $+9.37\times10^{-6}$, and each equals $(\Delta(n)-\tfrac12)/n$ to every digit shown, with $\Delta(n) = 6.81, 14.32, 94.19$ — the identity is exact, so the estimate is not merely close to $\gamma$, it is $\gamma$ plus a known quantity. That buys four correct digits at $n=10^7$, and no further digits without progress on the divisor problem.
 
-> **What is classical here.** All of it. $\int_1^\infty\{u\}u^{-2}du=1-\gamma$ is a standard exercise, and the displayed identity is Dirichlet's derivation run backwards. The point worth keeping is the reading: $\gamma$ is *defined* as the accumulated gap between the staircase $\sum 1/d$ and the ramp $\log n$, and $\{n/d\}$ is that same gap measured entry by entry. Its appearance in a division table is not a coincidence but a restatement.
+> **What is classical here.** All of it. $\int_1^\infty\lbrace u\rbrace u^{-2}du=1-\gamma$ is a standard exercise, and the displayed identity is Dirichlet's derivation run backwards. The point worth keeping is the reading: $\gamma$ is *defined* as the accumulated gap between the staircase $\sum 1/d$ and the ramp $\log n$, and $\lbrace n/d\rbrace$ is that same gap measured entry by entry. Its appearance in a division table is not a coincidence but a restatement.
 
 **The error is not, however, caused by the cells being square.** Same lattice, four different boundaries:
 
-| boundary | max $\lvert E\rvert$ over the decades $10^3\!-\!10^4,\ldots,10^6\!-\!10^7$ | growth exponent |
+| boundary | max $\lvert E\rvert$ over the decades $10^3-10^4,\ldots,10^6-10^7$ | growth exponent |
 |---|---|---|
 | line, slope $3/2$ | $0.25, 0.25, 0.25, 0.25$ | $+0.000$ |
 | line, slope $\varphi$ | $1.01, 1.23, 1.51, 1.71$ | $+0.076$ |
@@ -300,7 +300,7 @@ Every decade here is a whole decade, and that is not a detail: the maximum for s
 A straight boundary has one fixed slope, so the lattice meets it periodically and the continued fraction of the slope controls everything. A curved boundary's slope keeps changing, so it samples every direction and no single continued fraction helps. **Curvature is the cause.** The exponent ladder follows from the geometry of the elbow at $a=b=\sqrt x$, where the boundary has length $\sim\sqrt x$ and curvature $\sim 1/\sqrt x$: the trivial bound is the length $x^{1/2}$; van der Corput gives $\text{length}^{2/3} = x^{1/3}$; Huxley (2003) gives $131/416 = 0.31490\ldots$ and Bourgain--Watt $517/1648 = 0.31371\ldots$; and the conjecture $x^{1/4}$ is $\sqrt{\text{length}}$, full cancellation.
 
 There is an exact formula for the error — Voronoï's,
-$$\Delta(x) = \frac{x^{1/4}}{\pi\sqrt2}\sum_{n}\tau(n)\,n^{-3/4}\cos\!\left(4\pi\sqrt{nx} - \frac{\pi}{4}\right),$$
+$$\Delta(x) = \frac{x^{1/4}}{\pi\sqrt2}\sum_{n}\tau(n)\,n^{-3/4}\cos\left(4\pi\sqrt{nx} - \frac{\pi}{4}\right),$$
 whose coefficients are the divisor counts themselves. Truncating at $10^2, 10^3, 10^4, 10^5, 4\times10^5$ terms at $x = 5000.3$ gives $6.18, 9.26, 16.33, 15.05, 15.00$ against the measured $14.976$. So the error is not random; it has a closed form. What resists is that a straight line has *one* frequency while this curve has infinitely many incommensurate frequencies $\sqrt n$, and bounding their sum is the open problem.
 
 > **What is classical here.** All of it: the $\psi$-sum representation, van der Corput's method, Huxley's exponent, Voronoï's formula (and Hardy's for the circle), the mean-square results of Cramér and Preissmann, Hardy's $\Omega$-theorem, and Heath-Brown's limiting distribution. The exposition is the contribution.
@@ -342,7 +342,7 @@ Here is a construction whose answer is pleasant and whose *reason* is the same a
 
 The law is **arc fraction $=$ area density**, and at $r = \tfrac12$ it returns $\pi/4$. Measured at $x = 10^3,\dots,10^8$: $0.782795$, $0.785637$, $0.788086$, $0.785897$, $0.785466$, $0.785402$ against $\pi/4 = 0.785398$.
 
-Why is the deviation so small? Because this construction is a *smoothing*. The sharp count is a sum of sawtooth terms $\psi(t) = \{t\}-\tfrac12$, whose Fourier coefficients decay like $m^{-1}$ (measured $m^{-0.99}$) — barely summable, so the cancellation is delicate and the answer is $x^{1/4}$. The circle replaces the sawtooth by a semicircular chord weight whose coefficients decay like $m^{-3/2}$ (measured $m^{-1.52}$, a Bessel $J_1$), and the sum then converges fast. **The circles and the $e^{-n/X}$ weight are the same move reached from two directions.**
+Why is the deviation so small? Because this construction is a *smoothing*. The sharp count is a sum of sawtooth terms $\psi(t) = \lbrace t\rbrace -\tfrac12$, whose Fourier coefficients decay like $m^{-1}$ (measured $m^{-0.99}$) — barely summable, so the cancellation is delicate and the answer is $x^{1/4}$. The circle replaces the sawtooth by a semicircular chord weight whose coefficients decay like $m^{-3/2}$ (measured $m^{-1.52}$, a Bessel $J_1$), and the sum then converges fast. **The circles and the $e^{-n/X}$ weight are the same move reached from two directions.**
 
 > **What is classical here.** The law is Weyl equidistribution: the fraction of a suitably equidistributed curve's length inside any lattice-periodic set is that set's density. The $\pi/4$ is then arithmetic. The Fourier decay of a semicircle is a Bessel function.
 
@@ -356,7 +356,7 @@ The object it needs was half-introduced already: §5 needed *smooth* numbers —
 
 Use only a prefix of the sheet: fix a cutoff $z$ and keep the rows $d \le z$. A column $n$ is then **struck** if some kept row divides it, and **standing** otherwise. Truncating this way changes what the word *prime* means. A standing column is not a prime; it is a number *not yet known to be composite*, and the verdict can be overturned by a row that has not been consulted. Write
 
-$$\Phi(x,z) \;=\; \#\{\,2 \le n \le x \;:\; p \mid n \Rightarrow p > z\,\}$$
+$$\Phi(x,z) \;=\; \mathrm{card}\lbrace\,2 \le n \le x \;:\; p \mid n \Rightarrow p > z\,\rbrace $$
 
 for the standing columns up to $x$. What governs the picture is neither $x$ nor $z$ but the single ratio
 
@@ -416,7 +416,7 @@ The share decreases strictly in $u$ — the further the column index runs past t
 
 Keep the convention of §1: the rows of the sheet are the divisors, the columns are the numbers. Work on the odd numbers and let the odd prime rows enter in order. Row $p$ strikes the columns divisible by $p$ that no smaller row has struck, so every odd composite is assigned to exactly one row — its least prime factor — and the assignment partitions the odd composites without overlap. Write
 
-$$A_p = \{\, n : \mathrm{spf}(n) = p \,\}, \qquad S_p^- = \{\, m \text{ odd} : q \nmid m \text{ for every prime } q < p \,\}$$
+$$A_p = \lbrace \, n : \mathrm{spf}(n) = p \,\rbrace , \qquad S_p^- = \lbrace \, m \text{ odd} : q \nmid m \text{ for every prime } q < p \,\rbrace $$
 
 for the row's own contributions and for the survivors standing just before it enters. Every product below runs over the odd primes only, the even numbers being outside the model.
 
@@ -489,13 +489,13 @@ With equal production one can ask how a row *moves*: its mean step, its longest 
 | 29 | 177.23 | 177.27 | 986 | 986 | 15 |
 | 31 | 196.13 | 196.27 | 1054 | 1054 | 15 |
 
-The longest-step column agrees *exactly*, not approximately, with $p$ times the previous stage's largest gap; the mean-step pair is asymptotic rather than exact, which is why the two part company in the last digits as the finite window bites ($196.13$ against $196.27$ at $p=31$). The count of distinct step sizes is the count of distinct gaps in $S_p^-$. Row $7$'s step histogram, $\{14: 6249,\; 28: 6250,\; 42: 4166\}$, is the gap histogram $\{1,2,3\}$ of the survivors after rows $3$ and $5$, scaled by $2p = 14$. There is no separate "complexity of a row's motion" to discover.
+The longest-step column agrees *exactly*, not approximately, with $p$ times the previous stage's largest gap; the mean-step pair is asymptotic rather than exact, which is why the two part company in the last digits as the finite window bites ($196.13$ against $196.27$ at $p=31$). The count of distinct step sizes is the count of distinct gaps in $S_p^-$. Row $7$'s step histogram, $\lbrace 14: 6249,\; 28: 6250,\; 42: 4166\rbrace$, is the gap histogram $\lbrace 1,2,3\rbrace$ of the survivors after rows $3$ and $5$, scaled by $2p = 14$. There is no separate "complexity of a row's motion" to discover.
 
 The same reduction answers the natural normalisation question. Plotting $a_p(k)/a_p(K)$ against $k/K$ for every row collapses all of them onto a single curve, and the curve is the diagonal: the largest deviation is $0.00003$ at $p=3$, rising only to $0.00081$ at $p=31$ — comparable to (longest step)$/X_p$, which is $3.2\times10^{-4}$ there. Whatever memory a stage carries does not survive the normalisation.
 
 ### 11.4 The cycle: copy, delete, merge
 
-Modulo $2P$, where $P = \prod_{2<q<p} q$ is the product of the odd rows already in, the survivors are the residues coprime to $2P$. Bringing in $p$: repeat the old cycle $p$ times, and inside each old family $\{a, a+2P, \dots, a+2(p-1)P\}$ exactly one member is divisible by $p$, since $\gcd(P,p)=1$. Deleting it gives
+Modulo $2P$, where $P = \prod_{2<q<p} q$ is the product of the odd rows already in, the survivors are the residues coprime to $2P$. Bringing in $p$: repeat the old cycle $p$ times, and inside each old family $\lbrace a, a+2P, \dots, a+2(p-1)P\rbrace$ exactly one member is divisible by $p$, since $\gcd(P,p)=1$. Deleting it gives
 
 $$\varphi(2pP) = (p-1)\varphi(2P),$$
 
@@ -567,8 +567,8 @@ The honest summary of both routes, item by item.
 | $x^{1/4}$ | Voronoï amplitude and square-root cancellation | one known fact |
 | $\pi/4$ from the circles | Weyl equidistribution | one known fact |
 | whole entries $=D(x)-x$ | the summatory divisor function | one known fact |
-| $\sum\{n/d\}/n \to 1-\gamma$ | $\gamma$'s own definition, rearranged | one known fact |
-| spectrum of the raw $0$–$1$ table | upper triangular, unit diagonal | $\{1\}$, $\det=1$; gain 0 |
+| $\sum\lbrace n/d\rbrace /n \to 1-\gamma$ | $\gamma$'s own definition, rearranged | one known fact |
+| spectrum of the raw $0$–$1$ table | upper triangular, unit diagonal | $\lbrace 1\rbrace$, $\det=1$; gain 0 |
 | $\det = M(n)$ after one column | Redheffer's matrix | 1977; and it is RH itself, not a route to it |
 | $\Phi(x,z)$, the clock $u$, the frontier $u=2$ | Legendre's sieve and Buchstab's $\omega$ | 1937; and $u\le2$ is why Eratosthenes stops at $\sqrt x$ |
 | $A_p = p\,S_p^-$ and the $2p$ rescaling | the definition of the least prime factor | a tautology, and it explains every derived statistic |
@@ -656,7 +656,7 @@ Everything in this note is checkable with a sieve and a few dozen lines.
 - **Sections 2–4.** Direct enumeration; the arch identities are one-line checks over $S < 400$.
 - **Section 5.** The $2041$ table is by hand. The striping count needs only $\pi(B)$ and $\sum_p 2M/p$, with the roots taken relative to the start index $x_0 = \lceil\sqrt N\rceil$ — modulo $7$ they are $i \equiv 0,1$ because $x_0 \equiv 3$, not because $N$ is a square mod $7$ at $x \equiv 0,1$. Dickman's $\rho$ comes from solving $u\rho'(u) = -\rho(u-1)$ on a grid; a coarse grid biases it high by a percent or two, which is enough to move the third decimal. The three residue families are: one interval $x_0\pm10^5$; MPQS with $a$ prime near $\sqrt{2N}/M$, $b^2\equiv N \bmod a$, $M=10^3$; and the continued-fraction residues of $\sqrt N$.
 - **Section 6.** $\rho(n)$ from a $\tau$-sieve; the summatory function to $10^{12}$ by the hyperbola method in $O(\sqrt X)$.
-- **Section 7.** The wobble sum $W(n)$ is a direct float sum, no $\gamma$ in the input. Every decade in the boundary table must be run to its end; see the note under the table. The four boundaries need the correct main terms: for a line of slope $\alpha$ the boundary correction is $-cn$ with $c$ the mean of $\{\alpha a\}$, namely $\tfrac12$ for irrational $\alpha$ and $\tfrac14$ for $\alpha = 3/2$. Getting this wrong produces a spurious exponent near $0.77$.
+- **Section 7.** The wobble sum $W(n)$ is a direct float sum, no $\gamma$ in the input. Every decade in the boundary table must be run to its end; see the note under the table. The four boundaries need the correct main terms: for a line of slope $\alpha$ the boundary correction is $-cn$ with $c$ the mean of $\lbrace \alpha a\rbrace$, namely $\tfrac12$ for irrational $\alpha$ and $\tfrac14$ for $\alpha = 3/2$. Getting this wrong produces a spurious exponent near $0.77$.
 - **Section 8.** $\sum \tau(n)e^{-n/X}$ directly, summed to $40X$ so that the truncated tail ($\sim e^{-40}$) is far below the $-1/(144X)$ term being measured. Stopping at $10X$ or $20X$ leaves a tail that swamps it.
 - **Section 9.** Sample the hyperbola densely on $a \in [\sqrt x/4,\, 4\sqrt x]$, accumulate arc-length elements, and test each midpoint against the nearest cell centre.
 - **Section 10.** A plain sieve to $10^8$ gives $\Phi(x,z)$ directly; $\omega$ comes from integrating $(u\omega)' = \omega(u-1)$ on a grid from the branch $1/u$ on $[1,2]$ — the same care as Dickman's $\rho$ in §5, and a coarse grid moves the third decimal the same way. Normalise by the exact product $\prod_{p\le z}(1-1/p)$, not by $1/\log z$: the difference is the factor $B$ tabulated in the text, and using $1/\log z$ hides it inside an apparent error in $\omega$.
