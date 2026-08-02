@@ -6,6 +6,8 @@
 
 *Independent researcher · August 2026*
 
+Repository: [github.com/Osman209/prime-number-studies](https://github.com/Osman209/prime-number-studies) · Licence: CC BY 4.0 (text), MIT (code)
+
 ---
 
 ## Abstract
@@ -38,7 +40,7 @@ $$R(n) \;=\; \sum_{d=2}^{n}\frac nd \;=\; n\bigl(H_n-1\bigr),$$
 so column $5$ gives $1+1\tfrac14+1\tfrac23+2\tfrac12 = 6\tfrac{5}{12}$, and column $100$ gives $418.7378\ldots$ Asymptotically $R(n)= n\log n + (\gamma-1)n+O(\log n)$ — the same leading term as $D(n)=n\log n+(2\gamma-1)n+\Delta(n)$, with a different second constant. The two differ by exactly the sum of the discarded fractional parts, which is the subject of §7.
 
 **The determinant is the Mertens function.** Replace every whole entry by $1$ and every fractional entry by $0$, and keep the full square array with rows and columns $1,\dots,n$. The result is the divisibility matrix
-$$K_n(d,m) \;=\; \begin{cases}1 & d\mid m,\\[2pt] 0 & \text{otherwise.}\end{cases}$$
+$$K_n(d,m) \;=\; \begin{cases}1 & d\mid m,\\ 0 & \text{otherwise.}\end{cases}$$
 
 As it stands this matrix says nothing. Since $d\mid m$ forces $d\le m$, $K_n$ is upper triangular with $1$s on the diagonal: every eigenvalue is $1$ and $\det K_n = 1$, for every $n$. (It is not the identity in disguise — $\dim\ker(K_n-I)$ is the number of odd integers up to $n$, measured $10$, $30$, $61$ at $n = 20, 60, 121$ — but the spectrum is empty of arithmetic.)
 
@@ -115,7 +117,7 @@ For $S=20$: entries $100, 99, 96, 91, 84, 75, 64, 51, 36$ at depths $0,1,4,9,16,
 **(e) Rows are straight lines.** With $a$ fixed, $N = aS - a^2$ — a line of slope $a$. And this line is precisely the **tangent** to the parabola $N = S^2/4$ at $S = 2a$. So the table is exactly the lattice points on the tangent lines drawn at integer parameters $a\ge1$, taken on the side $S \ge 2a$; the tangency points are the squares $a^2$.
 
 Now the collapse. Write $z = S + iH$. Then
-$$N = \operatorname{Re}\!\left(\frac{z^2}{4}\right).$$
+$$N = \mathrm{Re}\!\left(\frac{z^2}{4}\right).$$
 
 Everything above is a property of that single function:
 
@@ -128,7 +130,7 @@ Everything above is a property of that single function:
 
 > **A precision that is easy to miss.** $S$ and $H$ always have the same parity, since $S + H = 2b$. The $(S,H)$ points are therefore not all of $\mathbb{Z}^2$ but the index-2 sublattice $\{S \equiv H \bmod 2\}$ — a checkerboard. Any count performed in $(S,H)$ must be halved relative to the naive box.
 
-> **What is classical here.** All of it, and in one line: $(S,H)$ are the principal axes of the quadratic form $ab$, and $\operatorname{Re}(z^2)$ is the standard harmonic function whose level curves are the rectangular hyperbolas. Laws (a)–(e) are exercises about it. The value of the section is negative and useful: a list of "discoveries" is one fact, and noticing that saves the reader from thinking the list is long.
+> **What is classical here.** All of it, and in one line: $(S,H)$ are the principal axes of the quadratic form $ab$, and $\mathrm{Re}(z^2)$ is the standard harmonic function whose level curves are the rectangular hyperbolas. Laws (a)–(e) are exercises about it. The value of the section is negative and useful: a list of "discoveries" is one fact, and noticing that saves the reader from thinking the list is long.
 
 ---
 
@@ -215,7 +217,7 @@ Against measurement at $B = 3000$ on the same $N$, smoothness tested against eve
 
 The predicted column is $\rho$ at the $u$ of the *geometric mean*, which is a one-point stand-in for an average over a spread of sizes; that it lands within about $15\%$ of the measurement in all three rows is as much as the approximation deserves.
 
-CFRAC keeps $|{\rm gap}| < 2\sqrt N$ always — nearly fourteen times the smooth rate of the single long interval — but its residues are *not* polynomial in the index, so it cannot be sieved: every candidate must be trial-divided. That single trade-off, **residue size against sievability**, separates every algorithm in the family.
+CFRAC keeps $\lvert \mathrm{gap}\rvert < 2\sqrt N$ always — nearly fourteen times the smooth rate of the single long interval — but its residues are *not* polynomial in the index, so it cannot be sieved: every candidate must be trial-divided. That single trade-off, **residue size against sievability**, separates every algorithm in the family.
 
 Balancing the two costs — about $\pi(B)$ relations needed, $\pi(B)/\rho(u)$ candidates to find them, and $\pi(B)^2$ for the linear algebra — has a minimum, and optimising it in general gives
 $$B \sim \exp\!\left(\tfrac12\sqrt{\log N \log\log N}\right), \qquad \text{cost } \exp\!\left((1+o(1))\sqrt{\log N \log\log N}\right).$$
@@ -226,7 +228,7 @@ $$B \sim \exp\!\left(\tfrac12\sqrt{\log N \log\log N}\right), \qquad \text{cost 
 
 ## 6. Turn the picture forty-five degrees
 
-Set $a = x-y$, $b = x+y$. Then $x^2 - y^2 = ab$: **the arch family and the division table are the same lattice-point problem, rotated.** The arch fixes the sum and traces the product; its conjugate fixes the product $n=ab$ and traces the sum, $S(d) = d + n/d$, a curve with a *valley* at $d = \sqrt n$ where the arch had a *peak*. With $S = d+n/d$ and $H = n/d - d$ one has $S^2 - H^2 = 4n$ identically, so both families live on the single saddle $S^2 - H^2 = 4N$, curving down in one principal direction and up in the other. (They are *not* the two orthogonal families of $z\mapsto z^2$: those are $\operatorname{Re}(z^2)$ and $\operatorname{Im}(z^2)$ constant, i.e. $N$ constant and $SH/2$ constant. The arch, $S$ constant, is a vertical line in the $z$-plane and meets the level curves of $N$ at no fixed angle.)
+Set $a = x-y$, $b = x+y$. Then $x^2 - y^2 = ab$: **the arch family and the division table are the same lattice-point problem, rotated.** The arch fixes the sum and traces the product; its conjugate fixes the product $n=ab$ and traces the sum, $S(d) = d + n/d$, a curve with a *valley* at $d = \sqrt n$ where the arch had a *peak*. With $S = d+n/d$ and $H = n/d - d$ one has $S^2 - H^2 = 4n$ identically, so both families live on the single saddle $S^2 - H^2 = 4N$, curving down in one principal direction and up in the other. (They are *not* the two orthogonal families of $z\mapsto z^2$: those are $\mathrm{Re}(z^2)$ and $\mathrm{Im}(z^2)$ constant, i.e. $N$ constant and $SH/2$ constant. The arch, $S$ constant, is a vertical line in the $z$-plane and meets the level curves of $N$ at no fixed angle.)
 
 So the arch inherits a counting problem. Counting ordered pairs $(d,e)$ with $de=n$ and $d\equiv e \bmod 2$ — equivalently, signed representations $n = x^2-y^2$ — gives
 $$\rho^{\mathrm{ord}}(n) = \begin{cases} \tau(n) & n \text{ odd}\\ 0 & n \equiv 2 \ (4)\\ \tau(n/4) & 4 \mid n\end{cases}$$
@@ -248,7 +250,7 @@ Two different measurements, and they must not be conflated. The **typical** size
 
 > **What is classical here, and this is where the honesty matters most.** The third row is not new. The function $\rho(n)$, its summatory function, the error term, its mean square, and its close relation to $d(n)$ are the subject of a published literature: Kühleitner's omega theorem on differences of two squares (1992, with a second part in 1999), and the mean-square results of Kühleitner and Nowak, *On differences of two squares*, Cent. Eur. J. Math. **4** (2006), 110–122, which states the connection to $d(n)$ in its abstract. The surrounding work on sums and differences of $k$-th powers (Kühleitner–Nowak–Schoissengeier–Wooley) and on the general two-dimensional divisor problem (Zhai–Cao) belongs to the same family.
 >
-> A related caution about what a measurement can look like. Normalising the error by $x^{1/4}$ gives a distribution with a limiting law (Heath-Brown), and measuring its *skew* here gives a positive value for the divisor problem and a negative one for the circle; the arch's skew measures $+0.22$, apparently placing it on the divisor side. But $E_{\rm arch} = E_{\rm odd} + \Delta(X/4)$ exactly, so the third moment splits into four terms, and they give $-0.004 + 0.048 + 0.005 + 0.056 = +0.105$ — which reproduces the directly measured third moment, and hence the skew, since skew $=$ third moment$/\sigma^3$ and $\sigma = 0.79$ gives $0.105/0.79^3 = 0.21$. $\Delta$'s own third moment supplies $53\%$ of it. The fingerprint was never the arch's; it was inherited. The same decomposition dissolves the mean-square constant: $0.4266 = 0.1725 + 0.3232 - 0.0691$, i.e. $c_{\rm odd} + c_\Delta/2 + \text{cross}$, every piece already in the divisor literature.
+> A related caution about what a measurement can look like. Normalising the error by $x^{1/4}$ gives a distribution with a limiting law (Heath-Brown), and measuring its *skew* here gives a positive value for the divisor problem and a negative one for the circle; the arch's skew measures $+0.22$, apparently placing it on the divisor side. But $E_{\mathrm{arch}} = E_{\mathrm{odd}} + \Delta(X/4)$ exactly, so the third moment splits into four terms, and they give $-0.004 + 0.048 + 0.005 + 0.056 = +0.105$ — which reproduces the directly measured third moment, and hence the skew, since skew $=$ third moment$/\sigma^3$ and $\sigma = 0.79$ gives $0.105/0.79^3 = 0.21$. $\Delta$'s own third moment supplies $53\%$ of it. The fingerprint was never the arch's; it was inherited. The same decomposition dissolves the mean-square constant: $0.4266 = 0.1725 + 0.3232 - 0.0691$, i.e. $c_{\mathrm{odd}} + c_\Delta/2 + \text{cross}$, every piece already in the divisor literature.
 
 ---
 
@@ -414,7 +416,7 @@ The share decreases strictly in $u$ — the further the column index runs past t
 
 Keep the convention of §1: the rows of the sheet are the divisors, the columns are the numbers. Work on the odd numbers and let the odd prime rows enter in order. Row $p$ strikes the columns divisible by $p$ that no smaller row has struck, so every odd composite is assigned to exactly one row — its least prime factor — and the assignment partitions the odd composites without overlap. Write
 
-$$A_p = \{\, n : \operatorname{spf}(n) = p \,\}, \qquad S_p^- = \{\, m \text{ odd} : q \nmid m \text{ for every prime } q < p \,\}$$
+$$A_p = \{\, n : \mathrm{spf}(n) = p \,\}, \qquad S_p^- = \{\, m \text{ odd} : q \nmid m \text{ for every prime } q < p \,\}$$
 
 for the row's own contributions and for the survivors standing just before it enters. Every product below runs over the odd primes only, the even numbers being outside the model.
 
@@ -422,7 +424,7 @@ for the row's own contributions and for the survivors standing just before it en
 
 $$\boxed{\;A_p \;=\; p \cdot S_p^-\;}$$
 
-with $m$ running from $p$ upward. The proof is the definition: $\operatorname{spf}(n) = p$ exactly when $n = pm$ with $m$ free of every prime below $p$. Verified elementwise for the first $16{,}666$ contributions of each column $p = 5, \dots, 31$.
+with $m$ running from $p$ upward. The proof is the definition: $\mathrm{spf}(n) = p$ exactly when $n = pm$ with $m$ free of every prime below $p$. Verified elementwise for the first $16{,}666$ contributions of each column $p = 5, \dots, 31$.
 
 Two corollaries follow immediately, and they are the reason the identity is worth stating.
 
@@ -552,7 +554,7 @@ The honest summary of both routes, item by item.
 | item | it is | verdict |
 |---|---|---|
 | the arch, $N = (S^2-H^2)/4$ | Fermat's difference of squares | 1643 |
-| the laws (a)--(e) in $(S,H)$ | properties of $\operatorname{Re}(z^2/4)$ | one function |
+| the laws (a)--(e) in $(S,H)$ | properties of $\mathrm{Re}(z^2/4)$ | one function |
 | the diamond law $\partial_a\partial_b(ab)=1$ | a mixed second difference | trivial |
 | $N = (L-N)(R-N)$ | $L-N=a$, $R-N=b$ — a tautology | information gain 0 |
 | the full unfolding $(S,a)$ | the matrix $\binom{1\ 1}{1\ 0}$, $\det = -1$ | a unimodular shear; gain 0, provably |
@@ -561,7 +563,7 @@ The honest summary of both routes, item by item.
 | the repair by combination | Kraitchik $\to$ CFRAC $\to$ QS $\to$ NFS | 1920s–1990s |
 | $\rho(n)$ and its error term | a published literature | 1992, 1999, 2006 |
 | the skew "fingerprint" $+0.22$ | $53\%$ inherited from $\Delta$ | decomposes exactly |
-| the mean-square constant $0.4266$ | $c_{\rm odd} + c_\Delta/2 + \text{cross}$ | decomposes exactly |
+| the mean-square constant $0.4266$ | $c_{\mathrm{odd}} + c_\Delta/2 + \text{cross}$ | decomposes exactly |
 | $x^{1/4}$ | Voronoï amplitude and square-root cancellation | one known fact |
 | $\pi/4$ from the circles | Weyl equidistribution | one known fact |
 | whole entries $=D(x)-x$ | the summatory divisor function | one known fact |
@@ -663,5 +665,3 @@ Everything in this note is checkable with a sieve and a few dozen lines.
 Four scripts regenerate every number printed above: `verify_division_table.py` for §§1–9, `verify_knowledge_clock.py` for §10, `verify_row_inheritance.py` for §11, and `verify_redheffer.py`, which re-does §1's determinant claims on their own with exact rational arithmetic. Each exits nonzero if any number moves; `--fast` lowers the sieve limits and skips the rows that need more.
 
 *This note claims no new theorem. It offers a route, and an honest map of where each step of it already lives.*
-
-Repository: [github.com/Osman209/prime-number-studies](https://github.com/Osman209/prime-number-studies) · Licence: CC BY 4.0 (text), MIT (code)
