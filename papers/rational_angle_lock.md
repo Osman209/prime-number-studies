@@ -47,7 +47,7 @@ $\mu(q) = -1$, so the global minimum is at one of those angles, and the competit
 between the **values** $f_{\alpha}(2\pi a/q)$. That is why $q = 3$, with strength $1/2$, never
 wins although it is twice as strong as $q = 5$. Enumerating all $97$ candidates with
 $\mu(q) = -1, q \le 40$: $\pi$ wins below the crossing, $2\pi/5$ above it, and nothing else
-ever comes within $3\%$.
+ever comes within $3$%.
 
 **This corrects a number in the companion paper.** That paper puts the handover at
 "about $\alpha = 0.71$". Bisecting $f_{\alpha}(\pi) - f_{\alpha}(2\pi/5)$ gives
