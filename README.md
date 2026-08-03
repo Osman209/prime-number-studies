@@ -1,5 +1,5 @@
 # Prime Number Studies
-
+**[Read the papers as PDFs →](https://osman209.github.io/prime-number-studies/)**
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21638887.svg)](https://doi.org/10.5281/zenodo.21638887)
 
 Notes, measurements and verified code from an independent, self-directed study of the
