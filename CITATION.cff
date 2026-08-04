@@ -11,6 +11,7 @@ authors:
     family-names: Osman
     orcid: 'https://orcid.org/0009-0004-5912-999X'
 repository-code: 'https://github.com/Osman209/prime-number-studies'
+url: 'https://osman209.github.io/prime-number-studies/'
 identifiers:
   - type: doi
     value: 10.5281/zenodo.21638887

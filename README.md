@@ -2,6 +2,9 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21638887.svg)](https://doi.org/10.5281/zenodo.21638887)
 
+**Read the papers online — <https://osman209.github.io/prime-number-studies/>**
+Every paper and note has a page there with an abstract and a typeset PDF.
+
 Notes, measurements and verified code from an independent, self-directed study of the
 multiplicative structure of the integers — starting from an elementary object, the
 **division table**, and following it as far as it goes.
@@ -54,6 +57,7 @@ figures/    the figures they reference
 code/       verification scripts for every table and number, plus the figure generators
 harness/    the fixed-support builder, the zero-side validator, and a regression
             harness reporting inertia across an m-ladder with JSON metadata
+docs/       the GitHub Pages site: one page and one PDF per paper
 ```
 
 ### `papers/a_numerical_study_of_the_division_table.md`
