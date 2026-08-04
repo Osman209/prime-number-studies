@@ -1,5 +1,5 @@
 # Prime Number Studies
-**[Read the papers as PDFs →](https://osman209.github.io/prime-number-studies/)**
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21638887.svg)](https://doi.org/10.5281/zenodo.21638887)
 
 Notes, measurements and verified code from an independent, self-directed study of the
@@ -49,7 +49,7 @@ What the repository *does* offer:
 ## Contents
 
 ```
-papers/     five self-contained papers, plus three short structural notes (Markdown)
+papers/     five self-contained papers, plus four short structural notes (Markdown)
 figures/    the figures they reference
 code/       verification scripts for every table and number, plus the figure generators
 harness/    the fixed-support builder, the zero-side validator, and a regression
@@ -135,7 +135,7 @@ truncated Weil form in a Dirichlet sine construction and compares it with the ma
 von Mangoldt measure of Groskin (2026), where the jump is rank one. The two differ in where
 the edge vanishing lives: inside the matrix in the reference path, outside it as a scalar
 window here — so they are distinct families rather than the same object in different
-coordinates. The note carries a closed form for the measured plateau, `(m−1)/(m+2)`, due to
+coordinates. The note carries a closed form for the measured plateau, `(m-1)/(m+2)`, due to
 A. Groskin in correspondence and verified here to seven digits, and a corrections section
 recording what earlier versions of the note got wrong.
 
@@ -160,8 +160,7 @@ not consult.
 detector is not a shorter proof.*
 
 ### `papers/rational_angle_lock.md`
-A short note that closes the open item flagged in `papers/division_table_single_column.md`
-above, by dissolving it. The cusp law is
+A short note that closes the open item flagged in the fourth paper above, by dissolving it. The cusp law is
 `f(2πa/q + ε) − f(2πa/q) ~ 2 (μ(q)/φ(q)) Γ(−α) cos(πα/2) |ε|^α`: the **Hardy–Littlewood
 singular series** multiplying the **Lerch–Wood expansion of the polylogarithm** at `z = 1`.
 That gives the exponent (`β = α`, no arithmetic in it), the sign (down exactly where
@@ -170,8 +169,7 @@ Lipschitz). Rescaling every measured edge by `φ(q)/μ(q)` collapses them onto o
 universal cusp — mean `0.9944`, sd `0.0096`. The phenomenon is the major-arc approximation
 of the circle method drawn as a graph.
 
-It also **corrects a number in `papers/division_table_single_column.md`**: the handover
-from `π` to `2π/5` is at
+It also **corrects a number in the fourth paper**: the handover from `π` to `2π/5` is at
 `α* = 0.74005083`, not "about `α = 0.71`", and which rational wins is decided by the value
 at the angle, not by the cusp strength — which is why `q = 3`, twice as strong as `q = 5`,
 never wins.
@@ -179,6 +177,23 @@ never wins.
 *What survives as its own is small and labelled as such: for `0 < α < 1` a sub-Lipschitz
 cusp cannot be dislodged by a smooth background, so the minimiser is confined to rational
 angles with `μ(q) = −1` and can only ever jump.*
+
+### `papers/phase_and_masking.md`
+A companion to the note above, turning the same lens around to ask when it is **blind**. At
+the matched width the phase of the image is exactly `−π/2` independent of `β` and `T`, so a
+planted off-line quartet contributes on a strict `n mod 4` cycle: detection at `n ≡ 0`,
+active masking at `n ≡ 2`, and no exponential term at all for odd `n`. Following the rate
+`artanh(2βd/(d² + β² + T²))` to the far end recovers **Sekatskii's Theorem 3** as the other
+zero of one curve — a shift taken too far does not merely fail to help, it actively delays —
+and the detection index is measured to grow **linearly** in the shift, `N(d)·r(d) ≈ log M`,
+so hiding a violation past order `m` costs a shift of order `mR`.
+
+Two natural refinements are tested and **fail**: phase-tuned lenses do not beat `d = R` on
+the first negative index, and the far detection pockets at `d ≈ nT/πk`, though real and
+exactly where predicted, are swamped by the background by seven orders of magnitude.
+
+*Its usable consequence: a numerical search that finds the first `m` coefficients positive
+has established nothing unless it states its shift.*
 
 ### `harness/`
 `conventions.py` is the single source of truth for the support, basis, block definitions,
@@ -216,6 +231,9 @@ python code/prime_edge_jump.py        # prime-edge jump; section C retained with
 python code/prime_edge_rank.py        # rank, edge analysis, and factor universality
 python code/check_reply.py            # closed form for the plateau, and the split blocks
 python code/verify_li_lens.py         # the lens law; eleven checks, the proof verified line by line
+python code/verify_phase_masking.py   # the phase cycle and the masking law; 13 checks, --fast
+python code/detection_index.py        # the detection index at a few heights
+python code/detection_index_sweep.py  # the 24-run gain table of the lens note's section 3.3
 python code/verify_angle_lock.py      # the rational-angle cusp law; --fast for a 5 s run
 python code/verify_division_table.py  # the division-table paper, sections 1-9; 105 checks
 python code/verify_redheffer.py       # its section 1 again, in exact rational arithmetic
@@ -234,6 +252,15 @@ python run_ladder.py                   # inertia ladder + JSON; nonzero exit on 
 python edge_precision.py --m 20 40     # the edge limit in extended precision
 cd ..
 ```
+
+Four of the scripts — `verify_li_lens.py`, `detection_index.py`, `detection_index_sweep.py`
+and `verify_phase_masking.py` — read a list of critical-line ordinates from the environment
+variable `ZETA_ZEROS`: one ordinate per line, increasing. The tables in the two Li-lens notes
+use the first 100,000 (`γ` from `14.1347` to `74920.8275`). Such a list can be taken from
+Odlyzko's tables (`www.dtc.umn.edu/~odlyzko/zeta_tables`) or the LMFDB, or generated with
+`mpmath.zetazero`, which is far slower. Without the variable each script says so and skips
+only the tables that need it. A list **shorter** than a table needs is never silently used in
+its place: the table is skipped and reported at the end.
 
 Tested with Python 3.12, NumPy 2.4, SymPy 1.14, mpmath 1.3.
 The four division-table scripts take about ten, one, four and five minutes respectively on a
@@ -294,7 +321,7 @@ rather than any assurance about the tool, is what the reader is asked to rely on
 
 ## Status
 
-Five papers and three notes are here.
+Five papers and four notes are here.
 
 The newest paper, `a_numerical_study_of_the_division_table.md`, is the odd one out and the
 natural entry point: it is expository, it claims nothing new anywhere, and its ledger
@@ -302,21 +329,21 @@ decomposes all twenty-one of its items into named classical results. It is also 
 paper here that could reasonably be submitted to a journal, because an expository paper is
 accepted for its route rather than for a result.
 
-`papers/division_table_single_column.md` closes the division-table route as a direct
-approach to RH, and says so in its own conclusion. What it leaves genuinely open is
-listed in its Appendix A. The most
+The fourth paper closes the division-table route as a direct approach to RH, and says so in
+its own conclusion. What it leaves genuinely open is listed in its Appendix A. The most
 interesting of those items — the rational-angle locking of the symbol's minimum, the one
 measured structure that did not obviously reduce to bookkeeping — has since been closed in
 `papers/rational_angle_lock.md`, and it did reduce to bookkeeping: the singular series
 times a polylogarithm cusp, which is the circle method's major arcs seen as a graph. That
-note also corrects the crossing point that paper reported.
+note also corrects the crossing point the fourth paper reported.
 
-The three notes are smaller and were written the same way: an elementary route is followed
+The four notes are smaller and were written the same way: an elementary route is followed
 until it lands on something already published, the prior art is named, and what survives is
 a measurement or two. The first two end on the same finding — a sharper instrument is not a
-shorter proof — and the third ends one step further along, on a structure that looked like
-it might be an exception and was not. That is by now the pattern the repository is really a
-record of.
+shorter proof. The third goes one step further along, on a structure that looked like it
+might be an exception and was not. The fourth turns the same instrument around and asks when
+it is blind, which is the one question of the four whose answer is usable. That is by now the
+pattern the repository is really a record of.
 
 Corrections, counterexamples and pointers to prior art are all welcome; open an issue.
 Being told that something here is already known is a useful outcome, not an unwelcome one.
