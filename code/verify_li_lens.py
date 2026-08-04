@@ -4,15 +4,31 @@ verify_li_lens.py -- regenerates every table and number in
 
     python verify_li_lens.py
 
-Checks, in order:
+Checks, in the order they run:
+  0  section 2.1, the geometry of q_a: unit circle = critical line, and the
+     symmetry q_a(1-rho) = 1/q_a(rho)
   1  Proposition 1, S_n(a) = (1-2a) L_n(a), against the classical lambda_1
   2  the differentiation-step caveat of section 2.2, shown rather than asserted
-  3  Proposition 2, the optimal lens width d = T
+  3a Proposition 2's proof and Sekatskii's shorter route to the same optimum,
+     fifteen symbolic identities checked line by line
+  3  Proposition 2, the optimal lens width d = R = |rho - 1/2|
+     (this is sqrt(beta^2 + T^2), which is only T in the limit beta -> 0)
+  3b section 3.4, the on-line terms and the far-zero contribution
   4  Corollary 3, the factor-T gain over the classical lens
   5  section 3.3, the 30.9x measurement explained as T = 30
   6  section 4, the truncation constants as (1 + 1/b)
+  7  section 6, the Weil-side Paley-Wiener ceiling is monotone in L
+  8  section 2.3, the prime-side Laguerre formula, and the variant that stalls
 
 Exits nonzero if any check fails.
+
+Check 3b reads a list of critical-line ordinates from ZETA_ZEROS (one per line,
+increasing) and prints the cut and the list's reach beside every number; without
+one that single table is skipped and the other ten checks still run.  Such a
+list can be taken from Odlyzko's tables (www.dtc.umn.edu/~odlyzko/zeta_tables)
+or the LMFDB.  The table printed in section 3.4 of the note was computed on
+2x10^6 ordinates; a 100,000-ordinate list gives the same shape with a larger
+shortfall, which is the finite list and not the model.
 
 Python 3, numpy, sympy, mpmath.
 """
@@ -203,12 +219,36 @@ def check3a_proof_steps():
     steps.append(("9c R^2 - beta^2    = T^2 > 0, so beta/R < 1 and artanh applies",
                   sp.simplify(Rv0 ** 2 - beta ** 2 - T ** 2)))
 
+    # 10  Sekatskii's own route to the same optimum (correspondence, August 2026),
+    #     which stays in (sigma, a).  Reproduced in section 3.1 with his permission.
+    sig, aa, eps = sp.symbols('sigma a_var epsilon', positive=True)
+    Ns = (sig - aa) ** 2 + T ** 2
+    Ds = (sig + aa - 1) ** 2 + T ** 2
+    steps.append(("10a (sigma+a-1)^2 - (sigma-a)^2 = (2 sigma - 1)(2a - 1)",
+                  sp.simplify(sp.expand((sig + aa - 1) ** 2 - (sig - aa) ** 2)
+                              - sp.expand((2 * sig - 1) * (2 * aa - 1)))))
+    steps.append(("10b |q_a|^2 = 1 + (2 sigma - 1)(1 - 2a)/D",
+                  sp.simplify(Ns / Ds - (1 + (2 * sig - 1) * (1 - 2 * aa) / Ds))))
+    steps.append(("10c his form equals the (beta, d) form of step 2",
+                  sp.simplify((Ns / Ds).subs({sig: sp.Rational(1, 2) + beta,
+                                              aa: sp.Rational(1, 2) - d}) - N / D)))
+
     for label, residual in steps:
         ok = residual == 0
         print(f"   {'OK ' if ok else 'FAIL'}  {label}")
         if not ok:
             print(f"          residual: {residual}")
             FAIL.append(f"check 3a: step failed -- {label}")
+
+    # 10d  and his stationary points are a = 1/2 +- sqrt(eps^2 + T^2)
+    crit = sp.solve(sp.diff(Ns / Ds, aa), aa)
+    crit_eps = sorted(sp.simplify(c.subs(sig, sp.Rational(1, 2) + eps)) for c in crit)
+    want = sorted([sp.Rational(1, 2) - sp.sqrt(eps ** 2 + T ** 2),
+                   sp.Rational(1, 2) + sp.sqrt(eps ** 2 + T ** 2)])
+    ok10d = all(sp.simplify(x - y) == 0 for x, y in zip(crit_eps, want))
+    print(f"   {'OK ' if ok10d else 'FAIL'}  10d a = 1/2 +- sqrt(eps^2 + T^2), so |1/2 - a| = R")
+    if not ok10d:
+        FAIL.append("check 3a: Sekatskii's stationary points are not 1/2 +- R")
 
     # 7  the root is unique in d > 0 and the sign changes + -> -
     root = sp.solve(sp.Eq(2 * beta * (beta ** 2 - d ** 2 + T ** 2), 0), d)
@@ -279,11 +319,15 @@ def check3b_online_and_far(zerofile="2_million.txt"):
         print(f"   (far-zero table skipped: set ZETA_ZEROS to a zero list; looked for {path!r})")
         return
     g = np.loadtxt(path)
-    print(f"\n   far-zero sum against the model 2 n^2 d^2/gamma^2, {len(g)} ordinates")
+    gmax = g[-1]
+    print(f"\n   far-zero sum against the model 2 n^2 d^2/gamma^2, {len(g)} ordinates"
+          f" to gamma = {gmax:.0f}")
+    print("   (the model integrates to infinity while the list stops, so the cut T")
+    print("    is kept below gamma_max/10 and the shortfall stays small)")
     print(f"   {'d':>6} {'n':>5} {'T':>9} {'exact':>13} {'model':>13} {'ratio':>7}")
     for d, n in ((0.5, 20), (0.5, 50), (30.0, 50)):
         for T in (5e3, 2e4, 1e5):
-            if T < 20 * n * d:
+            if T < 20 * n * d or T > gmax / 10:
                 continue
             sel = g[g > T]
             th = 2 * np.arctan(sel / d) - np.pi
