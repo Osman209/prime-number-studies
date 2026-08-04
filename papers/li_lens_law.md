@@ -141,7 +141,7 @@ which is Sekatskii's Lemma 1.
 
 **[M] Checked here rather than quoted.** Comparing the $\zeta$-part of $L_n(a)$ against the sum directly, for $a \lt 0$ so that $1-a \gt 1$ and the Dirichlet series converges, the two sides agree to the sign shown, and the residue is truncation rather than error:
 
-| relative residue $\|LHS + RHS(M)\|/\|LHS\|$ | $M = 500$ | $2000$ | $8000$ | $32000$ |
+| relative residue $\Vert LHS + RHS(M)\Vert/\Vert LHS\Vert$ | $M = 500$ | $2000$ | $8000$ | $32000$ |
 |---|---|---|---|---|
 | $a = -0.5$, $n = 1$ | 5.99×10⁻² | 3.04×10⁻² | 1.56×10⁻² | 8.14×10⁻³ |
 | $a = -1.5$, $n = 1$ | 3.32×10⁻⁴ | 1.54×10⁻⁴ | 1.32×10⁻⁴ | 1.29×10⁻⁴ |
@@ -185,7 +185,19 @@ max_d log |q_a(ρ)| = ½ · log[ (R+β)/(R−β) ] = artanh(β/R).
 
 *Proof.* Substituting $a = 1/2 - d$ gives $\rho - a = (\beta +d) + iT$ and $\rho - (1-a) = (\beta -d) + iT$, which is the closed form. Write $N = (\beta +d)^{2}+T^{2}$ and $D = (\beta -d)^{2}+T^{2}$. Then $(N/D)' = 2[(\beta +d)D + (\beta -d)N]/D^{2}$, and with $u = \beta +d$, $v = \beta -d$ the bracket is $u(v^{2}+T^{2}) + v(u^{2}+T^{2}) = (u+v)(uv + T^{2}) = 2\beta(\beta^{2} - d^{2} + T^{2})$. Since $\beta \gt 0$ this vanishes exactly at $d^{2} = \beta^{2} + T^{2}$, changing sign from $+$ to $-$. At $d = R$ one has $N = 2R(R+\beta)$ and $D = 2R(R-\beta)$, giving the stated value. ∎
 
-**[M] Every line of that proof is machine-checked.** `verify_li_lens.py` check 3a verifies the substitution, the form of $|q_a|^{2}$, the derivative's numerator, the factorisation through $u = \beta +d$, $v = \beta -d$, its collapse to $2\beta(\beta^{2}-d^{2}+T^{2})$, the values of $N$ and $D$ at $d = R$, the uniqueness of the root and the sign change — eleven symbolic identities, each with residual exactly zero, plus the sign change numerically. The final $\mathrm{artanh}$ step is checked as three separate algebraic facts rather than one transcendental identity, because $\mathrm{artanh}(z) = \tfrac12 \log((1+z)/(1-z))$ holds only for $|z| \lt 1$: the script verifies that $N/D$ at $d = R$ is $(R+\beta)/(R-\beta)$, that $(x-1)/(x+1) = \beta/R$ for that $x$, and that $R^{2} - \beta^{2} = T^{2} \gt 0$ so the hypothesis $\beta/R \lt 1$ is met. The domain condition was missing from the first draft of the proof and the check is what surfaced it.
+**[M] Every line of that proof is machine-checked.** `verify_li_lens.py` check 3a verifies the substitution, the form of $|q_a|^{2}$, the derivative's numerator, the factorisation through $u = \beta +d$, $v = \beta -d$, its collapse to $2\beta(\beta^{2}-d^{2}+T^{2})$, the values of $N$ and $D$ at $d = R$, the uniqueness of the root and the sign change — and, since it is displayed below, every line of Sekatskii's route as well: fifteen symbolic identities, each with residual exactly zero, plus the sign change numerically. The final $\mathrm{artanh}$ step is checked as three separate algebraic facts rather than one transcendental identity, because $\mathrm{artanh}(z) = \tfrac12 \log((1+z)/(1-z))$ holds only for $|z| \lt 1$: the script verifies that $N/D$ at $d = R$ is $(R+\beta)/(R-\beta)$, that $(x-1)/(x+1) = \beta/R$ for that $x$, and that $R^{2} - \beta^{2} = T^{2} \gt 0$ so the hypothesis $\beta/R \lt 1$ is met. The domain condition was missing from the first draft of the proof and the check is what surfaced it.
+
+**[P] The same optimum in two variables — a derivation of S. K. Sekatskii.** In correspondence (August 2026) Sekatskii gave a shorter route to the same result, which he offered as an exercise and which is reproduced here with his permission. It stays in $\sigma$ and $a$ where the argument above moves through five variables. Writing $\rho = \sigma + iT$,
+
+$$|q_a(\rho)|^{2} = \frac{(\sigma-a)^{2}+T^{2}}{(\sigma+a-1)^{2}+T^{2}} = 1 + \frac{(2\sigma-1)(1-2a)}{D}, \qquad D = (\sigma+a-1)^{2}+T^{2},$$
+
+and setting the derivative in $a$ to zero gives
+
+$$a = \tfrac12 \pm \sqrt{\varepsilon^{2}+T^{2}}, \qquad \varepsilon = \sigma - \tfrac12,$$
+
+so $d = \tfrac12 - a$ has $|d| = \sqrt{\varepsilon^{2}+T^{2}} = R$: the same optimum, with his $\varepsilon$ the $\beta$ used here. The displayed second line uses $(\sigma+a-1)^{2} - (\sigma-a)^{2} = (2\sigma-1)(2a-1)$; Sekatskii notes that he did not track the overall sign, which does not affect where the extremum sits. The two derivations were checked against each other symbolically and agree exactly.
+
+**[C] And his own reading of what it is worth.** Sekatskii holds that the maximum of the modulus, and hence the choice of $a$, **might** be — rather than is — important for numerical work. That qualification is adopted here. Nothing below claims the optimum matters in practice; §5 says the opposite, and the measurements of §3.3 are of a planted configuration in a finite truncation.
 
 **The geometric reading.** The map $q_a$ has its two foci at $a$ and $1-a$, placed symmetrically about $1/2$ at distance $d$. The proposition says the detector is sharpest when **the foci stand at the same distance from $1/2$ as the zero does**.
 
@@ -195,7 +207,11 @@ max_d log |q_a(ρ)| = ½ · log[ (R+β)/(R−β) ] = artanh(β/R).
 G(β, T)  =  artanh(β/R)  /  ½ log[ ((β+½)² + T²) / ((β−½)² + T²) ],       R = √(β²+T²),
 ```
 
-and $G \to T$ as $\beta \to 0$ with $T$ fixed: the numerator is $\beta/T + O(\beta^{3}/T^{3})$ and the denominator is $\beta/(\tfrac14 +T^{2}) + O(\beta^{3}) = \beta/T^{2} + O(T^{-4})$.
+and, as $\beta \to 0$ with $T$ fixed, the numerator is $\beta/T + O(\beta^{3}/T^{3})$ and the denominator is $\beta/(\tfrac14 + T^{2}) + O(\beta^{3})$, so
+
+$$G \to \frac{\tfrac14 + T^{2}}{T} = T + \frac{1}{4T}.$$
+
+**The excess $1/(4T)$ is not rounding.** It is the $\tfrac14$ carried by the classical lens $d = 1/2$, and it is exactly what the gain column above measures: $10.025$, $30.008$, $100.0025$, $500.0005$ against the printed $10.026$, $30.009$, $100.003$, $500.001$, the remaining difference being the $O(\beta^{2})$ term at $\beta = 0.1$. Dropping it and writing $G \to T$ would be a scaling statement, not the limit.
 
 Since the index at which an off-line zero first drives the sum negative scales inversely with the exponential rate, **the detection threshold improves by a factor of $T$.**
 
@@ -230,7 +246,7 @@ with $\beta = 0.1$; the $\beta = 0.01$ row gives the same gains to three decimal
 
 against the measured $30.89$.
 
-**[C] The $3$% residue is not explained here, only attributed.** The crossing index is not exactly inversely proportional to the rate, because the on-line zeros contribute a background growing like $(n/2) \log n$ (Sekatskii, arXiv:1404.7276, Theorem 6) rather than a constant. That accounts for a residue of this sign and rough size, but no model of the crossing was fitted and the $3$% was not predicted in advance.
+**[M] The $3$% residue was afterwards measured and is scatter, not a systematic effect.** The detection index was swept over 24 runs — six heights $T = 10, 20, 30, 50, 80, 120$, two displacements $\beta = 0.1, 0.05$ and two ordinate counts $2000, 8000$ — and the measured gain divided by $T$ has mean $1.0034$ with standard deviation $0.0163$ and slope $-0.0052$ against $\log T$. The departures **shrink** with $T$ rather than growing, and move when only the zero count changes. An earlier draft of this note guessed that the $3$% was systematic and came from the background's own dependence on $d$; that guess is withdrawn. The crossing index is still not exactly inversely proportional to the rate — the on-line zeros contribute a background growing like $(n/2)\log n$ (Sekatskii, arXiv:1404.7276, Theorem 6) rather than a constant — but at these heights that correction is smaller than the run-to-run scatter. Regenerated by `code/detection_index_sweep.py`.
 
 **The empirical $30.9$ was the height of the planted zero.**
 
@@ -263,7 +279,11 @@ measured against the exact sum over 2×10⁶ ordinates:
 | $0.5$, $50$ | 0.993 | 0.974 | 0.892 |
 | $30$, $50$ | — | — | 0.892 |
 
-as ratios of exact to model. The shortfall at $T = 10^{5}$ is the finite zero list — the model integrates to infinity while the list stops at $1.13\times 10^{6}$.
+as ratios of exact to model.
+
+**Two features of that table are not typographical.** The first two rows are identical because the factor $n^{2}d^{2}$ appears in the exact sum and in the model alike and cancels from the ratio, so the ratio does **not** depend on $d$ or $n$ at all — which is itself a check on the model, and the reason the third row is given at one $T$ only. The dashes are the condition $\gamma \gg nd$: at $d = 30$, $n = 50$ the scale $nd = 1500$ is not small against a cut at $T = 5\times 10^{3}$, so those two cells would be testing the expansion rather than the density.
+
+The shortfall at $T = 10^{5}$ is the finite zero list — the model integrates to infinity while the sum stops. The shipped script keeps the cut below $\gamma_{\max}/10$ so the table adapts to whatever list is supplied, **which means the numbers a reader sees depend on the list they have.** With a 100,000-ordinate list reaching $\gamma = 74921$ the cut falls to $T = 5\times 10^{3}$ and the ratio is $0.910$ rather than $0.993$; the shape is the same and the larger shortfall is the shorter list. The script prints the list's reach next to the table so the two are never confused.
 
 **The structure of the argument then closes.** The far term is the analogue of Palojärvi's $K_{F,3}(T,\tau) n(n-1)$; for the near zeros, an off-line zero with $|q_a(\rho)| \ge R$ gives, by the same lemma of Montgomery she uses,
 
@@ -279,7 +299,7 @@ Rⁿ  ≳  20 [ N(T) + (2n²d²/π)(log(T/2π)+1)/T ],       i.e.   n  ≳  log(
 
 **So the detection index is inversely proportional to $\log R$ up to a logarithmic correction, and Proposition 2 — which maximises $\log R$ over the lens — minimises it.** That is the derivation §3.3 was missing.
 
-**[C] What this is not.** It is the argument's *structure*, not a theorem. Palojärvi's intervals come with explicit constants obtained from uniform estimates on every term, and none of that uniformity is established here: the $O(d^{3}/\gamma^{3})$ remainder is not bounded uniformly in $n$, the range of $n$ for which Montgomery's lemma applies is not made explicit, and the background's own dependence on $d$ — which enters through $n^{2}d^{2}$ — is not carried through. That last omission is very likely where the $3$% residue of §3.3 lives, since the two lenses there differ in $d$ by a factor of $60$. Supplying the uniform estimates would turn the factor-$T$ gain from a scaling law into a certified interval, and is the concrete next step named in §1.1.
+**[C] What this is not.** It is the argument's *structure*, not a theorem. Palojärvi's intervals come with explicit constants obtained from uniform estimates on every term, and none of that uniformity is established here: the $O(d^{3}/\gamma^{3})$ remainder is not bounded uniformly in $n$, the range of $n$ for which Montgomery's lemma applies is not made explicit, and the background's own dependence on $d$ — which enters through $n^{2}d^{2}$ — is not carried through. A draft of this note guessed that the last omission was where the $3$% residue of §3.3 lives; the 24-run sweep reported there withdraws that guess. Supplying the uniform estimates would turn the factor-$T$ gain from a scaling law into a certified interval, and is the concrete next step named in §1.1.
 
 
 ---
@@ -345,7 +365,7 @@ against ceilings $e^{\beta L/2}$ of $1.25, 1.57, 2.46, 6.05$ and $3.08, 9.49, 90
 | | shifted Li | truncated Weil |
 |---|---|---|
 | free parameter | lens width $d = 1/2 - a$ | support length $L$ |
-| detector rate | $\mathrm{artanh}(\beta/R)$, $R = \|\rho - 1/2\|$ | ceiling $\beta L/2$ |
+| detector rate | $\mathrm{artanh}(\beta/R)$, $R = \lvert \rho - 1/2 \rvert$ | ceiling $\beta L/2$ |
 | behaviour in the parameter | **interior maximum at $d = R$** | **monotone, no maximum** |
 | cost of moving it | none — $a$ is free | on the CvS path $L = \log c$, so a longer support forces a larger prime sum |
 
@@ -360,10 +380,14 @@ against ceilings $e^{\beta L/2}$ of $1.25, 1.57, 2.46, 6.05$ and $3.08, 9.49, 90
 ## 7. Reproducibility
 
 ```bash
-python code/verify_li_lens.py        # Propositions 1-3, the prime formula, and the tables of §3, §4, §6
+python code/verify_li_lens.py         # Propositions 1-4, the prime formula, and the tables of §3, §4, §6
+python code/detection_index.py        # the detection index at a few heights
+python code/detection_index_sweep.py  # the 24-run gain table of §3.3
 ```
 
-$§2.2$ needs an explicit differentiation step (see the caveat there); the script sets it and fails loudly if the recovered $\lambda_{1}$ does not match the closed form. Tested with Python 3.12, NumPy 2.4, SymPy 1.14, mpmath 1.3.
+**All three read `ZETA_ZEROS`** — a file of critical-line ordinates, one per line, increasing. `verify_li_lens.py` uses it for check 3b alone and skips that one table without it, printing the cut and the list's reach beside every number it does print; `detection_index.py` and `detection_index_sweep.py` fall back to `mpmath.zetazero`, which is far slower, and say so. A suitable list can be taken from Odlyzko's tables (`www.dtc.umn.edu/~odlyzko/zeta_tables`) or the LMFDB. `detection_index_sweep.py` needs 8000 ordinates and exits nonzero if the mean gain departs from $T$ by more than $2$% or if the slope against $\log T$ turns positive.
+
+§2.2 needs an explicit differentiation step (see the caveat there); the script sets it and fails loudly if the recovered $\lambda_{1}$ does not match the closed form. Tested with Python 3.12, NumPy 2.4, SymPy 1.14, mpmath 1.3.
 
 ---
 
@@ -372,6 +396,10 @@ $§2.2$ needs an explicit differentiation step (see the caveat there); the scrip
 The verification script and much of the prose in this note were written with the assistance of Claude (Anthropic); the research direction, the decisions about what to publish, and responsibility for every claim are the author's. See the repository README for a fuller statement.
 
 ---
+
+## Acknowledgements
+
+I am grateful to **S. K. Sekatskii** for reading an early version of this note and replying in detail; for the derivation reproduced in §3.1, which he offered as an exercise and permitted me to include; and for the qualification recorded there on what the optimum is and is not worth in numerical practice. Any error that remains is mine.
 
 ## References
 
