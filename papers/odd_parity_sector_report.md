@@ -85,7 +85,7 @@ leaves the Gram matrix and its zeros unchanged, and is noted only because the si
 coefficients are imaginary in the complex-exponential basis. (Written instead in the
 centred variable $x$ one has
 $\varphi_{2k}(x) = (-1)^k\sqrt{2/L}\sin(2\pi kx/L)$, so mixing the two variables
-introduces a spurious $\operatorname{diag}((-1)^k)$; the algebra fixes the pairing used
+introduces a spurious $\mathrm{diag}((-1)^k)$; the algebra fixes the pairing used
 below.) **The two finite odd basis spaces coincide exactly. The observed spectral discrepancy
 decreases rapidly with $T$, consistently with archimedean truncation, though I have
 not established that this is its only source.**
@@ -288,6 +288,15 @@ Every row is one cell: the same $c$, the same $N$, the same $T = 400$ for both
 sectors. An earlier draft mixed the deepest available rung per sector, which makes a
 ratio of two numbers that were not measured together.
 
+The $c = 23$ row is at $N = 120$ rather than deeper for a reason worth stating. The
+unseeded campaign reaches $N = 140$ in the odd sector, where $C_{\text{odd}} = 542.9$,
+but it computes no even block there. A separate convergence sweep does compute both
+sectors in one $N = 160$ cell and gives $C_{\text{odd}} = 542.7$,
+$C_{\text{even}} = 9048$ and a ratio of $16.671$ — so $N = 120$ is the deepest paired
+cell whose odd value belongs to the unseeded campaign described in §2, and the $N = 160$
+figures come from the seeded sweep instead. Both are reported; neither is mixed into the
+other.
+
 **The $N$-dependence must be reported with $C$, and the fourth cutoff shows why.** At
 $c = 23$, $C_{\text{odd}}$ runs $553.7,\ 545.1,\ 542.9$ at
 $N = 100, 120, 140$ — so a table taken uniformly at $N = 100$ would put $c = 23$ two
@@ -381,7 +390,7 @@ route when the question is only whether a vector reconstructs at all. The near-n
 figures are therefore the $N = 60$ ones and not the deeper $N = 100$ values quoted
 above.
 
-| vector | $|\widehat{\gamma}_1-\gamma_1|$, even sector | $|\widehat{\gamma}_1-\gamma_1|$, odd sector |
+| vector | $\lvert\widehat{\gamma}_1-\gamma_1\rvert$, even sector | $\lvert\widehat{\gamma}_1-\gamma_1\rvert$, odd sector |
 |---|---|---|
 | near-null | $4.22\times10^{-55}$ | $2.20\times10^{-52}$ |
 | largest eigenvalue | $1.27$ | $0.78$ |
@@ -404,7 +413,7 @@ $\lambda$ tabulated beside the error.
 Every cell run, at $T = 400$. The lag is $\log_{10}$ of the ratio of the two
 first-zero errors.
 
-| $c$ | $N$ | dps | $\lambda_{\min}^{\text{even}}$ | $|\widehat{\gamma}_1-\gamma_1|$ even | $|\widehat{\gamma}_1-\gamma_1|$ odd | lag |
+| $c$ | $N$ | dps | $\lambda_{\min}^{\text{even}}$ | $\lvert\widehat{\gamma}_1-\gamma_1\rvert$ even | $\lvert\widehat{\gamma}_1-\gamma_1\rvert$ odd | lag |
 |---|---|---|---|---|---|---|
 | 13 | 40 | 80 | $6.79298\times10^{-54}$ | $5.17506\times10^{-50}$ | $1.19574\times10^{-47}$ | 2.364 |
 | 13 | 60 | 80 | $5.99929\times10^{-59}$ | $4.21519\times10^{-55}$ | $2.19967\times10^{-52}$ | 2.718 |
