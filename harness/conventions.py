@@ -111,6 +111,94 @@ regression tests must be re-baselined deliberately.
     Double precision throughout the ladder. Edge-limit quantities (delta -> 0
     behaviour of the overlap) are cancellation-limited in float64 and are
     computed in extended precision instead; see edge_precision.py.
+
+--------------------------------------------------------------------------------
+7. THE SECOND FAMILY: PERIODIC FOURIER (CvS), AND HOW IT MAPS ONTO THIS ONE
+
+    Sections 1-6 fix the fixed-support (Dirichlet sine) family. A second family is
+    used in the CvS path and is available through builder_periodic.py, which wraps
+    A. Groskin's `connes-cvs` implementation of CvS Proposition 4.1. This section
+    states the correspondence so that both constructors run under one set of
+    conventions rather than one forking from the other. Nothing here is a free
+    choice either; it is read off that constructor's own source.
+
+    PARAMETERS. build_galerkin_matrix(c, N, T, dps) sets L = log c internally and
+    sums prime powers n <= c. It is therefore a ONE-parameter family: the support
+    and the prime cutoff are locked together, which is this harness's SATURATED
+    DIAGONAL and nothing else. The map is
+
+        L = log c,      p_c = c,      m = 2N,
+
+    and off the diagonal there is no periodic constructor to call. Requests off
+    the diagonal are refused rather than answered with a matrix built at the
+    wrong support.
+
+    BASIS. Take the correspondence from what the periodic side actually
+    reconstructs, not from a docstring: connes_cvs.extract_zeros integrates
+    against exp(2 pi i k x/L) on [0, L], so the periodic basis is the FULL Fourier
+    basis of period L, frequencies 2 pi k/L. The sine family has j pi/L. Hence
+
+        periodic sine half   (e_k - e_{-k}) ~ sin(2 pi k x/L)  =  phi_{2k}
+        periodic cosine half {1, cos(2 pi k x/L)}              outside this span
+        sine odd-indexed     phi_1, phi_3, ...                 outside THEIR span
+
+    The periodic odd sector is exactly this family's EVEN-INDEXED sine modes --
+    which is why m = 2N is the right pairing, and it is verified by the spectra
+    below rather than argued from the basis. The two "even" sectors are not two
+    versions of one space: one is spanned by cosines, the other by the
+    half-integer-frequency sines, so they share no vector at FINITE size. They are
+    not disjoint in the limit: phi_j for j odd carries the same parity and is
+    complete in the same subspace, but only asymptotically -- the L2 residual of
+    the constant and the cosines in those modes falls like 1/m (4.0e-2, 8.1e-3,
+    2.0e-3, 1.0e-3 at j <= 10, 50, 200, 400). So the finite blocks differ and the
+    difference should converge in m, not in T. That is an inference from
+    completeness; the m-dependence of the block discrepancy has NOT been swept.
+
+    BOUNDARY PRIME. q = c is included by the periodic side (n <= c) and excluded
+    here (log q < L, strict). Its overlap integrates over an interval of length
+    L - log c = 0, so it contributes nothing and the two prime sums agree.
+
+    REPORTING IS SECTOR BY SECTOR, NOT MATRIX TO MATRIX. Both forms commute with
+    parity (measured: the sine W is parity block-diagonal to 7e-15, so the split
+    is exact and not imposed), and the two sectors then behave differently. A
+    single whole-matrix comparison averages the two behaviours into one number
+    that means nothing.
+
+      ODD sector -- the periodic combinations (e_k - e_{-k}) ~ sin(2 pi k x/L)
+      vanish at the centre AND at both endpoints, so they ARE the Dirichlet sine
+      modes and the two constructors compute the SAME operator. The measured
+      difference falls with the archimedean truncation and not otherwise:
+      1.7e-4, 2.4e-5, 3.2e-6 at T = 100, 200, 400 (c = 13, N = 16, dps = 80).
+
+      EVEN sector -- the periodic side carries the constant and the cosines that
+      do not vanish at the endpoints. The Dirichlet space cannot represent them
+      and the operators genuinely differ: 5.0e-2, 4.7e-2, 4.9e-2 over the same
+      sweep, flat in T. The sector dimensions differ by one, the extra mode being
+      k = 0.
+
+      NEAR-NULL COUNTS agree in BOTH sectors (7/7 and 7/7 at N = 20, 5/5 and 5/5
+      at N = 12), so the blind subspace is a shared invariant even where the
+      non-null spectra are not.
+
+      AND THE SHARED SECTOR CARRIES THE ZEROS. At c = 13, N = 100, T = 400,
+      dps = 80 the near-null vector of the ODD sector -- the one this family
+      spans -- reconstructs the first three zeta ordinates through
+      connes_cvs.extract_zeros to 8.70e-53, 6.67e-50, 4.28e-48, against the even
+      sector's 1.45e-55, 2.69e-52, 2.49e-50 (lambda_min 2.011e-55 against
+      2.077e-59). So the endpoint condition costs roughly three decimal places
+      and a factor 1e4 in depth, and it is NOT what makes the reconstruction
+      work: the fixed-support family reaches the same zeros through a subspace
+      the CvS ground state does not use.
+
+    PRECISION, two traps, both measured rather than assumed:
+      * dps must be raised together with T. At dps = 40, T = 800 degrades the
+        comparison to 5.5e-1 -- worse than T = 200 gives -- while at dps = 80 the
+        T-trend is monotone.
+      * connes_cvs.extract_zeros must receive L as an mpmath number. A Python
+        float caps the reconstruction at ~1e-17 instead of ~1e-55, silently: at
+        c = 13, N = 100, T = 400, dps = 80 we measure |gamma_1 error| = 1.41e-17
+        with math.log(13) against 1.4549524e-55 with mp.log(13), while
+        lambda_min^even = 2.0769626582e-59 either way. See upstream issue #3.
 """
 
 # ---- fixed conventions -------------------------------------------------------
@@ -121,4 +209,9 @@ TAU_DEFAULT = 1e-6     # absolute near-null tolerance; always reported
 GAMMA_MAX_DEFAULT = 1062.9   # highest zeta ordinate used by the validator
 M_LADDER = (100, 200, 300, 400, 500)
 
-__all__ = ["L_DEFAULT", "R_MAX", "NR", "TAU_DEFAULT", "GAMMA_MAX_DEFAULT", "M_LADDER"]
+# ---- periodic (CvS) family; see section 7 --------------------------------------
+T_PERIODIC = 400       # archimedean truncation passed to build_galerkin_matrix
+DPS_PERIODIC = 80      # working precision; raise it together with T_PERIODIC
+
+__all__ = ["L_DEFAULT", "R_MAX", "NR", "TAU_DEFAULT", "GAMMA_MAX_DEFAULT", "M_LADDER",
+           "T_PERIODIC", "DPS_PERIODIC"]

@@ -1,0 +1,17 @@
+{"c": 13, "N": 40, "dps": 80, "T": 400, "even_lambda": "6.79298e-54", "even_err": "5.17506e-50", "odd_lambda": "2.58062e-50", "odd_err": "1.19574e-47"}
+{"c": 13, "N": 60, "dps": 80, "T": 400, "even_lambda": "5.99929e-59", "even_err": "4.21519e-55", "odd_lambda": "5.0752e-55", "odd_err": "2.19967e-52"}
+{"c": 13, "N": 100, "dps": 80, "T": 400, "even_lambda": "2.0769626582e-59", "even_err": "1.4549524e-55", "odd_lambda": "2.011170073e-55", "odd_err": "8.6968e-53"}
+{"c": 17, "N": 60, "dps": 80, "T": 400, "even_lambda": "3.52427e-74", "even_err": "3.00057e-70", "odd_lambda": "2.41747e-70", "odd_err": "1.2396e-67"}
+{"c": 17, "N": 60, "dps": 150, "T": 400, "even_lambda": "3.52427e-74", "even_err": "3.00057e-70", "odd_lambda": "2.41747e-70", "odd_err": "1.2396e-67"}
+{"c": 19, "N": 60, "dps": 80, "T": 400, "even_lambda": "1.14409e-79", "even_err": "1.04719e-75", "odd_lambda": "8.18862e-76", "odd_err": "4.54572e-73"}
+{"c": 19, "N": 80, "dps": 80, "T": 400, "even_lambda": "6.89173e-82", "even_err": "1.00758e-78", "odd_lambda": "4.40414e-82", "odd_err": "1.23528e-79", "WARNING": "eigenvalue depth 82 digits against dps 80: at or below the precision floor, repeat at dps >= 200"}
+{"c": 19, "N": 80, "dps": 200, "T": 400, "build_min": 24.9, "even_lambda": "2.0267455e-87", "even_err": "1.7504111e-83", "odd_lambda": "2.5703987e-83", "odd_err": "1.3366936e-80"}
+{"c": 17, "N": 80, "dps": 150, "T": 400, "build_min": 13.7, "even_lambda": "1.7132546e-79", "even_err": "1.3882501e-75", "odd_lambda": "1.9867421e-75", "odd_err": "9.7703122e-73"}
+{"c": 23, "N": 60, "dps": 150, "T": 400, "build_min": 10.1, "even_lambda": "2.7614241e-88", "even_err": "3.0443528e-84", "odd_lambda": "1.8455508e-84", "odd_err": "1.1879401e-81"}
+{"c": 23, "N": 80, "dps": 200, "T": 400, "build_min": 24.2, "even_lambda": "1.1429159e-99", "even_err": "1.1131975e-95", "odd_lambda": "1.3921385e-95", "odd_err": "8.0476451e-93"}
+{"c": 17, "N": 100, "dps": 250, "T": 400, "build_min": 41.5, "even_lambda": "1.4010782e-80", "even_err": "1.1281528e-76", "odd_lambda": "2.1398591e-76", "odd_err": "1.0472119e-73"}
+{"c": 23, "N": 100, "dps": 250, "T": 400, "build_min": 64.1, "even_lambda": "4.1817585e-107", "even_err": "3.8755469e-103", "odd_lambda": "6.427788e-103", "odd_err": "3.5593483e-100"}
+{"c": 17, "N": 120, "dps": 250, "T": 400, "build_min": 81.4, "even_lambda": "1.0144374e-80", "even_err": "8.1650921e-77", "odd_lambda": "1.5944426e-76", "odd_err": "7.8005642e-74"}
+{"c": 23, "N": 120, "dps": 300, "T": 400, "build_min": 89.3, "even_lambda": "3.1365753e-111", "even_err": "2.8535453e-107", "odd_lambda": "7.4368021e-107", "odd_err": "4.0538931e-104"}
+{"c": 19, "N": 120, "dps": 250, "T": 400, "build_min": 84.7, "even_lambda": "2.4220867e-91", "even_err": "2.0445623e-87", "odd_lambda": "4.9268349e-87", "odd_err": "2.514042e-84"}
+{"c": 23, "N": 160, "dps": 350, "T": 400, "build_min": 223.8, "even_lambda": "5.8318457e-113", "even_err": "5.2767228e-109", "odd_lambda": "1.7692045e-108", "odd_err": "9.6020371e-106"}
