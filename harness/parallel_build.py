@@ -2,6 +2,13 @@
 """
 parallel_build.py — build the CvS Galerkin matrix using every core, and cache it.
 
+A PERFORMANCE UTILITY, NOT PART OF THE EVIDENCE CHAIN.  It rebuilds the same
+matrix as connes_cvs.build_galerkin_matrix, using the psi(-n) = -psi(n) symmetry
+and a process pool, checks itself against the package's serial builder under
+--verify, and caches partial and final results so that a long high-precision
+build survives a crash.  **No number in papers/odd_parity_sector.md depends on
+this file**, and nothing else in harness/ reads its output yet.
+
 Two savings, applied together:
 
   1. SYMMETRY, free.  For integer n, psi(-n) = -psi(n) and psi'(-n) = psi'(n)
@@ -73,19 +80,37 @@ def _psi_pair(n):
 def build(c, N, T, dps, workers):
     mp.mp.dps = dps
     t0 = time.time()
-    todo = list(range(0, N + 1))            # symmetry: negatives come for free
-    print(f"psi phase: {len(todo)} independent quadratures "
+
+    # RESUME. Each psi pair is appended to a JSONL cache the moment it lands, so a
+    # crash, a swap-death or a Ctrl-C costs only the quadratures still in flight.
+    # Re-running the same command picks up exactly where it stopped. This matters
+    # because memory, not cores, is the binding constraint on a long high-dps run.
+    cache = f"psi_c{c}_N{N}_T{T}_dps{dps}.jsonl"
+    psi, psid = {}, {}
+    if os.path.exists(cache):
+        for line in open(cache, encoding="utf-8"):
+            if line.strip():
+                r = json.loads(line)
+                psi[r["n"]], psid[r["n"]] = mp.mpf(r["psi"]), mp.mpf(r["psid"])
+        print(f"resuming: {len(psi)} psi pairs already in {cache}", flush=True)
+
+    todo = [n for n in range(0, N + 1) if n not in psi]   # symmetry: negatives free
+    print(f"psi phase: {len(todo)} quadratures left of {N+1} independent "
           f"(instead of {2*N+1}) on {workers} workers", flush=True)
-    with Pool(workers, initializer=_init, initargs=(c, T, dps)) as pool:
-        done = 0
-        psi, psid = {}, {}
-        for n, a, b in pool.imap_unordered(_psi_pair, todo, chunksize=1):
-            psi[n], psid[n] = mp.mpf(a), mp.mpf(b)
-            done += 1
-            if done % max(1, len(todo) // 20) == 0:
-                el = time.time() - t0
-                print(f"  {done}/{len(todo)}  {el/60:.1f} min elapsed, "
-                      f"~{el/done*(len(todo)-done)/60:.1f} min left", flush=True)
+    if todo:
+        with Pool(workers, initializer=_init, initargs=(c, T, dps)) as pool, \
+             open(cache, "a", encoding="utf-8") as fh:
+            done = 0
+            for n, a, b in pool.imap_unordered(_psi_pair, todo, chunksize=1):
+                psi[n], psid[n] = mp.mpf(a), mp.mpf(b)
+                fh.write(json.dumps({"n": n, "psi": a, "psid": b}) + "\n")
+                fh.flush()
+                os.fsync(fh.fileno())
+                done += 1
+                if done % max(1, len(todo) // 20) == 0:
+                    el = time.time() - t0
+                    print(f"  {done}/{len(todo)}  {el/60:.1f} min elapsed, "
+                          f"~{el/done*(len(todo)-done)/60:.1f} min left", flush=True)
     for n in range(1, N + 1):               # mirror
         psi[-n], psid[-n] = -psi[n], psid[n]
     print(f"psi phase done in {(time.time()-t0)/60:.1f} min", flush=True)
