@@ -61,6 +61,32 @@ def entrywise(Wp, Ws, N, m):
     return float(np.abs(G - S).max()), float(np.abs(G - S).max() / np.abs(G).max())
 
 
+def entrywise_controls(Wp, Ws, N, m):
+    """The two controls that make the odd-sector pairing non-trivial.
+
+    Both are the same max|G - S| / max|G| as above, computed against a deliberately
+    WRONG pairing, so that a large number here is the evidence that the small number
+    above is an identification and not a coincidence.
+
+      wrong index set : pair the periodic odd sector with the ODD-indexed sine modes
+                        phi_1, phi_3, ... instead of the even-indexed ones.
+      sign-conjugated : pair correctly but conjugate S by D = diag((-1)^k), the sign
+                        pattern that appears if the two sides are written in different
+                        variables (centred x against x' = x + L/2).
+    """
+    _, Vo = BP.parity_projectors(N)
+    G = Vo.T @ Wp @ Vo
+    i_odd_indexed, i_even_indexed = BP.sine_parity_index(m)
+    scale = np.abs(G).max()
+    k = G.shape[0]
+    S_wrong = Ws[np.ix_(i_odd_indexed[:k], i_odd_indexed[:k])]
+    S = Ws[np.ix_(i_even_indexed, i_even_indexed)]
+    sgn = np.array([(-1) ** j for j in range(1, k + 1)], dtype=float)
+    S_signed = np.outer(sgn, sgn) * S
+    return (float(np.abs(G - S_wrong).max() / scale),
+            float(np.abs(G - S_signed).max() / scale))
+
+
 def gap(a, b, k=6):
     """Largest of the top-k absolute eigenvalue gaps, scaled by the largest
     eigenvalue. A ratio would be dominated by the near-null end, which carries no
@@ -127,6 +153,16 @@ def main() -> int:
     print("\n  Reading: on the odd sector the two constructors agree and the residual is")
     print("  the archimedean truncation; on the even one they do not agree at this m, and")
     print("  the gap does not respond to T. Whether it responds to m is not tested here.")
+
+    w_rel, d_rel = entrywise_controls(per["W"], sine["W"], per["N"], m)
+    print(f"\n  controls on the SAME quantity, deliberately mispaired:")
+    print(f"        wrong index set (odd-indexed sine modes) : {w_rel:.3f}")
+    print(f"        correct pairing conjugated by diag((-1)^k): {d_rel:.3f}")
+    ok_ctrl = w_rel > 0.1 and d_rel > 0.1
+    print(f"  {'ok  ' if ok_ctrl else 'FAIL'} both controls stay of order 1, so the small "
+          f"entrywise figure is an identification")
+    if not ok_ctrl:
+        FAILS.append("mispaired controls no longer separate from the correct pairing")
 
     ok = all(entry_track[i + 1] < entry_track[i] / 3 for i in range(len(entry_track) - 1))
     print(f"  {'ok  ' if ok else 'FAIL'} the ENTRYWISE odd-sector difference falls with T "
