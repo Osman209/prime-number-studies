@@ -7,15 +7,16 @@ produces and whose recipe is written out beside it — and the **derived $K(m)$ 
 §5**, which is one division away from `edge_precision.py`'s output, also written out.
 Four principal measurements and one follow-up correction are reported — the sector correspondence, the unseeded zero scan,
 the random-ensemble test of real-rootedness, and the $T$-scaling of the Galerkin
-exponent — each with its limits stated beside it, and four open questions are
-collected separately at the end.
+exponent — each with its limits stated beside it. Four questions were put to Groskin
+and §6 records them beside the answers received; three now carry his answer and the
+remaining open items are named there.
 
 **Novelty, stated plainly.** Nothing here is proved. Every section reports a
 measurement, and the one thing that would matter theoretically — whether these roots
 converge to the zeta zeros as $c \to \infty$ — is exactly the open question this
 framework was built around, and is untouched by anything below. Whether the odd-sector
-behaviour is already known is not something this report can settle either; it is asked
-in §6 rather than assumed. What is offered is a probe of a sector the published work
+behaviour is already known is not something this report could settle by itself; it was
+asked rather than assumed, and §6 records the answers received. What is offered is a probe of a sector the published work
 lists as unprobed, with its controls and its limits attached.
 
 **What is and is not claimed, in one paragraph.** The odd sector of the periodic
@@ -47,8 +48,15 @@ and it matters which is which.
 **Attribution.** The parity split of the sine modes, the exact parity decoupling,
 the edge expansion and the $(m-1)/(m+2)$ law are due to A. Groskin (issue #2 of
 `akivag613/connes-cvs-`). The answer that $L = u = \log c$ is structural for the
-CvS path is his. CvS Theorem 5.6, Theorem 6.1, eq. (11), eq. (21) and Appendix B.3
-are Connes and van Suijlekom's, arXiv:2511.23257.
+CvS path is his. So are, by correspondence of August 2026 and recorded in §4.1 and §6:
+the provenance of Table 14, the withdrawal of the §8.2 mechanism and the second defect
+found in rewriting it; the cosh/sinh sign structure that closes the odd-dictionary
+question; and the statement that the even-sector real-rootedness mechanism is a
+parity-specific Toeplitz positivity argument with no odd analogue in print. The
+constructive form of that sign structure is B. Andrade's,
+[10.5281/zenodo.20710075](https://doi.org/10.5281/zenodo.20710075). CvS Theorem 5.6,
+Theorem 6.1, eq. (11), eq. (21) and Appendix B.3 are Connes and van Suijlekom's,
+arXiv:2511.23257.
 
 ---
 
@@ -222,6 +230,28 @@ ordinate is $0.144$**, against $1.199\times10^{-35}$ for the worst of the ten in
 same run — the two figures must come from one cell, and these do. Thirty-four orders of
 magnitude separate them, so the agreement is not a generic feature of the tested random
 odd controls.
+
+**That $0.144$ is a single draw, and a single draw is the wrong form for this control.**
+It is reproducible only from the same generator consuming its stream in the same order,
+not from the seed alone. Groskin, reimplementing the protocol independently, ran the
+control over five draws and obtained closest approaches of
+$0.104,\ 0.182,\ 0.187,\ 1.074,\ 0.120$ (correspondence, August 2026); the value above
+sits inside that spread. **The claim the control supports is the separation and not the
+number.**
+
+**Independent reimplementation.** Beyond the controls above, the campaign has since been
+reproduced by Groskin against the tagged release **without running the scripts of
+`harness/`** — the protocol reimplemented from its description, so that the agreement is
+independent evidence rather than a re-execution of this code (correspondence, August
+2026). Every row of the constants table below reproduces in both sectors to the digits
+reported there; the ten-root and twenty-nine-root counts reproduce; and the worst of the
+ten at $c = 13$, $N = 100$, $T = 600$ comes out $1.19901\times10^{-35}$ against the
+$1.199\times10^{-35}$ reported here. Two anchors in that run are external to both of us:
+the $c = 13$, $N = 100$, $T = 400$ even sector returns
+$\lambda_{\min} = 2.0769626582\times10^{-59}$ and
+$\lvert\gamma_1\ \mathrm{err}\rvert = 1.45495\times10^{-55}$, reproducing the published
+Table 2 values to their printed precision; and the published $T = 800$ value at $c = 17$
+is $8047.4062$, which is what the $8047$ against $8052$ comparison below rests on.
 
 **Cross-check against the package's own root finder.** The reconstruction $F$ above is
 re-implemented here from the published formula, so an error in that re-implementation
@@ -483,8 +513,12 @@ vector of §2 satisfies none of them: the even sector is always lower, so it is 
 lowest eigenvector **of the odd sector**, and it is not in the kernel.
 
 To see whether that matters, random matrices were drawn from the **algebraic matrix
-class of CvS eq. (11)** — an ensemble respecting that algebraic structure, not
-matrices arising from the Weil form itself —
+class of CvS eq. (11)** — an ensemble respecting that algebraic structure, not matrices
+arising from the Weil form itself. **The sampling law, stated in full so that the
+observation can be read for exactly what it covers**: the free parameters
+$a_0,\dots,a_N$ and $b_1,\dots,b_N$ are drawn i.i.d. standard normal with
+`numpy.random.default_rng(7)`, and the remaining entries are fixed by the symmetry
+below. The class is
 
 $$q_{i,i} = a_i, \qquad q_{i,j} = \frac{b_i - b_j}{i-j}\ (j \ne i), \qquad
 a_{-i} = a_i, \quad b_{-i} = -b_i,$$
@@ -529,6 +563,13 @@ is arithmetic is precisely what is not known here.** The ensemble was not design
 to isolate any particular constraint, and a non-arithmetic constraint absent from it
 would produce the same contrast.
 
+**Recorded as a sampled-ensemble observation under the stated sampling law, not as a
+conjecture** — the conservative of the two forms Groskin offered. He confirms that the
+even-sector mechanism in CvS runs through a **Toeplitz positivity argument that is
+parity-specific**, and that he knows of no odd analogue in print (correspondence,
+August 2026), so the contrast above is not answered by anything published that either of
+us is aware of.
+
 ---
 
 ## 4. The $T$-scaling of the Galerkin exponent
@@ -570,11 +611,47 @@ fit uses six cutoffs measured on the common grid $\lbrace 40,60,80\rbrace $ (ref
 gives $s(c) \approx 54.5\log c - 127.6$). Only the $T$-ratio at a fixed $c$ and a fixed
 grid is used above.
 
-**No interpretation is offered here.** Whether this is the appropriate regime in which
-to test $s = \sigma_{\text{eff}}T/2\pi$ is not something this report can settle, and the
-relation is not claimed to be confirmed or refuted by these rows. Table 4 of the paper
-already reports a $0.14$ shift between $T = 400$ and $800$ at $c = 13$, so the
-insensitivity begins before this test.
+### 4.1 Which $T$ Table 14 belongs to, and what the measurement settles
+
+An earlier draft asked which $T$ the published Table 14 was computed at, because §8.2
+treats its slope $55$ as a $T = 800$ datum ($A = 55\cdot 2\pi/800 = 0.432$) while Table 8
+— the $c = 23$ $N$-sweep the measurement rests on — is labelled $T = 400$.
+
+**Groskin has resolved it** (correspondence, August 2026): Table 14's rows come from the
+per-cutoff $N$-convergence ladders at **$T = 400$, $\mathrm{dps} = 150$, on
+$N \in \lbrace 40,60,80\rbrace $**, and §8.2's $T = 800$ came from the sweep convention.
+That also explains why the $c = 23$ reproduction above is exact to every printed digit:
+**that table is its source.**
+
+**And on what the three-$T$ measurement settles.** He has since recomputed all nine cells
+independently, on the code released as `connes-cvs` 0.3.0, obtaining $46.14000$,
+$46.03143$, $45.93406$ against the values above — agreeing to $4.1\times10^{-3}$ at
+worst. **On that basis §8.2's mechanism is withdrawn**: in his words, the measurement
+*is* the §11 test executed, and it fails; the constant $A = 0.432$ has no meaning as
+derived. Proportionality in $T$ would have put $s(1600)$ near $184.6$ against a measured
+$45.93$.
+
+The withdrawal is his and is recorded here as his. What this report measured is narrower
+and is all it claims: that $s$ is nearly flat in $T$ at fixed $c$ on a fixed grid.
+Table 4 of the paper already reports a $0.14$ shift between $T = 400$ and $800$ at
+$c = 13$, so the insensitivity begins before this test.
+
+**A second defect surfaced in the same rewrite, and it is his finding, not this
+report's**: §8.2 reasoned as though the Galerkin method acted on $[0,T]$, when the form
+acts on $[0,L]$ with $L = \log c$ and $T$ bounds only the archimedean integral — so the
+substitution producing $A = 0.432$ was wrong in two ways rather than merely fed the wrong
+cutoff.
+
+Both corrections are public in the package's `ERRATA.md`, carried in the text of the
+revised manuscript, deposited as Zenodo Version 3.6 under the concept DOI
+[10.5281/zenodo.19546514](https://doi.org/10.5281/zenodo.19546514), and submitted to
+arXiv as a replacement for 2605.20224.
+
+**The comparison he specifies for a cross-cutoff slope**, which this report does not yet
+carry: $N \in \lbrace 40,60,80\rbrace $ at $T = 400$, $\mathrm{dps} = 150$, with $c = 17$
+and $c = 23$ — leaving $c = 13$ out, since it is already saturating on that grid, which
+is why its row carries $R^2 = 0.87$. `harness/sobolev_slope.py --stage1` runs exactly
+that grid.
 
 **Limits.** Two cutoffs. At $c = 13$ the grid $\lbrace 20,25,30\rbrace $ is not the published
 $\lbrace 40,60,80\rbrace $, so the value $s = 24.23$ is not comparable with the published
@@ -621,37 +698,66 @@ $200$ reachable; it was validated at $m = 40$, where both routes give $0.9285718
 
 ---
 
-## 6. Open questions
+## 6. Questions, and the answers received
 
-1. Does the finite Guinand–Weil dictionary, stated for real even Galerkin
-   coefficient vectors, extend to odd $v$, or is there a reason it should not?
-2. Is there a general theorem that an odd ground-state kernel vector in the CvS
-   class makes the polynomial of eq. (21) real-rooted? Appendix B.3 settles $N = 2$
-   by hand; experiment A finds no counterexample at $N = 3,4,5,6,8$ in 693 of 693
-   trials, while experiment B — the same ensemble with the vector taken from the odd
-   sector instead — holds in only about half. That contrast is what makes the
-   question look worth asking, but it is evidence and not a proof, and the statement
-   may already be known.
-3. **How should the §11 test be run?** §4 measures $s$ itself at a fixed $N$ grid
-   across $T$. §11 phrases its test as the slope of $s(c)$ against $\log c$, which needs
-   two cutoffs on ONE grid, and the cutoffs available here were measured on different
-   $N$-grids. Related: Table 14
-   does not state $T$ in its caption; §8.2 treats its slope $55$ as a $T = 800$
-   measurement, while its $c = 23$ entry $46.1$ is identical to the value derived from
-   the $T = 400$ Table 8. Which $T$ generated Table 14, and which pair of cutoffs would
-   be the right ones to put on a shared grid?
-4. Passing `L = math.log(13)` to `extract_zeros` yields a first-zero error of
-   $1.41\times10^{-17}$, whereas passing `L = mp.log(13)` yields
-   $1.4549524\times10^{-55}$; $\lambda_{\min}^{\text{even}} = 2.0769626582\times10^{-59}$
-   either way. Two facts
-   make this worth raising rather than filing as caller error: the quick-start example
-   itself passes `L = math.log(13)`, and casting that float to `mp.mpf` afterwards
-   cannot recover the digits already lost, so the $10^{-17}$ ceiling is the expected
-   outcome of following the example. Would passing `c` and computing `mp.log(c)`
-   internally be preferable, or accepting `str`/`mp.mpf` and refusing `float` above
-   `dps = 15`, or simply correcting the example? Separately, the
-   `build_galerkin_matrix` docstring gives the basis as $\exp(2\pi ikt/(2\log c))$,
-   while the implementation uses $2\pi k/L$ with $L = \log c$, matching Groskin §2.2.
+The four questions below were put to Groskin; three now carry his answer, recorded beside
+the question it replaced so that the exchange is legible rather than silently absorbed.
+
+**1. Does the finite Guinand–Weil dictionary, stated for real even Galerkin coefficient
+vectors, extend to odd $v$?**
+**Answered: no, and not as an editorial choice.** The even statement rides on a cosh-type
+pairing whose prime-power terms carry **one sign**; the odd analogue is a sinh-type
+pairing whose terms carry **mixed signs**, so an odd dictionary needs its own tail
+treatment rather than a transcription of the even one. He sees no obstruction of
+principle, but it is an open construction and not a corollary.
+
+That sign structure is worked out constructively in Andrade,
+[10.5281/zenodo.20710075](https://doi.org/10.5281/zenodo.20710075): the prime block is a
+Loewner divided-difference matrix, and the per-prime signs are fixed by the parity of the
+test vector through its Fourier symbol — real and positive for an even vector, so the
+terms add without cancellation; purely imaginary and sign-changing for an odd one, so
+they compete and positivity survives only as a sum. His measured transition sits near
+$q \sim \sqrt{c}$. **Nothing in this report claims the dictionary extends**, and §2 is
+unaffected: the scan does not use it.
+
+**2. Is there a general theorem that an odd ground-state kernel vector in the CvS class
+makes the polynomial of eq. (21) real-rooted?**
+**Answered: not one he knows of.** The even-sector mechanism runs through a Toeplitz
+positivity argument that is parity-specific, and he knows no odd analogue in print.
+Appendix B.3 settles $N = 2$ by hand; experiment A finds no counterexample at
+$N = 3,4,5,6,8$ in 693 of 693 trials, while experiment B — the same ensemble with the
+vector taken from the odd sector instead — holds in 686 of 1307. On his suggestion §3
+records that contrast as a sampled-ensemble observation with its sampling law stated,
+rather than as a conjecture.
+
+**3. Which $T$ does Table 14 belong to, and how should the §11 test be run?**
+**Answered, and now published**: $T = 400$, $\mathrm{dps} = 150$,
+$N \in \lbrace 40,60,80\rbrace $, with §8.2's $T = 800$ coming from the sweep convention.
+The correction is in `ERRATA.md` and in the revised manuscript, alongside the withdrawal
+of the §8.2 mechanism. Both are recorded in §4.1, together with the grid he specifies for
+a cross-cutoff slope.
+
+**4. The float $L$ in `extract_zeros`.**
+Passing `L = math.log(13)` yields a first-zero error of $1.41\times10^{-17}$, whereas
+`L = mp.log(13)` yields $1.4549524\times10^{-55}$, with
+$\lambda_{\min}^{\text{even}} = 2.0769626582\times10^{-59}$ either way. Two facts made
+this worth raising rather than filing as caller error: the quick-start example itself
+passes `L = math.log(13)`, and casting that float to `mp.mpf` afterwards cannot recover
+the digits already lost, so the $10^{-17}$ ceiling is the expected outcome of following
+the example.
+**Answered, and shipped in `connes-cvs` 0.3.0**: the function takes `c` and computes
+`L = mp.log(mp.mpf(c))` internally at the active precision; a float passed as `c` is
+refused and a float passed as `L` still works but warns, and the corrected quick-start
+ships with the same release. The same trap was reported independently at
+[issue #3](https://github.com/akivag613/connes-cvs-/issues/3) against the PyPI 0.2.2
+metadata. Separately, the `build_galerkin_matrix` docstring gives the basis as
+$\exp(2\pi ikt/(2\log c))$ while the implementation uses $2\pi k/L$ with $L = \log c$,
+matching Groskin §2.2.
+
+**What remains open.** Whether the odd-sector behaviour of §2 has an explanation inside
+the theory; whether the §3 contrast reflects arithmetic structure or some other
+constraint absent from the ensemble; and whether the flatness of §4 holds at cutoffs
+beyond 23 or on grids deeper than $N = 80$. None of these is settled here.
 
 ---
 
@@ -670,5 +776,5 @@ above $N \approx 40$, `python-flint`.
 | `reconstruction_controls.py` | §2.1, the four control vectors |
 | `convergence_sweep.py` | §2.2, the lag table |
 | `odd_vector_reality.py` | §3, experiments A and B and the B.3 validation |
-| `sobolev_slope.py` | §4, the $T$-scaling |
+| `sobolev_slope.py` | §4, the $T$-scaling; `--stage1` runs the cross-cutoff grid of §4.1 |
 | `edge_precision.py` | §5, the $(m-1)/(m+2)$ law itself; $K(m)$ is one division away, written out in §5 |
