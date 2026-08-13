@@ -189,6 +189,17 @@ regression tests must be re-baselined deliberately.
       and a factor 1e4 in depth, and it is NOT what makes the reconstruction
       work: the fixed-support family reaches the same zeros through a subspace
       the CvS ground state does not use.
+      A CANDIDATE MECHANISM FOR THE GAP, not established here.  Andrade
+      (10.5281/zenodo.20710075) shows the prime block is a Loewner matrix whose
+      per-prime signs are fixed by the PARITY of the test vector: an even vector
+      has a real positive Fourier symbol, so the prime terms all carry one sign
+      and add without cancellation, while an odd vector has a purely imaginary,
+      sign-changing symbol, so its terms compete and partly cancel (his
+      transition sits near q ~ sqrt c).  The imaginary/sign-changing half of that
+      follows from parity alone and so applies to every odd vector, not only to
+      his sinh.  Whether it accounts QUANTITATIVELY for the factor above is not
+      tested: his law is about the sign of each per-prime term, the numbers here
+      are reconstruction errors, and nothing yet connects the two.
 
     PRECISION, two traps, both measured rather than assumed:
       * dps must be raised together with T. At dps = 40, T = 800 degrades the

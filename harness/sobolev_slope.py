@@ -14,12 +14,16 @@ sigma_eff ~ A log c, i.e. s(c, T) proportional to T.  §11 states the test: repe
 the measurement at T = 1600; if the slope of s against log c doubles, the
 mechanism is supported; if it stays flat, it is not.
 
-AN AMBIGUITY THIS SCRIPT ALSO RESOLVES.  §8.2 treats the measured slope 55 as a
-T = 800 datum ("With T = 800 and the measured slope 55, this gives A = 0.432")
-and predicts ~28 at T = 400.  But Table 8, the c = 23 N-sweep the measurement
-rests on, is labelled T = 400.  Measuring the slope at BOTH T = 400 and T = 800
-settles which reading is right, and therefore whether the T = 1600 prediction is
-110 or 220.  This script sweeps T itself rather than assuming.
+AN AMBIGUITY THE AUTHOR HAS SINCE RESOLVED.  §8.2 treats the measured slope 55 as
+a T = 800 datum ("With T = 800 and the measured slope 55, this gives A = 0.432"),
+while Table 8 — the c = 23 N-sweep the measurement rests on — is labelled T = 400.
+Groskin has confirmed (correspondence, August 2026) that TABLE 14 IS T = 400,
+dps = 150, on N in {40, 60, 80}, and that §8.2's T = 800 came from the sweep
+convention; he is filing the caption as an erratum candidate.  So the T = 1600
+prediction to test against is ~220, not ~110.
+
+Stage 1 below is therefore a reproduction of his published slope on his own grid,
+not a disambiguation.  Stage 2 is the test.
 
 USAGE
     pip install connes-cvs python-flint
@@ -47,11 +51,12 @@ RESULTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sobolev_resu
 # N values are Groskin's pre-saturation regime; c and T are what we vary
 N_REGIME = (40, 60, 80)
 PILOT = [(13, n, 400, 80) for n in (20, 25, 30)] + [(13, n, 1600, 80) for n in (20, 25, 30)]
-# Stage 1 (~80 min) settles the T ambiguity on its own: Groskin's Table 14 gives
-# s(17) = 27.8 and s(23) = 46.1, a slope of 60.5 against log c.  If T = 400
-# reproduces that, Table 14 is a T = 400 measurement and the T = 1600 prediction
-# is ~220; if T = 400 gives roughly half, Table 14 is T = 800 and it is ~110.
-# Stage 2 is the actual test and costs about four times as much per cell.
+# THE GRID IS THE ONE GROSKIN SPECIFIED for a cross-cutoff slope: N in {40, 60, 80},
+# T = 400, dps = 150, c = 17 and c = 23.  c = 13 is deliberately EXCLUDED — it is
+# already saturating on that grid, which is why its row in his Table 14 carries
+# R^2 = 0.87.  Stage 1 should reproduce s(17) = 27.8 and s(23) = 46.1, a slope of
+# 60.5 against log c; Stage 2 repeats it at T = 1600, where the §8.2 mechanism
+# predicts ~220.  Stage 2 costs about four times as much per cell.
 STAGE1 = [(c, n, 400, 150) for c in (17, 23) for n in N_REGIME]
 STAGE2 = [(c, n, 1600, 250) for c in (17, 23) for n in N_REGIME]
 SWEEP = STAGE1 + STAGE2

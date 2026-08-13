@@ -53,7 +53,11 @@ differently:
     the ODD-sector near-null vector reconstructs the first three ordinates to
     8.70e-53, 6.67e-50, 4.28e-48 against the even sector's 1.45e-55, 2.69e-52,
     2.49e-50.  The endpoint condition costs about three decimal places; it is not
-    what makes the reconstruction work.
+    what makes the reconstruction work.  For a candidate mechanism behind the gap
+    -- even vectors give a real positive symbol whose prime terms add without
+    cancellation, odd vectors an imaginary sign-changing one whose terms compete
+    -- see conventions.py section 7 and Andrade, 10.5281/zenodo.20710075.  It is
+    a candidate: it is not shown to account for the size of the gap.
 
   * The near-null counts nevertheless agree in BOTH sectors (7/7 and 7/7 at
     N = 20; 5/5 and 5/5 at N = 12).
