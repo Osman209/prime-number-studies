@@ -26,7 +26,13 @@ abstract: >-
   shifted Li coefficients; the major-arc expansion of the circle
   method; Buchstab's function and the wheel sieve), documented negative
   results and controls, and runnable verification scripts for every
-  table and figure. No claim is made about the Riemann Hypothesis.
+  table and figure. A sixth paper probes the odd parity sector of the
+  Connes-van Suijlekom Galerkin construction, reporting an exact
+  finite identification on that sector, an unseeded reconstruction of
+  the first ten zeta ordinates at four prime cutoffs, and a
+  measurement of the Galerkin exponent against the archimedean cutoff
+  that led the author of that construction to withdraw one of its
+  stated mechanisms. No claim is made about the Riemann Hypothesis.
 keywords:
   - number theory
   - prime numbers
@@ -45,9 +51,13 @@ keywords:
   - wheel sieve
   - Redheffer matrix
   - Dirichlet divisor problem
+  - Connes-van Suijlekom
+  - Galerkin approximation
+  - parity sectors
+  - independent verification
 license: CC-BY-4.0
-version: 1.12.0
-date-released: '2026-08-03'
+version: 1.13.0
+date-released: '2026-08-13'
 
 preferred-citation:
   type: report

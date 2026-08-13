@@ -53,10 +53,10 @@ What the repository *does* offer:
 ## Contents
 
 ```
-papers/     five self-contained papers, plus four short structural notes (Markdown)
+papers/     six self-contained papers, plus four short structural notes (Markdown)
 figures/    the papers' figures, and two more drawn for the division-table paper
 code/       verification scripts for every table and number, plus the figure generators
-harness/    the fixed-support builder, the zero-side validator, and a regression
+harness/    the fixed-support builder, the zero-side validator, the CvS comparison
             harness reporting inertia across an m-ladder with JSON metadata
 docs/       the GitHub Pages site: one page and one PDF per paper
 ```
@@ -201,6 +201,41 @@ exactly where predicted, are swamped by the background by seven orders of magnit
 *Its usable consequence: a numerical search that finds the first `m` coefficients positive
 has established nothing unless it states its shift.*
 
+### `papers/odd_parity_sector.md`
+A probe of the **odd parity sector** of the Connes–van Suijlekom Galerkin construction
+(A. Groskin, `connes-cvs`; arXiv:2605.20224), which §10 of that paper lists as unprobed:
+*we compute the even sector only; the odd-sector zero, if any, is not probed*.
+
+The odd sector of the periodic construction is shown to coincide **exactly, at finite
+size**, with a specific finite sine space — an identification that holds there and not on
+the even sector, where only asymptotic completeness is available. On that sector, at
+`c = 13, 17, 19, 23`, the eigenvector belonging to the smallest eigenvalue yields a
+function whose **unseeded** sign-change scan returns the first ten zeta ordinates in
+order, none missing and no additional sign-changing root detected. At `c = 13` the scan
+extends to height 100 and returns exactly the twenty-nine ordinates below it. The scan
+builds its function from the eigenvector coefficients alone, refines by bisection, writes
+the root list to disk, and only then calls `mp.zetazero` to compare — no ordinate enters
+the discovery. A random odd vector in the same basis, put through the identical scan,
+comes no closer to any ordinate than order `1e-1`.
+
+Two further measurements. The first-zero error tracks the smallest eigenvalue through
+`C = |γ̂₁ − γ₁| / λ_min`, which grows with `c` in both parity sectors while the ratio
+between them moves only a few percent. And the Galerkin exponent is nearly insensitive to
+the archimedean cutoff: `46.14, 46.03, 45.93` at `T = 400, 800, 1600` on the published
+grid, where the source paper's §8.2 mechanism predicted proportionality and would have
+put the last value near `184.6`.
+
+**On the basis of that measurement the author of the construction has withdrawn the §8.2
+mechanism and corrected the provenance of Table 14**, both recorded in that package's
+`ERRATA.md` and in its revised manuscript; and the odd-sector limitation of its §10 is
+being revised to say it has been closed. The `extract_zeros` precision trap reported here
+is fixed in `connes-cvs` 0.3.0.
+
+*Everything in it is numerical, at four cutoffs, on the first ten ordinates below height
+50 — twenty-nine below 100 at `c = 13` only. It says nothing about whether these roots
+converge to the zeta zeros as `c → ∞`, which is the open question the construction exists
+to raise, and nothing about RH.*
+
 ### `harness/`
 `conventions.py` is the single source of truth for the support, basis, block definitions,
 tolerance and reporting requirements. `builder_sine.py` assembles the truncated Weil form
@@ -210,6 +245,15 @@ of the construction — reporting residuals against explicit tail bounds rather 
 asserting agreement. `run_ladder.py` sweeps the `m`-ladder, prints the full inertia triple
 with its stated tolerance, writes raw arrays and JSON metadata, and exits nonzero on
 regression failure.
+
+`compare_families.py` sets the periodic and sine constructions against each other sector
+by sector, with two deliberately mispaired controls so that a small agreement figure is
+evidence rather than arithmetic. `odd_sector_unseeded_scan.py`,
+`odd_sector_scan_height100.py`, `cross_check_extract_zeros.py`,
+`reconstruction_controls.py`, `odd_vector_reality.py`, `odd_sector_zeros.py`,
+`convergence_sweep.py` and `sobolev_slope.py` are the odd-parity-sector campaign; each
+carries a failure gate on the claim it supports and exits nonzero when that claim does
+not hold.
 
 Built to a specification supplied by A. Groskin so that a second constructor can be run
 against the same harness.
@@ -328,7 +372,7 @@ rather than any assurance about the tool, is what the reader is asked to rely on
 
 ## Status
 
-Five papers and four notes are here.
+Six papers and four notes are here.
 
 The newest paper, `a_numerical_study_of_the_division_table.md`, is the odd one out and the
 natural entry point: it is expository, it claims nothing new anywhere, and its ledger
@@ -353,6 +397,14 @@ is not a shorter proof. The third goes one step further along, on a structure th
 like it might be an exception and was not. The fourth turns the same instrument around and
 asks when it is blind, which is the one question of the four whose answer is usable. That is by now the
 pattern the repository is really a record of.
+
+The sixth paper, `papers/odd_parity_sector.md`, is the only one here that is not about the
+division table. It probes a sector of someone else's construction that his own paper listed
+as unprobed, and it is the one item in this repository whose measurements have changed a
+published document: a mechanism withdrawn, a table provenance corrected, a stated
+limitation closed, and a precision trap fixed in the package. It is also the clearest
+example of the pattern above — nothing in it is new mathematics, and what it contributes is
+that the numbers were taken carefully enough to be worth acting on.
 
 Corrections, counterexamples and pointers to prior art are all welcome; open an issue.
 Being told that something here is already known is a useful outcome, not an unwelcome one.
