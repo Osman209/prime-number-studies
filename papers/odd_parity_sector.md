@@ -7,16 +7,15 @@ produces and whose recipe is written out beside it — and the **derived $K(m)$ 
 §5**, which is one division away from `edge_precision.py`'s output, also written out.
 Four principal measurements and one follow-up correction are reported — the sector correspondence, the unseeded zero scan,
 the random-ensemble test of real-rootedness, and the $T$-scaling of the Galerkin
-exponent — each with its limits stated beside it. Four questions were put to Groskin
-and §6 records them beside the answers received; three now carry his answer and the
-remaining open items are named there.
+exponent — each with its limits stated beside it. §6 records what the exchange with
+Groskin settled, and §7 states what remains open.
 
 **Novelty, stated plainly.** Nothing here is proved. Every section reports a
 measurement, and the one thing that would matter theoretically — whether these roots
 converge to the zeta zeros as $c \to \infty$ — is exactly the open question this
 framework was built around, and is untouched by anything below. Whether the odd-sector
 behaviour is already known is not something this report could settle by itself; it was
-asked rather than assumed, and §6 records the answers received. What is offered is a probe of a sector the published work
+asked rather than assumed, and §6 records what came back. What is offered is a probe of a sector the published work
 lists as unprobed, with its controls and its limits attached.
 
 **What is and is not claimed, in one paragraph.** The odd sector of the periodic
@@ -52,8 +51,9 @@ CvS path is his. So are, by correspondence of August 2026 and recorded in §4.1 
 the provenance of Table 14, the withdrawal of the §8.2 mechanism and the second defect
 found in rewriting it; the cosh/sinh sign structure that closes the odd-dictionary
 question; and the statement that the even-sector real-rootedness mechanism is a
-parity-specific Toeplitz positivity argument with no odd analogue in print. The
-constructive form of that sign structure is B. Andrade's,
+parity-specific Toeplitz positivity argument with no odd analogue in print — all recorded
+in §6, with the sign structure carried in §3. The constructive form of that structure is
+B. Andrade's,
 [10.5281/zenodo.20710075](https://doi.org/10.5281/zenodo.20710075). CvS Theorem 5.6,
 Theorem 6.1, eq. (11), eq. (21) and Appendix B.3 are Connes and van Suijlekom's,
 arXiv:2511.23257.
@@ -570,6 +570,20 @@ parity-specific**, and that he knows of no odd analogue in print (correspondence
 August 2026), so the contrast above is not answered by anything published that either of
 us is aware of.
 
+**A mechanism that bears on the parity asymmetry, though not on this experiment.** The
+same correspondence points at Andrade,
+[10.5281/zenodo.20710075](https://doi.org/10.5281/zenodo.20710075), where the prime block
+is written as a Loewner divided-difference matrix and the sign of each prime-power term
+is fixed by the parity of the test vector through its Fourier symbol: real and positive
+for an even vector, so the terms add without cancellation, and purely imaginary and
+sign-changing for an odd one, so they compete and positivity survives only as a sum, with
+the measured transition near $q \sim \sqrt{c}$. The imaginary and sign-changing half of
+that follows from parity alone and therefore covers **any** real odd vector, not only the
+$\sinh$ he works with. **It is a candidate account of why the two sectors behave
+differently and it is not tested here**: his statement is about the sign of each
+per-prime term, the quantities measured above are root counts and reconstruction errors,
+and nothing yet connects the two.
+
 ---
 
 ## 4. The $T$-scaling of the Galerkin exponent
@@ -698,70 +712,58 @@ $200$ reachable; it was validated at $m = 40$, where both routes give $0.9285718
 
 ---
 
-## 6. Questions, and the answers received
+## 6. What the exchange settled
 
-The four questions below were put to Groskin; three now carry his answer, recorded beside
-the question it replaced so that the exchange is legible rather than silently absorbed.
+Four questions were put to Groskin. Three are now closed; the record is kept short here
+because in each case the substance lives where it belongs in the report.
 
-**1. Does the finite Guinand–Weil dictionary, stated for real even Galerkin coefficient
-vectors, extend to odd $v$?**
-**Answered: no, and not as an editorial choice.** The even statement rides on a cosh-type
-pairing whose prime-power terms carry **one sign**; the odd analogue is a sinh-type
-pairing whose terms carry **mixed signs**, so an odd dictionary needs its own tail
-treatment rather than a transcription of the even one. He sees no obstruction of
-principle, but it is an open construction and not a corollary.
+| question | outcome |
+|---|---|
+| Does the finite Guinand–Weil dictionary extend to odd $v$? | **No, and not as an editorial choice.** The even statement rides on a cosh-type pairing whose prime-power terms carry one sign; the odd analogue is sinh-type with mixed signs and needs its own tail treatment. No obstruction of principle, but an open construction rather than a corollary. The constructive form of that sign structure is Andrade's — see §3. **Nothing here claims the dictionary extends, and §2 does not use it.** |
+| A general real-rootedness theorem for an odd ground-state kernel vector? | **Not one he knows of.** The even-sector mechanism runs through a parity-specific Toeplitz positivity argument, with no odd analogue in print. §3 therefore records the ensemble contrast as a sampled-ensemble observation with its sampling law stated, not as a conjecture. |
+| Which $T$ does Table 14 belong to, and how should the §11 test be run? | **Answered and published** — $T = 400$, $\mathrm{dps} = 150$, $N \in \lbrace 40,60,80\rbrace $. The measurement of §4 is the §11 test executed; on its basis the §8.2 mechanism is withdrawn and a second defect in that section corrected. Both are in `ERRATA.md` and the revised manuscript. See §4.1. |
+| The float $L$ in `extract_zeros`. | **Fixed and shipped in `connes-cvs` 0.3.0**: the function takes `c` and computes `L` internally at the active precision; a float `c` is refused, a float `L` warns, and the quick-start is corrected. Reported independently at [issue #3](https://github.com/akivag613/connes-cvs-/issues/3). |
 
-That sign structure is worked out constructively in Andrade,
-[10.5281/zenodo.20710075](https://doi.org/10.5281/zenodo.20710075): the prime block is a
-Loewner divided-difference matrix, and the per-prime signs are fixed by the parity of the
-test vector through its Fourier symbol — real and positive for an even vector, so the
-terms add without cancellation; purely imaginary and sign-changing for an odd one, so
-they compete and positivity survives only as a sum. His measured transition sits near
-$q \sim \sqrt{c}$. **Nothing in this report claims the dictionary extends**, and §2 is
-unaffected: the scan does not use it.
-
-**2. Is there a general theorem that an odd ground-state kernel vector in the CvS class
-makes the polynomial of eq. (21) real-rooted?**
-**Answered: not one he knows of.** The even-sector mechanism runs through a Toeplitz
-positivity argument that is parity-specific, and he knows no odd analogue in print.
-Appendix B.3 settles $N = 2$ by hand; experiment A finds no counterexample at
-$N = 3,4,5,6,8$ in 693 of 693 trials, while experiment B — the same ensemble with the
-vector taken from the odd sector instead — holds in 686 of 1307. On his suggestion §3
-records that contrast as a sampled-ensemble observation with its sampling law stated,
-rather than as a conjecture.
-
-**3. Which $T$ does Table 14 belong to, and how should the §11 test be run?**
-**Answered, and now published**: $T = 400$, $\mathrm{dps} = 150$,
-$N \in \lbrace 40,60,80\rbrace $, with §8.2's $T = 800$ coming from the sweep convention.
-The correction is in `ERRATA.md` and in the revised manuscript, alongside the withdrawal
-of the §8.2 mechanism. Both are recorded in §4.1, together with the grid he specifies for
-a cross-cutoff slope.
-
-**4. The float $L$ in `extract_zeros`.**
-Passing `L = math.log(13)` yields a first-zero error of $1.41\times10^{-17}$, whereas
-`L = mp.log(13)` yields $1.4549524\times10^{-55}$, with
-$\lambda_{\min}^{\text{even}} = 2.0769626582\times10^{-59}$ either way. Two facts made
-this worth raising rather than filing as caller error: the quick-start example itself
-passes `L = math.log(13)`, and casting that float to `mp.mpf` afterwards cannot recover
-the digits already lost, so the $10^{-17}$ ceiling is the expected outcome of following
-the example.
-**Answered, and shipped in `connes-cvs` 0.3.0**: the function takes `c` and computes
-`L = mp.log(mp.mpf(c))` internally at the active precision; a float passed as `c` is
-refused and a float passed as `L` still works but warns, and the corrected quick-start
-ships with the same release. The same trap was reported independently at
-[issue #3](https://github.com/akivag613/connes-cvs-/issues/3) against the PyPI 0.2.2
-metadata. Separately, the `build_galerkin_matrix` docstring gives the basis as
-$\exp(2\pi ikt/(2\log c))$ while the implementation uses $2\pi k/L$ with $L = \log c$,
-matching Groskin §2.2.
-
-**What remains open.** Whether the odd-sector behaviour of §2 has an explanation inside
-the theory; whether the §3 contrast reflects arithmetic structure or some other
-constraint absent from the ensemble; and whether the flatness of §4 holds at cutoffs
-beyond 23 or on grids deeper than $N = 80$. None of these is settled here.
+For the record, since it is the reason the fourth item was raised at all rather than
+filed as caller error: passing `L = math.log(13)` yields a first-zero error of
+$1.41\times10^{-17}$ where `L = mp.log(13)` yields $1.4549524\times10^{-55}$, with
+$\lambda_{\min}^{\text{even}} = 2.0769626582\times10^{-59}$ either way — and the
+quick-start example itself passed the float, so the $10^{-17}$ ceiling was the expected
+outcome of following the documentation. Separately, the `build_galerkin_matrix` docstring
+gives the basis as $\exp(2\pi ikt/(2\log c))$ while the implementation uses $2\pi k/L$
+with $L = \log c$, matching Groskin §2.2.
 
 ---
 
-## 7. Reproducing
+## 7. What remains open
+
+**Whether the odd-sector reconstruction has an explanation inside the theory.** §2 reports
+that the scan finds the ordinates and nothing else, at four cutoffs and to height 100 at
+the smallest. Why a sector the dictionary does not cover should reconstruct at all is not
+addressed here, and the two answers above make it less likely that it is already known: the
+dictionary does not extend, and there is no odd analogue of the positivity mechanism in
+print.
+
+**Whether the §3 contrast reflects arithmetic structure.** The sampled ensemble breaks
+real-rootedness in about half of configuration B and in none of configuration A. The CvS
+matrices carry some structure the ensemble does not — but the ensemble was not designed to
+isolate any particular constraint, and a non-arithmetic constraint absent from it would
+produce the same contrast. The parity mechanism noted in §3 is a candidate account of the
+asymmetry and is untested against these numbers.
+
+**Whether the flatness of §4 persists.** The exponent is nearly insensitive to $T$ at two
+cutoffs on two grids, and that measurement has already cost one mechanism. What it does not
+establish is the behaviour at cutoffs beyond 23, on grids deeper than $N = 80$, or under a
+reparameterisation of the mechanism that was not considered. The cross-cutoff slope on the
+grid specified in §4.1 has not yet been run.
+
+**And the standing one, which none of this touches.** Whether the CvS roots converge to the
+zeta zeros as $c \to \infty$ is the question the construction exists to raise, and nothing
+in this report bears on it, or on RH.
+
+---
+
+## 8. Reproducing
 
 All scripts in `harness/`. They require `pip install connes-cvs` and, for anything
 above $N \approx 40$, `python-flint`.
