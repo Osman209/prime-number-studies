@@ -780,3 +780,10 @@ above $N \approx 40$, `python-flint`.
 | `odd_vector_reality.py` | §3, experiments A and B and the B.3 validation |
 | `sobolev_slope.py` | §4, the $T$-scaling; `--stage1` runs the cross-cutoff grid of §4.1 |
 | `edge_precision.py` | §5, the $(m-1)/(m+2)$ law itself; $K(m)$ is one division away, written out in §5 |
+
+## AI assistance
+
+The verification scripts and much of the prose in this paper were written with the
+assistance of Claude (Anthropic); the research direction, the decisions about what
+to publish, and responsibility for every claim are the author's. See the repository
+README for a fuller statement.
