@@ -32,7 +32,12 @@ abstract: >-
   the first ten zeta ordinates at four prime cutoffs, and a
   measurement of the Galerkin exponent against the archimedean cutoff
   that led the author of that construction to withdraw one of its
-  stated mechanisms. No claim is made about the Riemann Hypothesis.
+  stated mechanisms.  That paper also scans every near-null branch of
+  both parity blocks at one cutoff, finding the count of unmatched
+  roots non-decreasing in the eigenvalue modulus across twelve
+  cell-sector combinations with no separate sign effect detected, and
+  reports a parity-count pattern together with the cell that breaks
+  it. No claim is made about the Riemann Hypothesis.
 keywords:
   - number theory
   - prime numbers
@@ -56,8 +61,8 @@ keywords:
   - parity sectors
   - independent verification
 license: CC-BY-4.0
-version: 1.13.0
-date-released: '2026-08-13'
+version: 1.14.0
+date-released: '2026-08-14'
 
 preferred-citation:
   type: report

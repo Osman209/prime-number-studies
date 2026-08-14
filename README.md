@@ -158,8 +158,18 @@ the archimedean cutoff: `46.14, 46.03, 45.93` at `T = 400, 800, 1600` on the pub
 grid, where the source paper's §8.2 mechanism predicted proportionality and would have
 put the last value near `184.6`.
 
+A later section extends the same scan from the ground state to **every near-null branch of
+both parity blocks** at `c = 100`. Across twelve cell–sector combinations the number of
+roots a branch produces beyond the thirteen ordinates is non-decreasing in `|λ|`, with the
+sign of the eigenvalue interleaved throughout and no separate sign effect detected — in one
+cell the count steps by one through four alternating sign changes. The negative
+eigenvalues of those blocks, which are a finite-cutoff artifact, are counted against the
+archimedean cutoff and do not reach zero at the cutoffs tested; a parity-count pattern that
+held in five successive cells is reported together with the sixth cell that breaks it.
+
 The source paper's §8.2 mechanism has since been withdrawn and the provenance of its
-Table 14 corrected; both are recorded in that package's `ERRATA.md`. The `extract_zeros`
+Table 14 corrected; both are recorded in that package's `ERRATA.md`, along with a later
+correction to the cutoff at which the negative block is said to vanish. The `extract_zeros`
 precision trap noted here is fixed in `connes-cvs` 0.3.0.
 
 *Everything in it is numerical, at four cutoffs, on the first ten ordinates below height
@@ -251,7 +261,12 @@ evidence rather than arithmetic. `odd_sector_unseeded_scan.py`,
 `reconstruction_controls.py`, `odd_vector_reality.py`, `odd_sector_zeros.py`,
 `convergence_sweep.py` and `sobolev_slope.py` are the odd-parity-sector campaign; each
 carries a failure gate on the claim it supports and exits nonzero when that claim does
-not hold.
+not hold. `negative_branch.py` scans every near-null branch of either parity block —
+`--sector even|odd` reuses one matrix, and the matrix, the eigendecomposition and the scan
+are cached separately so a control is a rescan rather than a rebuild — and
+`root_precision_probe.py` recomputes a root at several working precisions and compares the
+roots to each other rather than to zeta, which is what makes a displacement figure a
+measurement rather than a guess.
 
 Built to a specification supplied by A. Groskin so that a second constructor can be run
 against the same harness.
@@ -309,6 +324,8 @@ python reconstruction_controls.py      # the four control vectors
 python convergence_sweep.py            # the lag table between the sectors
 python odd_vector_reality.py           # the real-rootedness ensemble, experiments A and B
 python sobolev_slope.py --stage1       # the T-scaling grid
+python negative_branch.py --c 100 --N 100 --T 400 --dps 500 --sector even   # section 6
+python negative_branch.py --c 100 --N 100 --T 400 --dps 500 --sector odd    # same matrix
 python edge_precision.py --m 20 40     # the edge limit in extended precision
 cd ..
 ```
