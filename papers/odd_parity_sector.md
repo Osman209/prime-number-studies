@@ -7,15 +7,16 @@ produces and whose recipe is written out beside it — and the **derived $K(m)$ 
 §5**, which is one division away from `edge_precision.py`'s output, also written out.
 Four principal measurements and one follow-up correction are reported — the sector correspondence, the unseeded zero scan,
 the random-ensemble test of real-rootedness, and the $T$-scaling of the Galerkin
-exponent — each with its limits stated beside it. §6 records what the exchange with
-Groskin settled, and §7 states what remains open.
+exponent, and the near-null branches of both sectors at $c = 100$ — each with its limits
+stated beside it. §7 records what the exchange with Groskin settled, and §8 states what
+remains open.
 
 **Novelty, stated plainly.** Nothing here is proved. Every section reports a
 measurement, and the one thing that would matter theoretically — whether these roots
 converge to the zeta zeros as $c \to \infty$ — is exactly the open question this
 framework was built around, and is untouched by anything below. Whether the odd-sector
 behaviour is already known is not something this report could settle by itself; it was
-asked rather than assumed, and §6 records what came back. What is offered is a probe of a sector the published work
+asked rather than assumed, and §7 records what came back. What is offered is a probe of a sector the published work
 lists as unprobed, with its controls and its limits attached.
 
 **What is and is not claimed, in one paragraph.** The odd sector of the periodic
@@ -47,12 +48,12 @@ and it matters which is which.
 **Attribution.** The parity split of the sine modes, the exact parity decoupling,
 the edge expansion and the $(m-1)/(m+2)$ law are due to A. Groskin (issue #2 of
 `akivag613/connes-cvs-`). The answer that $L = u = \log c$ is structural for the
-CvS path is his. So are, by correspondence of August 2026 and recorded in §4.1 and §6:
+CvS path is his. So are, by correspondence of August 2026 and recorded in §4.1 and §7:
 the provenance of Table 14, the withdrawal of the §8.2 mechanism and the second defect
 found in rewriting it; the cosh/sinh sign structure that closes the odd-dictionary
 question; and the statement that the even-sector real-rootedness mechanism is a
 parity-specific Toeplitz positivity argument with no odd analogue in print — all recorded
-in §6, with the sign structure carried in §3. The constructive form of that structure is
+in §7, with the sign structure carried in §3. The constructive form of that structure is
 B. Andrade's,
 [10.5281/zenodo.20710075](https://doi.org/10.5281/zenodo.20710075). CvS Theorem 5.6,
 Theorem 6.1, eq. (11), eq. (21) and Appendix B.3 are Connes and van Suijlekom's,
@@ -712,7 +713,127 @@ $200$ reachable; it was validated at $m = 40$, where both routes give $0.9285718
 
 ---
 
-## 6. What the exchange settled
+## 6. The near-null branches at $c = 100$, in both sectors
+
+Sections 2 and 3 use the eigenvector belonging to the smallest eigenvalue. The controls of
+§2.1 already showed that the whole near-null subspace carries the ordinates and not only
+that one vector, with the accuracy graded by $\lambda$. This section takes that seriously
+and scans **every** branch near zero, in both parity sectors, at $c = 100$.
+
+The protocol is the one of §2 unchanged: build $F$ from the eigenvector coefficients alone,
+sweep for sign changes, refine by bisection, freeze the root list, and only then call
+`mp.zetazero`. Two quantities are reported per branch — how many of the thirteen ordinates
+below height 60 are matched, and **how many roots are left over**. The second is the one
+that separates the branches; each ordinate takes its closest root and no other, so two
+roots near one zero cannot both count as matched.
+
+### 6.1 The ordering, and the sign
+
+Sort the branches of a cell by $\lvert\lambda\rvert$, ignoring the sign, and read off the
+number of unmatched roots.
+
+**Across twelve cell–sector combinations the sequence is non-decreasing, with no inversion
+anywhere.** Every branch matches all thirteen ordinates; the random control matches none,
+in every cell.
+
+The sign is interleaved throughout rather than segregated. Three cells make that plain:
+
+| cell | signs by $\lvert\lambda\rvert$ | unmatched roots |
+|---|---|---|
+| even, $N = 150$, $T = 400$ | $-\ +\ +\ +\ -$ | 0, 1, 2, 3, 4 |
+| odd, $N = 150$, $T = 400$ | $+\ -\ +\ -\ +$ | 0, 1, 2, 3, 4 |
+| even, $N = 100$, $T = 1200$ | $+\ +\ -\ +\ -$ | 0, 1, 3, 3, 13 |
+
+The second runs through **four alternating sign changes with the count stepping by one at
+each**. If the sign carried information separate from the magnitude it would show there.
+
+**Stated as narrowly as the evidence allows**: within a fixed cell and sector, among the
+branches scanned, the number of unmatched roots was non-decreasing in
+$\lvert\lambda\rvert$, and **no separate sign effect was detected**. That is not a
+demonstration of independence from the sign, and no quantitative law is claimed across
+cells.
+
+Supporting checks, in every cell: $Q$ is exactly symmetric and its parity coupling
+$\lVert P_{\mathrm{even}} Q P_{\mathrm{odd}}\rVert_F$ is exactly zero, so the split is
+exact rather than imposed; $\lVert Qv - \lambda v\rVert$ lies between
+$1.5\times10^{-500}$ and $8.4\times10^{-500}$ on the **lifted** vectors; and the sweep
+step was refined by a factor of four at four cells without changing a single count.
+
+### 6.2 The negative block against the archimedean cutoff
+
+The negative eigenvalues of these blocks are the finite-cutoff artifact discussed in
+Groskin's errata. Counted at $c = 100$, $\mathrm{dps} = 500$:
+
+| $N$ | $T = 400$ | $T = 800$ | $T = 1200$ |
+|---|---|---|---|
+| 100 | 5 | 3 | 2 |
+| 150 | 11 | 5 | — |
+| 200 | 18 | — | — |
+
+The even and odd sectors give the same count in every cell of the first two columns; the
+$T = 1200$ column is the exception and is treated in §6.3.
+
+**The block declines with $T$ and does not reach zero in these cells.** Groskin has since
+confirmed this independently and corrected the errata sentence that had put it at zero by
+$T = 1200$ (correspondence and `ERRATA.md`, 2026-08-14): the ladder behind that sentence
+was a single $N = 100$, $\mathrm{dps} = 150$ run, and at $\mathrm{dps} = 500$ the count at
+$T = 1200$ is 2, 3 and 4 at $N = 100$, 150 and 200 — rising with $N$, not falling.
+
+**The block rearranges rather than shrinking.** At $N = 100$, the even negatives at
+$\log_{10}\lvert\lambda\rvert$:
+
+| $T$ | negative log-magnitudes |
+|---|---|
+| 400 | $-23.31, -56.33, -71.60, -114.15, -150.91$ |
+| 800 | $-63.07, -95.40, -162.44$ |
+| 1200 | $-115.81, -174.10$ |
+
+No value persists from one cutoff to the next. At the level of the observed envelope — not
+as a statement tracking individual branches, which do not survive — the large-magnitude
+edge retreats by 39.8 and then 52.7 decades while the smallest-magnitude edge retreats by
+11.5 and 11.7. So the block thins and moves toward zero unevenly, the large-magnitude edge
+receding far faster than the near-zero one.
+
+**Two limits on all of this.** The counts are not monotone in $T$ at fixed working
+precision: Groskin reports a $\mathrm{dps} = 150$ ladder running 4, 3, then **13** at
+$T = 1600$, with the smallest positive collapsing from $10^{-150}$ to $10^{-71}$ — past
+some $T$ the arithmetic stops resolving the deep spectrum, so **a $T$-ladder is not
+readable without the precision floor it was computed at.** The table above is at
+$\mathrm{dps} = 500$ and was not extended to $T = 1600$. And **none of it bears on the
+cutoff-free problem**: that the cutoff-free even sectors are non-negative at
+$N = 100, 150, 200$ is Groskin's result, certified by Arb interval LDLT factorizations
+with every pivot strictly signed, and it rests on those certificates rather than on any
+finite-$T$ ladder.
+
+### 6.3 A negative result: the parity counts are not a conserved quantity
+
+The two sectors returned **the same number of negative eigenvalues in five successive
+cells** — 5, 11 and 18 at $T = 400$ for $N = 100, 150, 200$, and 3 and 5 at $T = 800$ for
+$N = 100, 150$ — with spectra sharing no scale, the even negatives at $N = 200$ running
+from $-2.04\times10^{-11}$ to $-4.45\times10^{-263}$ and the odd from
+$-1.11\times10^{-14}$ to $-6.82\times10^{-274}$. The two $T = 800$ rows were predicted
+from the $T = 400$ pattern before they were run.
+
+Two ordinary explanations were tested and failed. The negatives are not simply whatever has
+sunk below a common floor — in every cell they sit **above** the smallest positive in
+modulus, and at even $N = 150$, $T = 400$ ten of the eleven are larger in modulus than the
+smallest positive. Nor is the count a fixed fraction of the block dimension: the even block
+has $N+1$ rows and the odd block $N$, so the ratios differ (0.0297 against 0.0300, 0.0495
+against 0.0500, and so on) while the integer counts were exactly equal five times.
+
+**At $N = 100$, $T = 1200$ the equality breaks: two in the even block against one in the
+odd.** So the agreement is not a count invariant. Groskin's reading, which is the one
+adopted here: if the counts are truncation-determined then five exact agreements were the
+same mechanism acting similarly in both sectors rather than a conserved quantity, and it
+had to break somewhere.
+
+This is recorded as a **failed pattern**, not a bounded one. Two sequences descending
+through the same small integers agree more readily than "exact agreement in five cells"
+suggests, and once they are known to separate, the earlier agreements carry little weight.
+The measurement that survives this section is the ordering of §6.1, which has not failed a
+cell.
+
+## 7. What the exchange settled
 
 Four questions were put to Groskin. Three are now closed; the record is kept short here
 because in each case the substance lives where it belongs in the report.
@@ -735,7 +856,7 @@ with $L = \log c$, matching Groskin §2.2.
 
 ---
 
-## 7. What remains open
+## 8. What remains open
 
 **Whether the odd-sector reconstruction has an explanation inside the theory.** §2 reports
 that the scan finds the ordinates and nothing else, at four cutoffs and to height 100 at
@@ -751,6 +872,11 @@ isolate any particular constraint, and a non-arithmetic constraint absent from i
 produce the same contrast. The parity mechanism noted in §3 is a candidate account of the
 asymmetry and is untested against these numbers.
 
+**Whether the ordering of §6.1 has an account.** Twelve cell–sector combinations, no
+inversion, and no separate sign effect detected — but nothing here explains why the number
+of unmatched roots should be ordered by $\lvert\lambda\rvert$ at all, and the branches
+carrying those roots are finite-cutoff objects.
+
 **Whether the flatness of §4 persists.** The exponent is nearly insensitive to $T$ at two
 cutoffs on two grids, and that measurement has already cost one mechanism. What it does not
 establish is the behaviour at cutoffs beyond 23, on grids deeper than $N = 80$, or under a
@@ -763,7 +889,7 @@ in this report bears on it, or on RH.
 
 ---
 
-## 8. Reproducing
+## 9. Reproducing
 
 All scripts in `harness/`. They require `pip install connes-cvs` and, for anything
 above $N \approx 40$, `python-flint`.
@@ -780,6 +906,10 @@ above $N \approx 40$, `python-flint`.
 | `odd_vector_reality.py` | §3, experiments A and B and the B.3 validation |
 | `sobolev_slope.py` | §4, the $T$-scaling; `--stage1` runs the cross-cutoff grid of §4.1 |
 | `edge_precision.py` | §5, the $(m-1)/(m+2)$ law itself; $K(m)$ is one division away, written out in §5 |
+| `negative_branch.py` | §6, the near-null branches in either sector; `--sector even\|odd` shares one matrix |
+| `root_precision_probe.py` | §6, the root-stability check behind the displacement figures |
+
+---
 
 ## AI assistance
 
